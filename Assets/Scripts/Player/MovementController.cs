@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
 
-    public float speed = 5f;
+    public float speed = 10f;
     public float jumpHeight = 2f;
     public float groundDistance = 0.1f;
 
@@ -17,21 +17,20 @@ public class MovementController : MonoBehaviour
     private bool _isGrounded = true;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         _body = GetComponent<Rigidbody>();
         _groundChecker = transform.GetChild(0);
     }
 
-    // Update is called once per frame
     void Update()
     {
         _isGrounded = IsGrounded();
 
         _inputs = Vector3.zero;
-        _inputs.x = Input.GetAxis("Horizontal");
-        _inputs.z = Input.GetAxis("Vertical");
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        _inputs = (_body.transform.right * x + _body.transform.forward * z).normalized;
 
         if (Input.GetButtonDown("Jump") && _isGrounded)
         {
