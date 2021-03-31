@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MovementController : MonoBehaviour
 {
@@ -15,6 +15,9 @@ public class MovementController : MonoBehaviour
     private Transform _groundChecker;
     private Vector3 _inputs = Vector3.zero;
     private bool _isGrounded = true;
+
+    // temporary for debug purposes
+    public TextMeshProUGUI velocityText;
 
 
     void Start()
@@ -36,6 +39,10 @@ public class MovementController : MonoBehaviour
         {
             _body.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
         }
+
+
+        // temporary for debug purposes
+        velocityText.text = _body.velocity.ToString();
     }
 
     void FixedUpdate()
