@@ -8,8 +8,7 @@ public class MovementController : MonoBehaviour
     private CharacterController _controller;
 
     // temporary for debug purposes
-    public TextMeshProUGUI velocityText;
-
+    public TextMeshProUGUI horizontalSpeedText, verticalSpeedText;
 
     private const float MAX_SPEED = 15f;
 
@@ -45,19 +44,56 @@ public class MovementController : MonoBehaviour
         QueueJump();
 
         // temporary for debug purposes
-        velocityText.text = Mathf.Sqrt(Mathf.Pow(_velocity.x, 2) + Mathf.Pow(_velocity.z, 2)).ToString("#.00");
+        horizontalSpeedText.text = string.Format("hspeed: {0}", Mathf.Sqrt(Mathf.Pow(_velocity.x, 2) + Mathf.Pow(_velocity.z, 2)).ToString("#.00"));
+        verticalSpeedText.text = string.Format("vspeed: {0}", _velocity.y.ToString("#.00"));
     }
 
     void FixedUpdate()
     {
-        if (_controller.isGrounded)
+
+        // display _velocity and _wishDir vectors
+        Debug.DrawLine(transform.position, transform.position + _velocity, Color.green);
+        Debug.DrawLine(transform.position, transform.position + _wishDir, Color.blue);
+
+
+        RaycastHit hitInfo;
+        bool isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, 2f);
+
+        // draw ray   
+        Debug.DrawLine(transform.position, transform.position - Vector3.up * 2f, Color.red);
+
+        if (isGrounded)
         {
-            GroundMovement(Time.fixedDeltaTime);
+            // draw hit plane normal
+            Debug.DrawLine(hitInfo.point, hitInfo.point + hitInfo.normal.normalized, Color.white);
+
+            float slopeAng = Vector3.Angle(Vector3.up, hitInfo.normal);
+
+            if (slopeAng < 40)
+            {
+                Debug.Log("ground movement");
+
+                GroundMovement(Time.fixedDeltaTime);
+            }
+            else
+            {
+                SlopeMovement(hitInfo.normal.normalized, Time.fixedDeltaTime);
+            }
         }
         else
         {
             AirMovement(Time.fixedDeltaTime);
+
         }
+
+
+        // collision with walls
+        if (_controller.collisionFlags == CollisionFlags.Sides)
+        {
+            _velocity.x = 0;
+            _velocity.z = 0;
+        }
+
         _controller.Move(_velocity * Time.fixedDeltaTime);
     }
 
@@ -68,8 +104,6 @@ public class MovementController : MonoBehaviour
         if (Input.GetButtonUp("Jump"))
             _wishJump = false;
     }
-
-
 
     void GroundMovement(float deltaTime)
     {
@@ -85,6 +119,15 @@ public class MovementController : MonoBehaviour
         {
             ApplyFriction(GROUND_FRICTION, deltaTime);
         }
+
+    }
+
+    void SlopeMovement(Vector3 normal, float deltaTime)
+    {
+
+        float slopeAccel = Vector3.Angle(Vector3.up, normal);
+
+        _velocity += Vector3.ProjectOnPlane(new Vector3(0, -GRAVITY - slopeAccel, 0), normal) * deltaTime;
     }
 
     void AirMovement(float deltaTime)
@@ -101,11 +144,10 @@ public class MovementController : MonoBehaviour
         if (_wishDir == Vector3.zero)
             return;
 
-        // display _velocity and _wishDir vectors
-        Debug.DrawLine(transform.position, transform.position + _velocity, Color.green);
-        Debug.DrawLine(transform.position, transform.position + _wishDir, Color.blue);
+        Vector3 vel = _velocity;
+        vel.y = 0;
 
-        float currentSpeed = Vector3.Dot(_velocity, _wishDir);
+        float currentSpeed = Vector3.Dot(vel, _wishDir);
         float addSpeed = Mathf.Clamp(maxSpeed - currentSpeed, 0, acceleration * deltaTime);
 
         _velocity += _wishDir * addSpeed;
