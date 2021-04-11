@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MovementController : MonoBehaviour
 {
 
-    public float speed = 5f;
+    public float speed = 10f;
     public float jumpHeight = 2f;
     public float groundDistance = 0.1f;
 
@@ -16,27 +16,33 @@ public class MovementController : MonoBehaviour
     private Vector3 _inputs = Vector3.zero;
     private bool _isGrounded = true;
 
+    // temporary for debug purposes
+    public TextMeshProUGUI velocityText;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         _body = GetComponent<Rigidbody>();
         _groundChecker = transform.GetChild(0);
     }
 
-    // Update is called once per frame
     void Update()
     {
         _isGrounded = IsGrounded();
 
         _inputs = Vector3.zero;
-        _inputs.x = Input.GetAxis("Horizontal");
-        _inputs.z = Input.GetAxis("Vertical");
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        _inputs = (_body.transform.right * x + _body.transform.forward * z).normalized;
 
         if (Input.GetButtonDown("Jump") && _isGrounded)
         {
             _body.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
         }
+
+
+        // temporary for debug purposes
+        velocityText.text = _body.velocity.ToString();
     }
 
     void FixedUpdate()
