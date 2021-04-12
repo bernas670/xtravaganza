@@ -6,6 +6,7 @@ public class MovementController : MonoBehaviour
 {
 
     private CharacterController _controller;
+    private Rigidbody _rb;
 
     // temporary for debug purposes
     public TextMeshProUGUI horizontalSpeedText, verticalSpeedText;
@@ -13,23 +14,26 @@ public class MovementController : MonoBehaviour
     private const float MAX_SPEED = 15f;
 
     private const float GROUND_MAX_SPEED = 15f;
-    private const float GROUND_ACCEL = 100f * GROUND_MAX_SPEED;
-    private const float GROUND_FRICTION = 1f * GROUND_MAX_SPEED;
+    private const float GROUND_ACCEL = 10f * GROUND_MAX_SPEED;
+    private const float GROUND_FRICTION = 3f * GROUND_MAX_SPEED;
 
     private const float AIR_MAX_SPEED = 1.5f;
 
     private const float JUMP_HEIGHT = 2f;
-    private const float GRAVITY = 10f;
+    // private const float GRAVITY = 10f;
 
     // 
+    private bool _isGrounded = false;
     private bool _wishJump = false;
     private Vector3 _wishDir = Vector3.zero;
-    private Vector3 _velocity = Vector3.zero;
 
+    private float _hVel = 0f;
+    private float _vVel = 0f;
 
     void Start()
     {
         _controller = GetComponent<CharacterController>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -44,57 +48,35 @@ public class MovementController : MonoBehaviour
         QueueJump();
 
         // temporary for debug purposes
-        horizontalSpeedText.text = string.Format("hspeed: {0}", Mathf.Sqrt(Mathf.Pow(_velocity.x, 2) + Mathf.Pow(_velocity.z, 2)).ToString("#.00"));
-        verticalSpeedText.text = string.Format("vspeed: {0}", _velocity.y.ToString("#.00"));
+        horizontalSpeedText.text = string.Format("hspeed: {0}", _hVel.ToString("#.00"));
+        verticalSpeedText.text = string.Format("vspeed: {0}", _vVel.ToString("#.00"));
     }
 
     void FixedUpdate()
     {
+        // update velocity values
+        _hVel = Mathf.Sqrt(Mathf.Pow(_rb.velocity.x, 2) + Mathf.Pow(_rb.velocity.z, 2));
+        _vVel = _rb.velocity.y;
 
         // display _velocity and _wishDir vectors
-        Debug.DrawLine(transform.position, transform.position + _velocity, Color.green);
-        Debug.DrawLine(transform.position, transform.position + _wishDir, Color.blue);
+        // Debug.DrawLine(transform.position, transform.position + _rb.velocity, Color.green);
+        // Debug.DrawLine(transform.position, transform.position + _wishDir, Color.blue);
 
 
         RaycastHit hitInfo;
-        bool isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, 2f);
+        _isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, 1.1f);
+        // draw ray
+        Debug.DrawLine(transform.position, transform.position - Vector3.up * 1.1f, Color.red);
 
-        // draw ray   
-        Debug.DrawLine(transform.position, transform.position - Vector3.up * 2f, Color.red);
 
-        if (isGrounded)
+        if (_isGrounded)
         {
-            // draw hit plane normal
-            Debug.DrawLine(hitInfo.point, hitInfo.point + hitInfo.normal.normalized, Color.white);
-
-            float slopeAng = Vector3.Angle(Vector3.up, hitInfo.normal);
-
-            if (slopeAng < 40)
-            {
-                Debug.Log("ground movement");
-
-                GroundMovement(Time.fixedDeltaTime);
-            }
-            else
-            {
-                SlopeMovement(hitInfo.normal.normalized, Time.fixedDeltaTime);
-            }
+            GroundMovement(Time.fixedDeltaTime);
         }
         else
         {
             AirMovement(Time.fixedDeltaTime);
-
         }
-
-
-        // collision with walls
-        if (_controller.collisionFlags == CollisionFlags.Sides)
-        {
-            _velocity.x = 0;
-            _velocity.z = 0;
-        }
-
-        _controller.Move(_velocity * Time.fixedDeltaTime);
     }
 
     void QueueJump()
@@ -109,56 +91,43 @@ public class MovementController : MonoBehaviour
     {
         Accelerate(GROUND_MAX_SPEED, GROUND_ACCEL, deltaTime);
 
-        // check if player intends to jump
         if (_wishJump)
         {
-            _velocity.y = Mathf.Sqrt(JUMP_HEIGHT * 2f * GRAVITY);
+            _rb.velocity = new Vector3(_rb.velocity.x, Mathf.Sqrt(JUMP_HEIGHT * 2f * -Physics.gravity.y), _rb.velocity.z);
             _wishJump = false;
         }
         else
         {
-            ApplyFriction(GROUND_FRICTION, deltaTime);
+            ApplyFriction(GROUND_FRICTION, GROUND_MAX_SPEED, deltaTime);
         }
 
-    }
-
-    void SlopeMovement(Vector3 normal, float deltaTime)
-    {
-
-        float slopeAccel = Vector3.Angle(Vector3.up, normal);
-
-        _velocity += Vector3.ProjectOnPlane(new Vector3(0, -GRAVITY - slopeAccel, 0), normal) * deltaTime;
     }
 
     void AirMovement(float deltaTime)
     {
         Accelerate(AIR_MAX_SPEED, GROUND_ACCEL, deltaTime);
-
-        // apply gravity
-        _velocity.y -= GRAVITY * deltaTime;
     }
 
     void Accelerate(float maxSpeed, float acceleration, float deltaTime)
     {
-        // prevent unnecessary operations
-        if (_wishDir == Vector3.zero)
-            return;
-
-        Vector3 vel = _velocity;
+        Vector3 vel = _rb.velocity;
         vel.y = 0;
 
         float currentSpeed = Vector3.Dot(vel, _wishDir);
         float addSpeed = Mathf.Clamp(maxSpeed - currentSpeed, 0, acceleration * deltaTime);
 
-        _velocity += _wishDir * addSpeed;
+        _rb.AddForce(_wishDir * addSpeed, ForceMode.VelocityChange);
     }
 
     // FIXME: not very responsive when player wants to stop
-    void ApplyFriction(float friction, float deltaTime)
+    void ApplyFriction(float friction, float maxSpeed, float deltaTime)
     {
         float drop = friction * deltaTime;
-        float speed = Mathf.Clamp(_velocity.magnitude - drop, 0, MAX_SPEED);
+        float speed = Mathf.Clamp(_rb.velocity.magnitude - drop, 0, maxSpeed);
 
-        _velocity = _velocity.normalized * speed;
+        Vector3 velocity = _rb.velocity.normalized * speed;
+        velocity.y = _rb.velocity.y;
+        _rb.velocity = velocity;
     }
+
 }
