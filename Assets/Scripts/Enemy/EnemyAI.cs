@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] float lookRadius = 10f;
 
+    public LayerMask whatIsPlayer;
     void Start()
     {
         _target = GameObject.Find("Player").transform; /* Make this a singleton + game manager*/
@@ -21,11 +22,16 @@ public class EnemyAI : MonoBehaviour
     {
         float distance = Vector3.Distance(_target.position, transform.position);
 
+
         if(distance <= lookRadius){
             _agent.SetDestination(_target.position); /*move towards target*/
 
             if(distance <= _agent.stoppingDistance){
                 faceTarget(); /*face target*/
+                meleeAttack();
+            }
+            else {
+                shootAttack();
             }
         }
     }
@@ -33,7 +39,16 @@ public class EnemyAI : MonoBehaviour
     void faceTarget(){
         Vector3 direction = (_target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7.5f);
     }
+
+    void meleeAttack(){
+        Debug.Log("Melee");
+
+    }
+
+    void shootAttack(){
+         Debug.Log("Shoot");
+    }
 }
+
