@@ -20,7 +20,6 @@ public class MovementController : MonoBehaviour
     private const float AIR_MAX_SPEED = 1.5f;
 
     private const float JUMP_HEIGHT = 2f;
-    // private const float GRAVITY = 10f;
 
     // 
     private bool _isGrounded = false;
@@ -38,11 +37,9 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        // _inputs = Vector3.zero;
         _wishDir = Vector3.zero;
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        _wishDir = new Vector3(x, 0, z);
+        _wishDir.x = Input.GetAxis("Horizontal");
+        _wishDir.z = Input.GetAxis("Vertical");
         _wishDir = transform.TransformDirection(_wishDir);
 
         QueueJump();
@@ -61,7 +58,6 @@ public class MovementController : MonoBehaviour
         // display _velocity and _wishDir vectors
         // Debug.DrawLine(transform.position, transform.position + _rb.velocity, Color.green);
         // Debug.DrawLine(transform.position, transform.position + _wishDir, Color.blue);
-
 
         RaycastHit hitInfo;
         _isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, 1.1f);
@@ -119,7 +115,6 @@ public class MovementController : MonoBehaviour
         _rb.AddForce(_wishDir * addSpeed, ForceMode.VelocityChange);
     }
 
-    // FIXME: not very responsive when player wants to stop
     void ApplyFriction(float friction, float maxSpeed, float deltaTime)
     {
         float drop = friction * deltaTime;
