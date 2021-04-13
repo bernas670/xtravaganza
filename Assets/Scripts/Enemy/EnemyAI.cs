@@ -13,7 +13,6 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] float lookRadius = 10f;
 
-    public LayerMask whatIsPlayer;
     void Start()
     {   
         _player = GameObject.Find("Player"); /* Make this a singleton + game manager*/
@@ -48,13 +47,13 @@ public class EnemyAI : MonoBehaviour
     }
 
     void meleeAttack(){
-        Debug.Log("Melee");
-        _playerStat.TakeDamage(10);
+        //Debug.Log("Melee");
+        //_playerStat.TakeDamage(10);
     }
 
     void shootAttack(){
-        Debug.Log("Shoot");
-        _playerStat.TakeDamage(5);
+        //Debug.Log("Shoot");
+        //_playerStat.TakeDamage(5);
     }
 }
 

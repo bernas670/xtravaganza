@@ -918,6 +918,7 @@ GameObject:
   - component: {fileID: 1848419413}
   - component: {fileID: 1848419415}
   - component: {fileID: 1848419416}
+  - component: {fileID: 1848419417}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -993,6 +994,22 @@ MonoBehaviour:
   sensitivity: 2
   minHeadRotation: -90
   maxHeadRotation: 90
+--- !u!114 &1848419417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848419412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c24eedd3fa863749b7fcba436cd679f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    _value: 0
+    _modifiers: 
+  MAX_HEALTH: 100
 --- !u!1 &1981552397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,3 +1112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 5
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
