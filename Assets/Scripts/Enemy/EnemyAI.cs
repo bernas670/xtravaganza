@@ -8,12 +8,17 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent _agent;
     private Transform _target;
 
+    private GameObject _player;
+    private PlayerStat _playerStat;
+
     [SerializeField] float lookRadius = 10f;
 
     public LayerMask whatIsPlayer;
     void Start()
-    {
-        _target = GameObject.Find("Player").transform; /* Make this a singleton + game manager*/
+    {   
+        _player = GameObject.Find("Player"); /* Make this a singleton + game manager*/
+        _target = _player.transform; /* Make this a singleton + game manager*/
+        _playerStat = _player.GetComponent<PlayerStat>();
         _agent = GetComponent<NavMeshAgent>();
         
     }
@@ -44,11 +49,12 @@ public class EnemyAI : MonoBehaviour
 
     void meleeAttack(){
         Debug.Log("Melee");
-
+        _playerStat.TakeDamage(10);
     }
 
     void shootAttack(){
-         Debug.Log("Shoot");
+        Debug.Log("Shoot");
+        _playerStat.TakeDamage(5);
     }
 }
 
