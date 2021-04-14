@@ -4,33 +4,14 @@ using UnityEngine;
 
 public class CerelacKiller : MonoBehaviour
 {   
-     [SerializeField] bool isPlayer = false;
      [SerializeField] float fireRate = 1f;
      [SerializeField] int damage = 10;
      [SerializeField] float range = 100f;
      [SerializeField] Camera cam;
-     [SerializeField] GameObject player;
-     [SerializeField] GameObject enemy;
 
     private PlayerStat _playerStat;
     private EnemyStat _enemyStat;
     private float timeToFire = 0f;
-
-    void Start(){
-        _playerStat = player.GetComponent<PlayerStat>();
-        _enemyStat = enemy.GetComponent<EnemyStat>();
-
-    }
-    void Update(){
-        if(isPlayer){
-            Debug.DrawRay(cam.transform.position, cam.transform.forward.normalized * range, Color.green, 5f);
-            
-        }
-        else if (!isPlayer){
-            Debug.DrawRay(enemy.transform.position, enemy.transform.forward.normalized * range, Color.red, 5f);
-        }
-    }
-
     public void PlayerShoot(){
         if (Input.GetButton("Fire1") && Time.time >= timeToFire){
                 Debug.Log("Player Shot");
@@ -39,6 +20,7 @@ public class CerelacKiller : MonoBehaviour
             if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range)){
                 Debug.Log(hit.transform.name);
                 if(hit.transform.name == "Enemy")
+                    _enemyStat = hit.transform.gameObject.GetComponent<EnemyStat>();
                     _enemyStat.TakeDamage(damage);
             }
         }
@@ -49,9 +31,10 @@ public class CerelacKiller : MonoBehaviour
             Debug.Log("Enemy Shot");    
             timeToFire = Time.time + 1f/fireRate;
             RaycastHit hit;
-            if(Physics.Raycast(enemy.transform.position, enemy.transform.forward, out hit, range)){
+            if(Physics.Raycast(transform.position, transform.forward, out hit, range)){
                 Debug.Log(hit.transform.name);
                 if(hit.transform.name == "Player")
+                    _playerStat = hit.transform.gameObject.GetComponent<PlayerStat>();
                     _playerStat.TakeDamage(damage);
             }
         }
