@@ -15,6 +15,7 @@ public class MovementController : MonoBehaviour
     private Transform _groundChecker;
     private Vector3 _inputs = Vector3.zero;
     private bool _isGrounded = true;
+    private CerelacKiller _cerelac;
 
     // temporary for debug purposes
     public TextMeshProUGUI velocityText;
@@ -24,6 +25,7 @@ public class MovementController : MonoBehaviour
     {
         _body = GetComponent<Rigidbody>();
         _groundChecker = transform.GetChild(0);
+        _cerelac = GetComponent<CerelacKiller>();
     }
 
     void Update()
@@ -39,6 +41,8 @@ public class MovementController : MonoBehaviour
         {
             _body.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
         }
+        
+        _cerelac.PlayerShoot();
 
 
         // temporary for debug purposes

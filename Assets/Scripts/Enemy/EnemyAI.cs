@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
 
     private GameObject _player;
     private PlayerStat _playerStat;
+    private CerelacKiller _cerelac;
 
     [SerializeField] float lookRadius = 10f;
 
@@ -19,13 +20,13 @@ public class EnemyAI : MonoBehaviour
         _target = _player.transform; /* Make this a singleton + game manager*/
         _playerStat = _player.GetComponent<PlayerStat>();
         _agent = GetComponent<NavMeshAgent>();
+        _cerelac = GetComponent<CerelacKiller>();
         
     }
 
     void Update()
     {
         float distance = Vector3.Distance(_target.position, transform.position);
-
 
         if(distance <= lookRadius){
             _agent.SetDestination(_target.position); /*move towards target*/
@@ -35,8 +36,8 @@ public class EnemyAI : MonoBehaviour
                 meleeAttack();
             }
             else {
-                shootAttack();
-            }
+                _cerelac.EnemyShoot();         
+                }
         }
     }
 
@@ -45,6 +46,7 @@ public class EnemyAI : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7.5f);
     }
+
 
     void meleeAttack(){
         //Debug.Log("Melee");

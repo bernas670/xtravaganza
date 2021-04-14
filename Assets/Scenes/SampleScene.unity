@@ -919,6 +919,7 @@ GameObject:
   - component: {fileID: 1848419415}
   - component: {fileID: 1848419416}
   - component: {fileID: 1848419417}
+  - component: {fileID: 1848419418}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1010,6 +1011,23 @@ MonoBehaviour:
     _value: 0
     _modifiers: 
   MAX_HEALTH: 100
+--- !u!114 &1848419418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848419412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4fcc6d796dc8b246af42498d7ba67d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 1
+  fireRate: 1
+  range: 10000
+  cam: {fileID: 963194227}
+  enemy: {fileID: 0}
 --- !u!1 &1981552397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1041,7 @@ GameObject:
   - component: {fileID: 1981552400}
   - component: {fileID: 1981552399}
   - component: {fileID: 1981552402}
+  - component: {fileID: 1981552403}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1038,7 +1057,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981552397}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0228475, y: 1.04, z: 3.57}
+  m_LocalPosition: {x: 0, y: 1, z: 3.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1021600320}
@@ -1095,7 +1114,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 3
+  m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -1112,6 +1131,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 5
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 0
+--- !u!114 &1981552403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981552397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4fcc6d796dc8b246af42498d7ba67d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 0
+  fireRate: 1
+  range: 10000
+  cam: {fileID: 963194227}
+  enemy: {fileID: 1981552397}

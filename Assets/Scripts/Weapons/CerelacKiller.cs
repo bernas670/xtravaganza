@@ -6,41 +6,54 @@ public class CerelacKiller : MonoBehaviour
 {   
      [SerializeField] bool isPlayer = false;
      [SerializeField] float fireRate = 1f;
-     [SerializeField] float damage = 10f;
-     [SerializeField] float range = 10000f;
+     [SerializeField] int damage = 10;
+     [SerializeField] float range = 100f;
      [SerializeField] Camera cam;
+     [SerializeField] GameObject player;
      [SerializeField] GameObject enemy;
+
+    private PlayerStat _playerStat;
+    private EnemyStat _enemyStat;
     private float timeToFire = 0f;
 
+    void Start(){
+        _playerStat = player.GetComponent<PlayerStat>();
+        _enemyStat = enemy.GetComponent<EnemyStat>();
+
+    }
     void Update(){
         if(isPlayer){
-            if (Input.GetButton("Fire1") && Time.time >= timeToFire){
-                timeToFire = Time.time + 1f/fireRate;
-                PlayerShoot();
-            }
+            Debug.DrawRay(cam.transform.position, cam.transform.forward.normalized * range, Color.green, 5f);
+            
         }
         else if (!isPlayer){
-            if(Time.time>=timeToFire)
-            {   
+            Debug.DrawRay(enemy.transform.position, enemy.transform.forward.normalized * range, Color.red, 5f);
+        }
+    }
+
+    public void PlayerShoot(){
+        if (Input.GetButton("Fire1") && Time.time >= timeToFire){
+                Debug.Log("Player Shot");
                 timeToFire = Time.time + 1f/fireRate;
-                EnemyShoot();
+                RaycastHit hit;
+            if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range)){
+                Debug.Log(hit.transform.name);
+                _enemyStat.TakeDamage(damage);
             }
         }
-
     }
-
-    void PlayerShoot(){
-        RaycastHit hit;
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range)){
-            Debug.DrawRay(cam.transform.position, cam.transform.forward, Color.green);
-            Debug.Log(hit.transform.name);
+    public void EnemyShoot(){
+        if(Time.time>=timeToFire)
+        {   
+            Debug.Log("Enemy Shot");    
+            timeToFire = Time.time + 1f/fireRate;
+            RaycastHit hit;
+            if(Physics.Raycast(enemy.transform.position, enemy.transform.forward, out hit, range)){
+                Debug.Log("hitttt");
+                Debug.Log(hit.transform.name);
+                _playerStat.TakeDamage(damage);
+            }
         }
     }
-    void EnemyShoot(){
-        RaycastHit hit;
-        if(Physics.Raycast(enemy.transform.position - cam.transform.position, enemy.transform.forward, out hit, range)){
-            Debug.Log(hit.transform.name);
-            Debug.DrawRay(enemy.transform.position - cam.transform.position, cam.transform.forward, Color.red, 2);
-        }
-    }
+
 }
