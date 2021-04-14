@@ -38,7 +38,8 @@ public class CerelacKiller : MonoBehaviour
                 RaycastHit hit;
             if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range)){
                 Debug.Log(hit.transform.name);
-                _enemyStat.TakeDamage(damage);
+                if(hit.transform.name == "Enemy")
+                    _enemyStat.TakeDamage(damage);
             }
         }
     }
@@ -49,9 +50,9 @@ public class CerelacKiller : MonoBehaviour
             timeToFire = Time.time + 1f/fireRate;
             RaycastHit hit;
             if(Physics.Raycast(enemy.transform.position, enemy.transform.forward, out hit, range)){
-                Debug.Log("hitttt");
                 Debug.Log(hit.transform.name);
-                _playerStat.TakeDamage(damage);
+                if(hit.transform.name == "Player")
+                    _playerStat.TakeDamage(damage);
             }
         }
     }
