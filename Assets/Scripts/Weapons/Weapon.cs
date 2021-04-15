@@ -1,50 +1,20 @@
-/*
 using UnityEngine;
-
-/* This class is responsible for keeping track of all stats of a character (health, damage, ..).
-Goal is to derive from it and change methods in order to create game logic for all characters 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] float fireRate = 1f;
-    [SerializeField] float damage = 10f;
-    [SerializeField] float range = 100f;
-    ShootingStrategy ShootStrat;
-    private float timeToFire = 0f;
+    protected int _damage;
+    protected float _range;
+    protected AmmoStat ammo; /* nr de bullets + modifiers para saber qts reloads ? */
 
-
-    void Update(){
-        ShootStrat.Shoot();
+    public int getDamage()
+    {
+        return _damage;
     }
 
-}
-public interface ShootingStrategy {
-     void Shoot();
-}
+    public float getRange(){
+        return _range;
+    }
 
-
-
-public class PlayerStrategy : MonoBehaviour, ShootingStrategy {
-    
-    public void Shoot(){
-        if (Input.GetButton("Fire1") && Time.time >= timeToFire){
-            timeToFire = Time.time + 1f/fireRate;
-            RaycastHit hit;
-            if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range)){
-                Debug.Log(hit.transform.name);
-            }
-        }
+    public void reload(){
+        // TODO
     }
 }
-
-public class EnemyStrategy : MonoBehaviour, ShootingStrategy {
-    public void Shoot(){
-        if (Time.time >= timeToFire){
-            timeToFire = Time.time + 1f/fireRate;
-            RaycastHit hit;
-            if(Physics.Raycast(enemy.transform.position, enemy.transform.forward, out hit, range)){
-                Debug.Log(hit.transform.name);
-            }
-        }
-    }
-}
-*/

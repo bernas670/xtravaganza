@@ -121,6 +121,129 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: fc7ceb5261177d644a360adc1373ffbe, type: 2}
+--- !u!1 &189095388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 189095394}
+  - component: {fileID: 189095393}
+  - component: {fileID: 189095392}
+  - component: {fileID: 189095391}
+  - component: {fileID: 189095390}
+  - component: {fileID: 189095389}
+  m_Layer: 0
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!54 &189095389
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189095388}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &189095390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189095388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4fcc6d796dc8b246af42498d7ba67d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &189095391
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189095388}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &189095392
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189095388}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &189095393
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189095388}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &189095394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189095388}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.81, y: 0.93, z: -5.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &308752771
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,8 +1041,8 @@ GameObject:
   - component: {fileID: 1848419413}
   - component: {fileID: 1848419415}
   - component: {fileID: 1848419416}
-  - component: {fileID: 1848419417}
   - component: {fileID: 1848419418}
+  - component: {fileID: 1848419417}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1004,13 +1127,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1848419412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c24eedd3fa863749b7fcba436cd679f, type: 3}
+  m_Script: {fileID: 11500000, guid: 90fa96af6721a51458b38262c51ecd4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage:
-    _value: 0
-    _modifiers: 
-  MAX_HEALTH: 100
 --- !u!114 &1848419418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,14 +1139,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1848419412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4fcc6d796dc8b246af42498d7ba67d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 765aaf161fff4934882d38f071d8f98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 1
-  fireRate: 1
-  range: 10000
+  fireRate: 0
   cam: {fileID: 963194227}
-  enemy: {fileID: 0}
+  weapon: {fileID: 189095390}
 --- !u!1 &1981552397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,7 +1158,6 @@ GameObject:
   - component: {fileID: 1981552400}
   - component: {fileID: 1981552399}
   - component: {fileID: 1981552402}
-  - component: {fileID: 1981552403}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1073,13 +1189,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1981552397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bf4311e418ff26468c905a41d6cc415, type: 3}
+  m_Script: {fileID: 11500000, guid: fb2814464df627244a4e01e8d3907165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage:
-    _value: 0
-    _modifiers: 
-  MAX_HEALTH: 100
 --- !u!54 &1981552400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1130,21 +1242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4116d20f776296e4e9dab4517f0e557e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 5
---- !u!114 &1981552403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981552397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4fcc6d796dc8b246af42498d7ba67d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayer: 0
-  fireRate: 1
-  range: 10000
+  fireRate: 0
   cam: {fileID: 963194227}
-  enemy: {fileID: 1981552397}
+  weapon: {fileID: 189095390}
+  lookRadius: 5
