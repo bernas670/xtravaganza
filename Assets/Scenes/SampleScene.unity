@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fcc6d796dc8b246af42498d7ba67d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fireRate: 0
 --- !u!65 &189095391
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -673,7 +674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1021600319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1981552398}
@@ -1142,9 +1143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765aaf161fff4934882d38f071d8f98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0
-  cam: {fileID: 963194227}
   weapon: {fileID: 189095390}
+  cam: {fileID: 963194227}
 --- !u!1 &1981552397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,7 +1242,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4116d20f776296e4e9dab4517f0e557e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0
-  cam: {fileID: 963194227}
   weapon: {fileID: 189095390}
   lookRadius: 5

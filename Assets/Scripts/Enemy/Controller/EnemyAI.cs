@@ -8,15 +8,17 @@ public class EnemyAI : Shooter
     private NavMeshAgent _agent;
     private Transform _target;
     private GameObject _player;
-    [SerializeField] float lookRadius = 10f;
+    [SerializeField] float lookRadius;
+
+    void Awake(){
+        lookRadius = 10f;
+    }
         void Start()
     {
         _player = GameObject.Find("Player"); /* Make this a singleton + game manager*/
         _target = _player.transform; /* Make this a singleton + game manager*/
         _agent = GetComponent<NavMeshAgent>();
 
-        fireRate = 0f; 
-        timeToFire= 0f;
 
     }
 
@@ -27,10 +29,10 @@ public class EnemyAI : Shooter
         if (distance <= lookRadius)
         {
             _agent.SetDestination(_target.position); /*move towards target*/
+            faceTarget(); /*face target*/
 
             if (distance <= _agent.stoppingDistance)
             {
-                faceTarget(); /*face target*/
                 meleeAttack();
             }
             else
@@ -55,21 +57,21 @@ public class EnemyAI : Shooter
     }
     public override void shoot()
     {
-        if (Time.time >= timeToFire)
+        if (Time.time >= weapon.getTimeToFire())
         {
-            timeToFire = Time.time + 1f / fireRate;
+            weapon.setTimeToFire(Time.time + 1f / weapon.getFireRate());
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, weapon.getRange()))
             {
                 if (hit.transform.name == "Player")
                 {
                     Debug.Log("Enemy Shot");
-
                     Player _playerStat = _player.GetComponent<Player>();
-                    _playerStat.getHealth().TakeDamage(weapon.getDamage());
+                    _playerStat.TakeDamage(weapon.getDamage());
                 }
             }
         }
     }
 }
+
 
