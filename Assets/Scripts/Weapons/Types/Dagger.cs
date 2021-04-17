@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CerelacKiller : FireWeapon {
+public class Dagger : MeleeWeapon {
     public void Awake(){
-        _damage = 10;
-        _range = 100f;
+        _damage = 15;
+        _range = 5f;
 
-        _fireRate = 15f;
+        _fireRate = 8f;
         _timeToFire= 1f;
     }
 }

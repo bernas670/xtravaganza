@@ -4,15 +4,22 @@ public class PlayerShootController : Shooter
 {
     [SerializeField] protected Camera cam;
 
-
     void Update()
-    {
-        shoot();
+    {   
+        if(Input.GetButton("Fire1")){
+            setWeapon(cerelac);
+            shoot();
+        }
+        else if(Input.GetButton("Fire2")){
+            setWeapon(dagger);
+            shoot();
+        }
+        
     }
     public override void shoot()
-    {
-
-        if (Input.GetButton("Fire1") && Time.time >= weapon.getTimeToFire())
+    {   
+        Debug.Log("Player Shot : " + weapon);
+        if (Time.time >= weapon.getTimeToFire())
         {       
             weapon.setTimeToFire( Time.time + 1f / weapon.getFireRate());
             RaycastHit hit;

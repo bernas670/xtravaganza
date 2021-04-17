@@ -31,12 +31,16 @@ public class EnemyAI : Shooter
             _agent.SetDestination(_target.position); /*move towards target*/
             faceTarget(); /*face target*/
 
+            // ---->>>>>>   Should we just use dagger.range instead of agent stopping distance?
             if (distance <= _agent.stoppingDistance)
-            {
-                meleeAttack();
+            {   
+                // refactor this
+                setWeapon(dagger);
+                shoot();
             }
             else
-            {
+            {   
+                setWeapon(cerelac);
                 shoot();
             }
         }
@@ -49,14 +53,9 @@ public class EnemyAI : Shooter
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7.5f);
     }
 
-
-    void meleeAttack()
-    {
-        //Debug.Log("Melee");
-        //_playerStat.TakeDamage(10);
-    }
     public override void shoot()
     {
+        
         if (Time.time >= weapon.getTimeToFire())
         {
             weapon.setTimeToFire(Time.time + 1f / weapon.getFireRate());
@@ -65,13 +64,14 @@ public class EnemyAI : Shooter
             {
                 if (hit.transform.name == "Player")
                 {
-                    Debug.Log("Enemy Shot");
+                    Debug.Log("Enemy attacked");
                     Player _playerStat = _player.GetComponent<Player>();
                     _playerStat.TakeDamage(weapon.getDamage());
                 }
             }
         }
     }
+    
 }
 
 
