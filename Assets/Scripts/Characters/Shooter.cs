@@ -13,4 +13,8 @@ public abstract class Shooter : MonoBehaviour
     public void setWeapon(Weapon weapon){
         this.weapon = weapon;
     }
+
+    public Weapon getWeapon(){
+        return this.weapon;
+    }
 }
