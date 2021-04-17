@@ -16,7 +16,7 @@ public class PlayerShootController : Shooter
         }
         
     }
-    public override void shoot()
+    public void shoot()
     {   
         Debug.Log("Player Shot : " + weapon);
         if (Time.time >= weapon.getTimeToFire())

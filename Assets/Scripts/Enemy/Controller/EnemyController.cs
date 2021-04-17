@@ -15,9 +15,13 @@ public class EnemyController : Shooter
     private Transform _target;
     public GameObject _player;
     [SerializeField] float lookRadius;
+    private bool isEvil;
 
     void Awake(){
         lookRadius = 10f;
+
+        // !!!!!!!!!!
+        // This setWeapon is temporary
         setWeapon(cerelac);
     }
         void Start()
@@ -28,31 +32,8 @@ public class EnemyController : Shooter
     }
 
     void Update()
-    {   
-        /*
-        float distance = Vector3.Distance(_target.position, transform.position);
-        if (distance <= lookRadius)
-        {
-            _agent.SetDestination(_target.position); //move towards target
-            faceTarget(); //face target
-
-            // ---->>>>>>   Should we just use dagger.range instead of agent stopping distance?
-            if (distance <= _agent.stoppingDistance)
-            {   
-                // refactor this
-                setWeapon(dagger);
-                shoot();
-            }
-            else
-            {   
-                setWeapon(cerelac);
-                shoot();
-            }
-        }
-        */
-        faceTarget(); //face target
+    {       
         UpdateState();
-
     }
 
     void faceTarget()
@@ -60,35 +41,9 @@ public class EnemyController : Shooter
         Vector3 direction = (_target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7.5f);
-    }
+    }  
 
-    public override void shoot()
-    {
-        
-        if (Time.time >= weapon.getTimeToFire())
-        {
-            weapon.setTimeToFire(Time.time + 1f / weapon.getFireRate());
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, weapon.getRange()))
-            {
-                if (hit.transform.name == "Player")
-                {
-                    Debug.Log("Enemy attacked");
-                    Player _playerStat = _player.GetComponent<Player>();
-                    _playerStat.TakeDamage(weapon.getDamage());
-                }
-            }
-        }
-    }
-
-    public NavMeshAgent getAgent(){
-        return _agent;
-    }
-    
-    public List<Transform> getWayPointList(){
-        return _wayPointList;
-    }
-    
+    // State Machine
     public void UpdateState()
     {   
        float distance = Vector3.Distance(_target.position, transform.position);
@@ -101,7 +56,8 @@ public class EnemyController : Shooter
                 //Use raycast, if player is in sight, chase him.
                 break;
             case (false):
-
+                
+                faceTarget();
                 // attack
                 AttackAction attack = new AttackAction();
                 attack.Act(this);
@@ -109,6 +65,15 @@ public class EnemyController : Shooter
                 // Implement attacking decision (should I shoot or stab the player?);
                 break;
        }
+    }
+
+    // Getters
+    public NavMeshAgent getAgent(){
+        return _agent;
+    }
+    
+    public List<Transform> getWayPointList(){
+        return _wayPointList;
     }
 }
 

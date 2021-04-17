@@ -8,8 +8,6 @@ public abstract class Shooter : MonoBehaviour
     [SerializeField] protected FireWeapon cerelac;
     [SerializeField] protected MeleeWeapon dagger;
 
-    public abstract void shoot();
-
     public void setWeapon(Weapon weapon){
         this.weapon = weapon;
     }
