@@ -5,7 +5,12 @@ using UnityEngine;
 public class AttackAction : Action
 {
     public override void Act(EnemyController controller){
+        //Implementar Decision method;
+        Shoot(controller);
 
+    }
+    
+    private void Shoot(EnemyController controller){
         if (Time.time >= controller.getWeapon().getTimeToFire())
         {
             controller.getWeapon().setTimeToFire(Time.time + 1f / controller.getWeapon().getFireRate());
@@ -20,5 +25,12 @@ public class AttackAction : Action
                 }
             }
         }
+    }
+
+    private void Stab(EnemyController controller){
+        // IDK yet;
+
+        // Chase;
+        // attack;
     }
 }

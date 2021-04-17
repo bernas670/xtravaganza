@@ -14,7 +14,6 @@ public class PlayerShootController : Shooter
             setWeapon(dagger);
             shoot();
         }
-        
     }
     public void shoot()
     {   

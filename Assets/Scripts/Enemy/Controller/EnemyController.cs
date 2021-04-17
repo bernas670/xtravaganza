@@ -8,18 +8,19 @@ using UnityEngine.AI;
 public class EnemyController : Shooter
 {
     private NavMeshAgent _agent;
+    private Transform _target;
+    public GameObject _player;
+    [SerializeField] float lookRadius;
+
     // Contains the locations where the enemie can go.
     [SerializeField] List<Transform> _wayPointList;
     [HideInInspector] public int nextWayPoint;
 
-    private Transform _target;
-    public GameObject _player;
-    [SerializeField] float lookRadius;
-    private bool isEvil;
+    private bool _isEvil;
 
     void Awake(){
         lookRadius = 10f;
-
+        _isEvil = Random.Range(0,2) == 0;
         // !!!!!!!!!!
         // This setWeapon is temporary
         setWeapon(cerelac);
@@ -56,13 +57,14 @@ public class EnemyController : Shooter
                 //Use raycast, if player is in sight, chase him.
                 break;
             case (false):
-                
+
+                if(!_isEvil) break;
+
                 faceTarget();
                 // attack
                 AttackAction attack = new AttackAction();
                 attack.Act(this);
-                //chase;
-                // Implement attacking decision (should I shoot or stab the player?);
+
                 break;
        }
     }
