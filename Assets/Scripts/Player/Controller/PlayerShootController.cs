@@ -3,19 +3,18 @@ using UnityEngine;
 public class PlayerShootController : Shooter
 {
     [SerializeField] protected Camera cam;
+    
 
     void Update()
     {   
         if(Input.GetButton("Fire1")){
-            setWeapon(cerelac);
-            shoot();
+            shoot(fireWeapon);
         }
         else if(Input.GetButton("Fire2")){
-            setWeapon(dagger);
-            shoot();
+            shoot(meleeWeapon);
         }
     }
-    public void shoot()
+    public void shoot(Weapon weapon)
     {   
         Debug.Log("Player Shot : " + weapon);
         if (Time.time >= weapon.getTimeToFire())

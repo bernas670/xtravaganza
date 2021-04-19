@@ -4,15 +4,20 @@ using UnityEngine;
 public abstract class Shooter : MonoBehaviour
 {
 
-    protected Weapon weapon;
-    [SerializeField] protected FireWeapon cerelac;
-    [SerializeField] protected MeleeWeapon dagger;
+    [SerializeField] protected FireWeapon fireWeapon;
+    [SerializeField] protected MeleeWeapon meleeWeapon;
 
-    public void setWeapon(Weapon weapon){
-        this.weapon = weapon;
+    public void setFireWeapon(FireWeapon weapon){
+        this.fireWeapon = weapon;
+    }
+    public FireWeapon getFireWeapon(){
+        return this.fireWeapon;
+    }
+      public void setMeleeWeapon(MeleeWeapon weapon){
+        this.meleeWeapon = weapon;
     }
 
-    public Weapon getWeapon(){
-        return this.weapon;
+    public MeleeWeapon getMeleeWeapon(){
+        return this.meleeWeapon;
     }
 }
