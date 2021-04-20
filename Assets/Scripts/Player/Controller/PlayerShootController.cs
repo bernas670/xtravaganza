@@ -7,18 +7,26 @@ public class PlayerShootController : Shooter
 
     void Update()
     {   
-        if(Input.GetButton("Fire1")){
+    
+        if(Input.GetButton("Fire1") && fireWeapon.getClipValue()>0){
             shoot(fireWeapon);
         }
         else if(Input.GetButton("Fire2")){
             shoot(meleeWeapon);
+        }
+        else if(Input.GetKey(KeyCode.R)){
+            fireWeapon.reload();
         }
     }
     public void shoot(Weapon weapon)
     {   
         Debug.Log("Player Shot : " + weapon);
         if (Time.time >= weapon.getTimeToFire())
-        {       
+        {    
+
+
+            // !!!!!!!!!!! Need to separate Shoot and Stab actions;
+            //  fireWeapon.decresaseAmmo();
             weapon.setTimeToFire( Time.time + 1f / weapon.getFireRate());
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.getRange()))
@@ -30,6 +38,7 @@ public class PlayerShootController : Shooter
                     enemy.TakeDamage(weapon.getDamage());
                 }
             }
+
         }
     }
 }

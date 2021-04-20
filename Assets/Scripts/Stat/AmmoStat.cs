@@ -4,18 +4,31 @@ using UnityEngine;
 
 [System.Serializable]
 public class AmmoStat
-{
-    [SerializeField] private int _value;
+{   
+
+    // Extra bullets that can be used for reload;
+    [SerializeField] private int _reloadValue;
+    // Bullets in the firearm ready to shoot;
+
+    [SerializeField] private int _clipValue;
+
 
     [SerializeField] private List<int> _modifiers = new List<int>();
 
-    public int getValue(){
-        return _value;
-    }
-    public void setValue(int value){
-        _value = value;
+    public int getReloadValue(){
+        return _reloadValue;
     }
 
+    public int getClipValue(){
+        return _clipValue ;
+    }
+    public void setReloadValue(int value){
+        _reloadValue = value;
+    }
+
+    public void setClipValue(int value){
+        _clipValue = value;
+    }
     public void addModifier(int modifier){
         if(modifier != 0)
             _modifiers.Add(modifier);
