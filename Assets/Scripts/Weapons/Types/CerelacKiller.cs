@@ -13,4 +13,6 @@ public class CerelacKiller : FireWeapon {
         setClipValue(30);
         _initialAmmo = 30;
     }
+
+ 
 }

@@ -27,4 +27,6 @@ public abstract class Weapon : MonoBehaviour
     public void setTimeToFire(float time){
         _timeToFire = time;
     }
+
+    public abstract void shoot(Shooter controller);
 }
