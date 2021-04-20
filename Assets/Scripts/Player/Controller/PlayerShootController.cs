@@ -10,9 +10,7 @@ public class PlayerShootController : Shooter
 
     void Update()
     {   
-    
         if(Input.GetButton("Fire1") && fireWeapon.getClipValue()>0){
-            //shoot(fireWeapon);
             fireWeapon.shoot(this);
         }
         else if(Input.GetButton("Fire2")){ //check distances
