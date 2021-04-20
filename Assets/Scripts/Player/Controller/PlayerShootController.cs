@@ -13,7 +13,7 @@ public class PlayerShootController : Shooter
         if(Input.GetButton("Fire1") && fireWeapon.getClipValue()>0){
             fireWeapon.shoot(this);
         }
-        else if(Input.GetButton("Fire2")){ //check distances
+        else if(Input.GetButton("Fire2")){ //TODO: check distances
             meleeWeapon.shoot(this);
         }
         else if(Input.GetKey(KeyCode.R)){

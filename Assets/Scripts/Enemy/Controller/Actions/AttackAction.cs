@@ -10,14 +10,13 @@ public class MeleeAction : AttackAction
 {
     public override void Act(EnemyController controller)
     {
-        //controller.getMeleeWeapon().shoot(controller);
+        controller.getMeleeWeapon().shoot(controller);
     }
 }
 public class ShootAction : AttackAction
 {
     public override void Act(EnemyController controller)
     {
-        //controller.getFireWeapon().shoot(controller);
+        controller.getFireWeapon().shoot(controller);
     }
-
 }
