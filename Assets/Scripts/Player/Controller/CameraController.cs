@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-
-
     public Camera cam;
     public float sensitivity = 300f;
 

@@ -40,7 +40,6 @@ public class MovementController : MonoBehaviour
             _body.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
         }
 
-
         // temporary for debug purposes
         velocityText.text = _body.velocity.ToString();
     }
@@ -54,4 +53,6 @@ public class MovementController : MonoBehaviour
     {
         return Physics.CheckSphere(_groundChecker.position, groundDistance, groundLayer, QueryTriggerInteraction.Ignore);
     }
+
+
 }
