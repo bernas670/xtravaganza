@@ -4,6 +4,8 @@ public abstract class FireWeapon : Weapon
     protected AmmoStat _ammo = new AmmoStat(); /* nr de bullets + modifiers para saber qts reloads ? */
     protected int _initialAmmo;
 
+    public ParticleSystem muzzleFlash;
+    public GameObject impactEffect;
     public void reload(){
         // TODO 
         Debug.Log("Started reloading");
@@ -49,8 +51,14 @@ public abstract class FireWeapon : Weapon
     {
         if (Time.time >= _timeToFire)
         {
+            if(controller.name == "Player"){
+                muzzleFlash.Play();
+                //  This should be outside the if statement. But since we only have 1 weapon enemy is decreasing the ammo aswell;
+                decresaseAmmo();
+            }
+
             setTimeToFire(Time.time + 1f / _fireRate);
-            decresaseAmmo();
+
             RaycastHit hit;
             if (Physics.Raycast(controller.getPoV().position, controller.getPoV().forward, out hit, _range))
             {
@@ -66,6 +74,9 @@ public abstract class FireWeapon : Weapon
                     Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
                     enemy.TakeDamage(_damage);
                 }
+
+                GameObject temObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(temObj, 2f);
             }
         }
     }
