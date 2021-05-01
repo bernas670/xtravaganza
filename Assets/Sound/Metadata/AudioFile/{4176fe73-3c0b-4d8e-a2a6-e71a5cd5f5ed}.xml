@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{4176fe73-3c0b-4d8e-a2a6-e71a5cd5f5ed}">
+		<property name="assetPath">
+			<value>Ne.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.91733333333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2837b30f-5ba3-4c4a-9835-20fbbc03b493}</destination>
+		</relationship>
+	</object>
+</objects>
