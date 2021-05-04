@@ -6,6 +6,7 @@ public class MovementController : MonoBehaviour
 {
 
     private CharacterController _controller;
+    private CameraController _camController;
     private Rigidbody _rb;
 
     // temporary for debug purposes
@@ -29,8 +30,23 @@ public class MovementController : MonoBehaviour
     private float _hVel = 0f;
     private float _vVel = 0f;
 
+
+    // wall running vars
+    private bool _leftWall = false;
+    private bool _rightWall = false;
+    private bool _isWallRunning = false;
+
+    private float _wallDist = 0.8f;
+    private float _minWallrunHeight = JUMP_HEIGHT - 0.5f;
+    private float _wallRunGravity = -Physics.gravity.y * 0.3f;
+    private float _wallRunJumpForce = 6f;
+    private float _wallRunCamTilt = 20;
+
+    RaycastHit _leftWallHit, _rightWallHit;
+
     void Start()
     {
+        _camController = GetComponent<CameraController>();
         _controller = GetComponent<CharacterController>();
         _rb = GetComponent<Rigidbody>();
     }
@@ -44,7 +60,7 @@ public class MovementController : MonoBehaviour
 
         QueueJump();
 
-        // temporary for debug purposes
+        // FIXME: REMOVE, temporary for debug purposes
         horizontalSpeedText.text = string.Format("hspeed: {0}", _hVel.ToString("#.00"));
         verticalSpeedText.text = string.Format("vspeed: {0}", _vVel.ToString("#.00"));
     }
@@ -55,19 +71,32 @@ public class MovementController : MonoBehaviour
         _hVel = Mathf.Sqrt(Mathf.Pow(_rb.velocity.x, 2) + Mathf.Pow(_rb.velocity.z, 2));
         _vVel = _rb.velocity.y;
 
-        // display _velocity and _wishDir vectors
+        // FIXME: REMOVE, display _velocity and _wishDir vectors
         // Debug.DrawLine(transform.position, transform.position + _rb.velocity, Color.green);
         // Debug.DrawLine(transform.position, transform.position + _wishDir, Color.blue);
 
+
         RaycastHit hitInfo;
         _isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, 1.1f);
-        // draw ray
-        Debug.DrawLine(transform.position, transform.position - Vector3.up * 1.1f, Color.red);
+         // draw ray
+        // Debug.DrawLine(transform.position, transform.position - Vector3.up * 1.1f, Color.red);
+
 
 
         if (_isGrounded)
         {
             GroundMovement(Time.fixedDeltaTime);
+        }
+        else if (CanWallRun())
+        {
+            if(_isWallRunning)
+                WallRun();
+            else
+                StartWallRun();
+        }
+        else if(_isWallRunning)
+        {
+            StopWallRun();
         }
         else
         {
@@ -104,6 +133,7 @@ public class MovementController : MonoBehaviour
         Accelerate(AIR_MAX_SPEED, GROUND_ACCEL, deltaTime);
     }
 
+
     void Accelerate(float maxSpeed, float acceleration, float deltaTime)
     {
         Vector3 vel = _rb.velocity;
@@ -125,4 +155,69 @@ public class MovementController : MonoBehaviour
         _rb.velocity = velocity;
     }
 
+    void CheckWall()
+    {
+        _rightWall = Physics.Raycast(transform.position, transform.right, out _rightWallHit, _wallDist);
+        _leftWall = Physics.Raycast(transform.position, -transform.right, out _leftWallHit, _wallDist);
+
+        // FIXME: REMOVE, draw rays
+        Debug.DrawLine(transform.position, transform.position + transform.right * _wallDist, Color.red);
+        Debug.DrawLine(transform.position, transform.position - transform.right * _wallDist, Color.red);
+    }
+
+    bool CanWallRun()
+    {
+        CheckWall();
+
+        Debug.DrawLine(transform.position, transform.position + Vector3.down * _minWallrunHeight, Color.red);
+        return !Physics.Raycast(transform.position, Vector3.down, _minWallrunHeight) && (_leftWall || _rightWall);
+    }
+
+    void StartWallRun()
+    {
+        _rb.useGravity = false;
+        _isWallRunning = true;
+    }
+    
+    void StopWallRun()
+    {
+        _rb.useGravity = true;
+        _isWallRunning = false;
+        StartCoroutine(_camController.AsyncTilt(0));
+    }
+
+    void WallRun()
+    {
+        _rb.AddForce(Vector3.down * _wallRunGravity, ForceMode.Force);
+
+        float tiltFactor = _leftWall ? -1 : 1;
+        _camController.Tilt(tiltFactor * _wallRunCamTilt);
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            // Debug.Log("Tried to jump");
+            if (!_leftWall && !_rightWall) return;
+
+            // Debug.Log("Jumped");
+            RaycastHit wall = _leftWall ? _leftWallHit : _rightWallHit;
+            Vector3 direction = transform.up + wall.normal;
+            _rb.velocity = new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
+
+            float force = _wallRunJumpForce * Mathf.Clamp(_hVel * 5, 50, 150);
+            // Debug.Log(force);
+            _rb.AddForce(direction * force, ForceMode.Force);
+        }
+    }
+
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     if (_currWall == WallCollision.NONE)
+    //         return;
+
+
+    //     RaycastHit hitInfo;
+    //     Physics.Raycast(transform.position, transform.right * (int)_currWall, out hitInfo, 1.1f);
+
+    //     _rb.velocity = Vector3.ProjectOnPlane(collision.relativeVelocity, hitInfo.normal);
+    // }
 }
