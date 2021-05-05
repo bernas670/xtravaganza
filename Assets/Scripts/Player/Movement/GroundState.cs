@@ -33,7 +33,7 @@ public class GroundState : MovementState
         base.PhysicsUpdate();
 
         if (!_controller.IsGrounded()) {
-            Debug.Log("Ground -> Air");
+            // Debug.Log("Ground -> Air");
             _sm.ChangeState(new AirState(_controller, _sm));
             return;
         }
@@ -43,7 +43,7 @@ public class GroundState : MovementState
         if (_wishJump) {
             _wishJump = false;
             _rb.velocity = new Vector3(_rb.velocity.x, Mathf.Sqrt(JUMP_HEIGHT * 2f * -Physics.gravity.y), _rb.velocity.z);
-            Debug.Log("Ground -> Air");
+            // Debug.Log("Ground -> Air");
             _sm.ChangeState(new AirState(_controller, _sm));
             return;
         }

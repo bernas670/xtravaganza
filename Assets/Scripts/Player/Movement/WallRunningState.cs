@@ -4,7 +4,7 @@ public class WallRunningState : MovementState
 {
     private Transform _transform;
     private Rigidbody _rb;
-    private bool _jump = false;
+    private bool _wishJump = false;
 
     private float _wallRunGravity = -Physics.gravity.y * 0.3f;
     private float _wallRunJumpForce = 6f;
@@ -23,7 +23,10 @@ public class WallRunningState : MovementState
     public override void HandleInput()
     {
         base.HandleInput();
-        _jump = Input.GetButtonDown("Jump");
+        if (Input.GetButtonDown("Jump"))
+            _wishJump = true;
+        if (Input.GetButtonUp("Jump"))
+            _wishJump = false;
     }
 
     public override void PhysicsUpdate()
@@ -32,12 +35,12 @@ public class WallRunningState : MovementState
 
         if(!_controller.CanWallRun()) {
             if(_controller.IsGrounded()) {
-                Debug.Log("WallRun -> Ground");
+                // Debug.Log("WallRun -> Ground");
                 _sm.ChangeState(new GroundState(_controller, _sm));
                 return;
             }
             
-            Debug.Log("WallRun -> Air");
+            // Debug.Log("WallRun -> Air");
             _sm.ChangeState(new AirState(_controller, _sm));
             return;
         }
@@ -47,7 +50,10 @@ public class WallRunningState : MovementState
         float wallRunFactor = _controller.GetWallRunFactor(out wall);
         _controller.Tilt(wallRunFactor * _wallRunCamTilt);
 
-        if (!_jump) return;
+        if (!_wishJump) return;
+
+        Debug.Log("JUMPING");
+        _wishJump = false;
 
         Vector3 direction = _transform.up + wall.normal;
 

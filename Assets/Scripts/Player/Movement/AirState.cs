@@ -19,13 +19,13 @@ public class AirState : MovementState
         base.PhysicsUpdate();
 
         if (_controller.IsGrounded()) {
-            Debug.Log("Air -> Ground");
+            // Debug.Log("Air -> Ground");
             _sm.ChangeState(new GroundState(_controller, _sm));
             return;
         }
         
         if (_controller.CanWallRun()) {
-            Debug.Log("Air -> WallRun");
+            // Debug.Log("Air -> WallRun");
             _sm.ChangeState(new WallRunningState(_controller, _sm));
             return;
         }
