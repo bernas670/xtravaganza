@@ -2,12 +2,13 @@
 using UnityEngine.UI;
 using TMPro;
 
+
 public class MovementController : MonoBehaviour
 {
 
     private CharacterController _controller;
     private CameraController _camController;
-    private Rigidbody _rb;
+    public Rigidbody rb;
 
     // temporary for debug purposes
     public TextMeshProUGUI horizontalSpeedText, verticalSpeedText;
@@ -24,8 +25,8 @@ public class MovementController : MonoBehaviour
 
     // 
     private bool _isGrounded = false;
-    private bool _wishJump = false;
-    private Vector3 _wishDir = Vector3.zero;
+    public bool wishJump = false;
+    public Vector3 wishDir = Vector3.zero;
 
     private float _hVel = 0f;
     private float _vVel = 0f;
@@ -44,19 +45,31 @@ public class MovementController : MonoBehaviour
 
     RaycastHit _leftWallHit, _rightWallHit;
 
+    private StateMachine _movementSM;
+
+
     void Start()
     {
         _camController = GetComponent<CameraController>();
         _controller = GetComponent<CharacterController>();
-        _rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+
+
+        _movementSM = new StateMachine();
+
+        GroundState ground = new GroundState(this, _movementSM);
+        _movementSM.Initialize(ground);
     }
 
     void Update()
     {
-        _wishDir = Vector3.zero;
-        _wishDir.x = Input.GetAxis("Horizontal");
-        _wishDir.z = Input.GetAxis("Vertical");
-        _wishDir = transform.TransformDirection(_wishDir);
+        wishDir = Vector3.zero;
+        wishDir.x = Input.GetAxis("Horizontal");
+        wishDir.z = Input.GetAxis("Vertical");
+        wishDir = transform.TransformDirection(wishDir);
+
+
+
 
         QueueJump();
 
@@ -67,9 +80,11 @@ public class MovementController : MonoBehaviour
 
     void FixedUpdate()
     {
+
+
         // update velocity values
-        _hVel = Mathf.Sqrt(Mathf.Pow(_rb.velocity.x, 2) + Mathf.Pow(_rb.velocity.z, 2));
-        _vVel = _rb.velocity.y;
+        _hVel = Mathf.Sqrt(Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.z, 2));
+        _vVel = rb.velocity.y;
 
         // FIXME: REMOVE, display _velocity and _wishDir vectors
         // Debug.DrawLine(transform.position, transform.position + _rb.velocity, Color.green);
@@ -102,24 +117,27 @@ public class MovementController : MonoBehaviour
         {
             AirMovement(Time.fixedDeltaTime);
         }
+
+        _movementSM.PhysicsUpdate();
     }
+
 
     void QueueJump()
     {
         if (Input.GetButton("Jump"))
-            _wishJump = true;
+            wishJump = true;
         if (Input.GetButtonUp("Jump"))
-            _wishJump = false;
+            wishJump = false;
     }
 
     void GroundMovement(float deltaTime)
     {
         Accelerate(GROUND_MAX_SPEED, GROUND_ACCEL, deltaTime);
 
-        if (_wishJump)
+        if (wishJump)
         {
-            _rb.velocity = new Vector3(_rb.velocity.x, Mathf.Sqrt(JUMP_HEIGHT * 2f * -Physics.gravity.y), _rb.velocity.z);
-            _wishJump = false;
+            rb.velocity = new Vector3(rb.velocity.x, Mathf.Sqrt(JUMP_HEIGHT * 2f * -Physics.gravity.y), rb.velocity.z);
+            wishJump = false;
         }
         else
         {
@@ -134,25 +152,25 @@ public class MovementController : MonoBehaviour
     }
 
 
-    void Accelerate(float maxSpeed, float acceleration, float deltaTime)
+    public void Accelerate(float maxSpeed, float acceleration, float deltaTime)
     {
-        Vector3 vel = _rb.velocity;
+        Vector3 vel = rb.velocity;
         vel.y = 0;
 
-        float currentSpeed = Vector3.Dot(vel, _wishDir);
+        float currentSpeed = Vector3.Dot(vel, wishDir);
         float addSpeed = Mathf.Clamp(maxSpeed - currentSpeed, 0, acceleration * deltaTime);
 
-        _rb.AddForce(_wishDir * addSpeed, ForceMode.VelocityChange);
+        rb.AddForce(wishDir * addSpeed, ForceMode.VelocityChange);
     }
 
-    void ApplyFriction(float friction, float maxSpeed, float deltaTime)
+    public void ApplyFriction(float friction, float maxSpeed, float deltaTime)
     {
         float drop = friction * deltaTime;
-        float speed = Mathf.Clamp(_rb.velocity.magnitude - drop, 0, maxSpeed);
+        float speed = Mathf.Clamp(rb.velocity.magnitude - drop, 0, maxSpeed);
 
-        Vector3 velocity = _rb.velocity.normalized * speed;
-        velocity.y = _rb.velocity.y;
-        _rb.velocity = velocity;
+        Vector3 velocity = rb.velocity.normalized * speed;
+        velocity.y = rb.velocity.y;
+        rb.velocity = velocity;
     }
 
     void CheckWall()
@@ -165,7 +183,7 @@ public class MovementController : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position - transform.right * _wallDist, Color.red);
     }
 
-    bool CanWallRun()
+    public bool CanWallRun()
     {
         CheckWall();
 
@@ -175,20 +193,20 @@ public class MovementController : MonoBehaviour
 
     void StartWallRun()
     {
-        _rb.useGravity = false;
+        rb.useGravity = false;
         _isWallRunning = true;
     }
     
     void StopWallRun()
     {
-        _rb.useGravity = true;
+        rb.useGravity = true;
         _isWallRunning = false;
         StartCoroutine(_camController.AsyncTilt(0));
     }
 
     void WallRun()
     {
-        _rb.AddForce(Vector3.down * _wallRunGravity, ForceMode.Force);
+        rb.AddForce(Vector3.down * _wallRunGravity, ForceMode.Force);
 
         float tiltFactor = _leftWall ? -1 : 1;
         _camController.Tilt(tiltFactor * _wallRunCamTilt);
@@ -201,23 +219,12 @@ public class MovementController : MonoBehaviour
             // Debug.Log("Jumped");
             RaycastHit wall = _leftWall ? _leftWallHit : _rightWallHit;
             Vector3 direction = transform.up + wall.normal;
-            _rb.velocity = new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
             float force = _wallRunJumpForce * Mathf.Clamp(_hVel * 5, 50, 150);
             // Debug.Log(force);
-            _rb.AddForce(direction * force, ForceMode.Force);
+            rb.AddForce(direction * force, ForceMode.Force);
         }
     }
 
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     if (_currWall == WallCollision.NONE)
-    //         return;
-
-
-    //     RaycastHit hitInfo;
-    //     Physics.Raycast(transform.position, transform.right * (int)_currWall, out hitInfo, 1.1f);
-
-    //     _rb.velocity = Vector3.ProjectOnPlane(collision.relativeVelocity, hitInfo.normal);
-    // }
 }
