@@ -40,15 +40,14 @@ public class CameraController : MonoBehaviour
         _tilt = Mathf.Lerp(_tilt, max, _camTiltTime * Time.deltaTime);
     }
 
-    public IEnumerator AsyncTilt(float max)
+    public IEnumerator AsyncTilt(float target)
     {
         float _lastTilt = _tilt;
-        while(Mathf.Abs(_tilt - max) >= _tiltError) {
+        while(Mathf.Abs(_tilt - target) >= _tiltError) {
             if(Mathf.Abs(_lastTilt) < Mathf.Abs(_tilt)) break;
 
-            _tilt = Mathf.Lerp(_tilt, max, _camTiltTime * Time.deltaTime);
+            _tilt = Mathf.Lerp(_tilt, target, _camTiltTime * Time.deltaTime);
             _lastTilt = _tilt;
-            Debug.Log(_tilt);
             yield return null;
         }
 
