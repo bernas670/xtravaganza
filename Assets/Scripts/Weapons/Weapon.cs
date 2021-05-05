@@ -29,4 +29,8 @@ public abstract class Weapon : MonoBehaviour
     }
 
     public abstract void shoot(Shooter controller);
+
+    public void setActive(bool isActive){
+        this.setActive(isActive);
+    }
 }

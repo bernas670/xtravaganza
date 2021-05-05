@@ -6,13 +6,9 @@ public abstract class FireWeapon : Weapon
 
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
+
+
     public void reload(){
-        // TODO 
-        Debug.Log("Started reloading");
-
-        Debug.Log("Current clip: " + _ammo.getClipValue());
-        Debug.Log("Current reload: " + _ammo.getReloadValue());
-
         // Verify if has bullets to reload and wepon is not full
         if(_ammo.getReloadValue()>0 && _initialAmmo > _ammo.getClipValue()){
             int ammountToReload = _initialAmmo - _ammo.getClipValue();
@@ -26,7 +22,6 @@ public abstract class FireWeapon : Weapon
         }
 
         Debug.Log("After reload clip: " + _ammo.getClipValue());
-        Debug.Log("After reload reload: " + _ammo.getReloadValue());
     }
 
     public void decresaseAmmo(){
