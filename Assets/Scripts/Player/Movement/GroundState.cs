@@ -6,7 +6,6 @@ public class GroundState : MovementState
     private const float GROUND_MAX_SPEED = 15f;
     private const float GROUND_ACCEL = 10f * GROUND_MAX_SPEED;
     private const float GROUND_FRICTION = 3f * GROUND_MAX_SPEED;
-
     private const float JUMP_HEIGHT = 2f;
 
     private bool _wishJump = false;
@@ -27,11 +26,6 @@ public class GroundState : MovementState
             _wishJump = true;
         if (Input.GetButtonUp("Jump"))
             _wishJump = false;
-    }
-
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
     }
 
     public override void PhysicsUpdate()
@@ -55,10 +49,5 @@ public class GroundState : MovementState
         }
 
         _controller.ApplyFriction(GROUND_FRICTION, GROUND_MAX_SPEED, Time.fixedDeltaTime);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 }
