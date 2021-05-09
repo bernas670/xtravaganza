@@ -24,6 +24,6 @@ public class HealthStat
     }
 
     public virtual void Die(){
-        Debug.Log("Dieded");
+        //Debug.Log("Dieded");
     }
 }

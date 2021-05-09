@@ -8,11 +8,10 @@ public class CerelacKiller : FireWeapon {
         _range = 15f;
 
         _fireRate = 5f;
-        _timeToFire= 1f;
-        setAmmoValue(90);
-        setClipValue(30);
+        _timeToFire= 1f;        
         _initialAmmo = 30;
-    }
 
- 
+        setAmmoValue(90);
+        setClipValue(_initialAmmo);
+    }
 }

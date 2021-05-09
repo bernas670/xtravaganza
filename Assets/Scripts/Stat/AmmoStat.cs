@@ -11,10 +11,7 @@ public class AmmoStat
     // Bullets in the firearm ready to shoot;
 
     [SerializeField] private int _clipValue;
-
-
-    [SerializeField] private List<int> _modifiers = new List<int>();
-
+    
     public int getReloadValue(){
         return _reloadValue;
     }
@@ -29,14 +26,7 @@ public class AmmoStat
     public void setClipValue(int value){
         _clipValue = value;
     }
-    public void addModifier(int modifier){
-        if(modifier != 0)
-            _modifiers.Add(modifier);
-    }
 
-    public void removeModifier(int modifier){
-        if(modifier != 0)
-            _modifiers.Remove(modifier);
-    }
+
     
 }

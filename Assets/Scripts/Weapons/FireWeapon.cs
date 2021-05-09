@@ -24,7 +24,7 @@ public abstract class FireWeapon : Weapon
         Debug.Log("After reload clip: " + _ammo.getClipValue());
     }
 
-    public void decresaseAmmo(){
+    public void decreaseAmmo(){
         Debug.Log("Current clip: " + _ammo.getClipValue());
         _ammo.setClipValue(_ammo.getClipValue() - 1);
         Debug.Log("After shoot clip: " + _ammo.getClipValue());
@@ -49,7 +49,7 @@ public abstract class FireWeapon : Weapon
             if(controller.name == "Player"){
                 muzzleFlash.Play();
                 //  This should be outside the if statement. But since we only have 1 weapon enemy is decreasing the ammo aswell;
-                decresaseAmmo();
+                decreaseAmmo();
             }
 
             setTimeToFire(Time.time + 1f / _fireRate);
