@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class MovementController : MonoBehaviour
 {
     private CharacterController _controller;
     private CameraController _camController;
+    [HideInInspector]
     public Rigidbody rb;
 
     // temporary for debug purposes
@@ -23,7 +23,6 @@ public class MovementController : MonoBehaviour
     void Start()
     {
         _camController = GetComponent<CameraController>();
-        _controller = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
 
         _movementSM = new StateMachine();
@@ -54,7 +53,7 @@ public class MovementController : MonoBehaviour
     }
 
     public bool IsGrounded() {
-        return Physics.Raycast(_controller.transform.position, -Vector3.up, 1.1f);
+        return Physics.Raycast(transform.position, -Vector3.up, 1.1f);
     }
 
     public int GetWallRunFactor(out RaycastHit hit) {

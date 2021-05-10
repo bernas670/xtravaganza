@@ -3,7 +3,7 @@
 public class AirState : MovementState
 {
     private Transform _transform;
-    private const float AIR_MAX_SPEED = 1.5f;
+    private const float AIR_MAX_SPEED = 3.0f;
     private const float AIR_ACCEL = 150f;
 
     public AirState(MovementController controller, StateMachine stateMachine) : base(controller, stateMachine) { }
