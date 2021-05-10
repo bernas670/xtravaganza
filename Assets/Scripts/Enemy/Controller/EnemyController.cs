@@ -19,10 +19,12 @@ public class EnemyController : Shooter
 
     void Awake(){
         _isEvil = Random.Range(0,2) == 0;
+        setPoV(this.transform);
     }
+
     void Start()
     {
-        _player = GameObject.Find("Player"); /* Make this a singleton + game manager*/
+        _player = GameObject.Find("Player"); // Make this a singleton + game manager
         _target = _player.transform; /* Make this a singleton + game manager*/
         _agent = GetComponent<NavMeshAgent>();
     }
