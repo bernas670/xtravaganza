@@ -18,8 +18,7 @@ public class PickDropController : MonoBehaviour
     void Awake(){
         player = GameObject.Find("Player").transform;
         fpsCam = Camera.main.transform;
-        //gunContainer = gameObject.transform.parent;
-        Debug.Log(gameObject.transform);
+        gunContainer = gameObject.transform.parent;
         fireWeapon = gameObject.GetComponent<FireWeapon>();
     }
     private void Start()
@@ -75,10 +74,12 @@ public class PickDropController : MonoBehaviour
         fireWeapon.enabled = true;
     }
 
-    private void Drop()
+    public void Drop(bool isEnemy = false)
     {
-        PlayerShootController player_controller = player.GetComponent<PlayerShootController>();
-        player_controller.drop();
+        if(!isEnemy){
+            PlayerShootController player_controller = player.GetComponent<PlayerShootController>();
+            player_controller.drop();
+        }
         fireWeapon.setNotInUse();
 
         equipped = false;
