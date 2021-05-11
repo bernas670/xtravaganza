@@ -8,7 +8,6 @@ public class Player : Character
     }
 
     public override void Die(){
-        Destroy(gameObject, 0);
+        Debug.Log("PLAYER DEAD");
     }
-
 }

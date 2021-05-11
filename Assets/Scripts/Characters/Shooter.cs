@@ -8,26 +8,32 @@ public abstract class Shooter : MonoBehaviour
 
     private Transform point_of_view;
 
-    public void setPoV(Transform pov){
+    public MeleeWeapon getMeleeWeapon()
+    {
+        return this.meleeWeapon;
+    }
+
+    public void setPoV(Transform pov)
+    {
         point_of_view = pov;
     }
-    
-    public Transform getPoV(){
+
+    public Transform getPoV()
+    {
         return point_of_view;
     }
 
-    public void setFireWeapon(FireWeapon weapon){
+    public void setFireWeapon(FireWeapon weapon)
+    {
         this.fireWeapon = weapon;
     }
-    public FireWeapon getFireWeapon(){
+    public FireWeapon getFireWeapon()
+    {
         return this.fireWeapon;
     }
-    
-    public void setMeleeWeapon(MeleeWeapon weapon){
-        this.meleeWeapon = weapon;
-    }
 
-    public MeleeWeapon getMeleeWeapon(){
-        return this.meleeWeapon;
+    public void setMeleeWeapon(MeleeWeapon weapon)
+    {
+        this.meleeWeapon = weapon;
     }
 }

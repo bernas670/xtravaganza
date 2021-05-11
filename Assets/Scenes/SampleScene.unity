@@ -6322,7 +6322,7 @@ GameObject:
   - component: {fileID: 1606052356}
   - component: {fileID: 1606052355}
   - component: {fileID: 1606052354}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6490,7 +6490,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: NaN, w: 3e-45}
+  m_BoundingSphereOverride: {x: 4.25e-43, y: 386490.75, z: 4.23e-43, w: 0.0000000016809887}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -6559,7 +6559,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848419412}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 8.86, y: 11.31, z: -3.47}
+  m_LocalPosition: {x: 8.86, y: 1.6, z: -3.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -6627,6 +6627,7 @@ MonoBehaviour:
   fireWeapon: {fileID: 2025150533}
   meleeWeapon: {fileID: 262023831}
   cam: {fileID: 963194227}
+  pickUpRange: 5
 --- !u!114 &2025150533 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8857985419638254388, guid: aa4901c8ddaf26b4ba45f72b0d40fd02,
@@ -6649,7 +6650,7 @@ PrefabInstance:
     - target: {fileID: 3244029777583353824, guid: a1f6c5d2c4f82f3498237044869db328,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.43
+      value: -3.6
       objectReference: {fileID: 0}
     - target: {fileID: 3244029777583353852, guid: a1f6c5d2c4f82f3498237044869db328,
         type: 3}
@@ -6674,7 +6675,7 @@ PrefabInstance:
     - target: {fileID: 3244029778788584350, guid: a1f6c5d2c4f82f3498237044869db328,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.4842825
+      value: -10.81
       objectReference: {fileID: 0}
     - target: {fileID: 3244029778788584350, guid: a1f6c5d2c4f82f3498237044869db328,
         type: 3}

@@ -52,7 +52,6 @@ public class WallRunningState : MovementState
 
         if (!_wishJump) return;
 
-        Debug.Log("JUMPING");
         _wishJump = false;
 
         Vector3 direction = _transform.up + wall.normal;
