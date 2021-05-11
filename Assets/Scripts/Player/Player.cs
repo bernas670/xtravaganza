@@ -6,4 +6,8 @@ public class Player : Character
     {
         _health = new HealthStat(100);
     }
+
+    public override void Die(){
+        Debug.Log("PLAYER DEAD");
+    }
 }
