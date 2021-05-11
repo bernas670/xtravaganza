@@ -9,7 +9,6 @@ public class PlayerShootController : Shooter
     void Awake()
     {
         setPoV(cam.transform);
-        UpdateText();
     }
 
     void UpdateText()
@@ -19,6 +18,7 @@ public class PlayerShootController : Shooter
 
     void Update()
     {
+        UpdateText();
         if (Input.GetButton("Fire1") && fireWeapon.getClipValue() > 0)
         {
             fireWeapon.shoot(this);
