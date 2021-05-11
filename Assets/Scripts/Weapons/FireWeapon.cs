@@ -7,6 +7,9 @@ public abstract class FireWeapon : Weapon
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
 
+    public bool inUse;
+
+
 
     public void reload(){
         // Verify if has bullets to reload and wepon is not full
@@ -59,7 +62,6 @@ public abstract class FireWeapon : Weapon
             {
                 if (hit.transform.name == "Player") /* controller = enemy */
                 {
-                    //Debug.Log(controller.gameObject.name + " attacked player");
                     Player player = hit.transform.gameObject.GetComponent<Player>();
                     player.TakeDamage(_damage);
                 }
@@ -68,12 +70,25 @@ public abstract class FireWeapon : Weapon
                     Debug.Log(controller.gameObject.name + " attacked enemy");
                     Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
                     enemy.TakeDamage(_damage);
-                }
 
-                GameObject temObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(temObj, 2f);
+                    GameObject temObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    temObj.transform.parent = enemy.transform;
+                    Destroy(temObj, 2f);
+                }
+                else {
+                    GameObject temObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(temObj, 2f);
+                }
             }
         }
+    }
+
+    public void setInUse(){
+        inUse = true;
+    }
+
+    public void setNotInUse(){
+        inUse=false;
     }
 
 }

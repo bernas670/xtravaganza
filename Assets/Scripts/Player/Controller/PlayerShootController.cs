@@ -10,6 +10,8 @@ public class PlayerShootController : Shooter
 
     void Update()
     {   
+        if(!fireWeapon) return;
+
         if(Input.GetButton("Fire1") && fireWeapon.getClipValue()>0){
             fireWeapon.shoot(this);
         }
@@ -19,6 +21,14 @@ public class PlayerShootController : Shooter
         else if(Input.GetKey(KeyCode.R)){
             fireWeapon.reload();
         }
+    }
+
+    public void drop(){
+        fireWeapon = null;
+    }
+
+    public void pick(FireWeapon weapon){
+        fireWeapon=weapon;
     }
 
 }

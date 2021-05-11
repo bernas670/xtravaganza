@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PickDropController : MonoBehaviour
 {
-    public Weapon gunScript;
+    public FireWeapon fireWeapon;
     public Rigidbody rb;
     public BoxCollider coll;
     public Transform player, gunContainer, fpsCam;
@@ -15,18 +15,25 @@ public class PickDropController : MonoBehaviour
     public bool equipped;
     public static bool slotFull;
 
+    void Awake(){
+        player = GameObject.Find("Player").transform;
+        fpsCam = Camera.main.transform;
+        //gunContainer = gameObject.transform.parent;
+        Debug.Log(gameObject.transform);
+        fireWeapon = gameObject.GetComponent<FireWeapon>();
+    }
     private void Start()
     {
         //Setup
         if (!equipped)
         {
-            gunScript.enabled = false;
+            fireWeapon.enabled = false;
             rb.isKinematic = false;
             coll.isTrigger = false;
         }
         if (equipped)
         {
-            gunScript.enabled = true;
+            fireWeapon.enabled = true;
             rb.isKinematic = true;
             coll.isTrigger = true;
             slotFull = true;
@@ -35,6 +42,8 @@ public class PickDropController : MonoBehaviour
 
     private void Update()
     {
+        if(equipped && fireWeapon.gameObject.transform.parent.name == "Enemy") return;
+
         //Check if player is in range and "E" is pressed
         Vector3 distanceToPlayer = player.position - transform.position;
         if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
@@ -45,6 +54,10 @@ public class PickDropController : MonoBehaviour
 
     private void PickUp()
     {
+        PlayerShootController player_controller = player.GetComponent<PlayerShootController>();
+        player_controller.pick(fireWeapon);
+        fireWeapon.setInUse();
+
         equipped = true;
         slotFull = true;
 
@@ -59,12 +72,17 @@ public class PickDropController : MonoBehaviour
         coll.isTrigger = true;
 
         //Enable script
-        gunScript.enabled = true;
+        fireWeapon.enabled = true;
     }
 
     private void Drop()
     {
+        PlayerShootController player_controller = player.GetComponent<PlayerShootController>();
+        player_controller.drop();
+        fireWeapon.setNotInUse();
+
         equipped = false;
+
         slotFull = false;
 
         //Set parent to null
@@ -85,7 +103,7 @@ public class PickDropController : MonoBehaviour
         rb.AddTorque(new Vector3(random, random, random) * 10);
 
         //Disable script
-        gunScript.enabled = false;
+        fireWeapon.enabled = false;
     }
 }
 
