@@ -12,6 +12,12 @@ public class Character : MonoBehaviour
 
     public void TakeDamage(int damage){
         _health.TakeDamage(damage);
+
+        if(_health.isDead()){
+            this.Die();
+        }
     }
+
+    public virtual void Die(){}
 
 }
