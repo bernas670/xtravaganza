@@ -17,12 +17,16 @@ public class PlayerShootController : Shooter
 
     void UpdateText()
     {
-        bulletsText.text = string.Format("ammo: {0}", fireWeapon.getClipValue());
+        if (fireWeapon)
+            bulletsText.text = string.Format("ammo: {0}", fireWeapon.getClipValue());
+        else
+            bulletsText.text = "No weapon";
     }
 
     void Update()
     {
         UpdateText();
+
         if (!fireWeapon)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -43,7 +47,6 @@ public class PlayerShootController : Shooter
         if (Input.GetButton("Fire1") && fireWeapon.getClipValue() > 0)
         {
             fireWeapon.shoot(this);
-            UpdateText();
         }
         else if (Input.GetButton("Fire2"))
         {
@@ -52,7 +55,6 @@ public class PlayerShootController : Shooter
         else if (Input.GetKey(KeyCode.R))
         {
             fireWeapon.reload();
-            UpdateText();
         }
         else if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -63,7 +65,7 @@ public class PlayerShootController : Shooter
     public void drop()
     {
         fireWeapon = null;
-        pickDrop.Drop(gameObject.GetComponent<Rigidbody>().velocity);
+        pickDrop.Drop(gameObject.GetComponent<Rigidbody>().velocity, cam.transform);
         pickDrop = null;
     }
 

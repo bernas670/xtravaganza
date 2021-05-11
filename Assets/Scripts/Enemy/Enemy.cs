@@ -11,7 +11,7 @@ public class Enemy : Character
     {
         EnemyController controller = gameObject.GetComponent<EnemyController>();
         PickDropController pickdrop = controller.getFireWeapon().GetComponent<PickDropController>();
-        pickdrop.Drop(gameObject.GetComponent<Rigidbody>().velocity);
+        pickdrop.Drop(gameObject.GetComponent<Rigidbody>().velocity, transform);
 
         Destroy(gameObject, 0);
     }

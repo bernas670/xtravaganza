@@ -6,7 +6,6 @@ public class PickDropController : MonoBehaviour
     public FireWeapon fireWeapon;
     public Rigidbody rb;
     public BoxCollider coll;
-    public Transform fpsCam;
 
     public float dropForwardForce, dropUpwardForce;
 
@@ -15,7 +14,6 @@ public class PickDropController : MonoBehaviour
 
     void Awake()
     {
-        fpsCam = Camera.main.transform;
         fireWeapon = gameObject.GetComponent<FireWeapon>();
     }
     
@@ -58,7 +56,7 @@ public class PickDropController : MonoBehaviour
         coll.enabled = false;
     }
 
-    public void Drop(Vector3 velocity)
+    public void Drop(Vector3 velocity, Transform fpsCam)
     {
         fireWeapon.setInUse(false);
 
