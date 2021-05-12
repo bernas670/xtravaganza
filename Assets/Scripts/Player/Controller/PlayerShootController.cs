@@ -7,6 +7,9 @@ public class PlayerShootController : Shooter
     public TextMeshProUGUI bulletsText;
     private PickDropController pickDrop;
 
+
+    public WeaponUI weaponUI;
+
     public float pickUpRange = 5;
 
     void Awake()
@@ -18,7 +21,8 @@ public class PlayerShootController : Shooter
     void UpdateText()
     {
         if (fireWeapon)
-            bulletsText.text = string.Format("ammo: {0}", fireWeapon.getClipValue());
+            weaponUI.SetAmmo(fireWeapon.getClipValue(), fireWeapon.getReloadValue());
+        // bulletsText.text = string.Format("ammo: {0}", fireWeapon.getClipValue());
         else
             bulletsText.text = "No weapon";
     }
@@ -27,20 +31,25 @@ public class PlayerShootController : Shooter
     {
         UpdateText();
 
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            RaycastHit hit;
+            if (!Physics.Raycast(base.getPoV().position, base.getPoV().forward, out hit, pickUpRange)) return;
+
+            PickDropController newPickDrop = hit.transform.gameObject.GetComponent<PickDropController>();
+            if (newPickDrop)
+            {
+                if (fireWeapon) {
+                    this.drop();
+                }
+                this.pick(newPickDrop);
+            }
+        }
+        
+        
         if (!fireWeapon)
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                RaycastHit hit;
-                if (!Physics.Raycast(base.getPoV().position, base.getPoV().forward, out hit, pickUpRange)) return;
-
-                PickDropController newPickDrop = hit.transform.gameObject.GetComponent<PickDropController>();
-                if (newPickDrop)
-                {
-                    this.pick(newPickDrop);
-                }
-            }
-
             return;
         }
 
