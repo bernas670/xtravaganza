@@ -4,7 +4,7 @@ public class Enemy : Character
 {
     void Awake()
     {
-        _health = new HealthStat(50);
+        _healthStat = new HealthStat(50);
     }
 
     public override void Die()

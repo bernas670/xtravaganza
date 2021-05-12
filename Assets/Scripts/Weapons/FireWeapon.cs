@@ -56,10 +56,10 @@ public abstract class FireWeapon : Weapon
             if (controller.name == "Player")
             {
                 muzzleFlash.Play();
-                //  This should be outside the if statement. But since we only have 1 weapon enemy is decreasing the ammo aswell;
-                decreaseAmmo();
             }
 
+            //  This should be outside the if statement. But since we only have 1 weapon enemy is decreasing the ammo aswell;
+            decreaseAmmo();
             setTimeToFire(Time.time + 1f / _fireRate);
 
             RaycastHit hit;
@@ -67,6 +67,7 @@ public abstract class FireWeapon : Weapon
             {
                 if (hit.transform.name == "Player") /* controller = enemy */
                 {
+                    Debug.Log(controller.gameObject.name + " attacked player");
                     Player player = hit.transform.gameObject.GetComponent<Player>();
                     player.TakeDamage(_damage);
                 }

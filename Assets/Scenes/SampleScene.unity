@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1851ea1590976a448a825237509e5c24,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -473,7 +474,7 @@ GameObject:
   - component: {fileID: 187671381}
   - component: {fileID: 187671380}
   - component: {fileID: 187671379}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187671377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.966, y: 1.38, z: -16.98}
+  m_LocalPosition: {x: 25.5, y: 1.4, z: -16.98}
   m_LocalScale: {x: 2.8331819, y: 0.9999992, z: 9.296362}
   m_Children: []
   m_Father: {fileID: 1525856954}
@@ -595,7 +596,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202206138}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 45a44dfea951c0140b6b12930b5aae1e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1191,7 +1192,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368659286}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 45a44dfea951c0140b6b12930b5aae1e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1846,7 +1847,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739147512}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 45a44dfea951c0140b6b12930b5aae1e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -8060,7 +8061,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422493451}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 45a44dfea951c0140b6b12930b5aae1e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
