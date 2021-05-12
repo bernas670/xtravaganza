@@ -1,29 +1,34 @@
-﻿
-
-using UnityEngine;
-
-public class HealthStat
+﻿public class HealthStat
 {
     protected int _health;
+
+    public HealthStat(int init)
+    {
+        _health = init;
+    }
+
+    public void setHealth(int health)
+    {
+        _health = health;
+    }
     
-    public HealthStat(int init){
-        _health=init;
-    }
-    public void setHealth(int health){
-        _health=health;
+    public int getHealth()
+    {
+        return _health;
     }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(int damage)
+    {
         _health -= damage;
-        if(_health < 0)
-            Die();
     }
 
-    public void TakePowerUp(int powerup){
-        _health+=powerup;
+    public void TakePowerUp(int powerup)
+    {
+        _health += powerup;
     }
 
-    public virtual void Die(){
-        //Debug.Log("Dieded");
+    public bool isDead()
+    {
+        return _health <= 0;
     }
 }

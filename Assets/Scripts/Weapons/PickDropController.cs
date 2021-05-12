@@ -1,55 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickDropController : MonoBehaviour
 {
-    public Weapon gunScript;
+    [HideInInspector]
+    public FireWeapon fireWeapon;
     public Rigidbody rb;
     public BoxCollider coll;
-    public Transform player, gunContainer, fpsCam;
 
-    public float pickUpRange;
     public float dropForwardForce, dropUpwardForce;
 
     public bool equipped;
     public static bool slotFull;
 
+    void Awake()
+    {
+        fireWeapon = gameObject.GetComponent<FireWeapon>();
+    }
+    
     private void Start()
     {
         //Setup
         if (!equipped)
         {
-            gunScript.enabled = false;
+            fireWeapon.enabled = false;
             rb.isKinematic = false;
             coll.isTrigger = false;
+            return;
         }
-        if (equipped)
-        {
-            gunScript.enabled = true;
-            rb.isKinematic = true;
-            coll.isTrigger = true;
-            slotFull = true;
-        }
+
+        fireWeapon.enabled = true;
+        rb.isKinematic = true;
+        coll.isTrigger = true;
+        slotFull = true;
     }
 
-    private void Update()
+    public void PickUp(Transform container)
     {
-        //Check if player is in range and "E" is pressed
-        Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
+        fireWeapon.setInUse(true);
 
-        //Drop if equipped and "Q" is pressed
-        if (equipped && Input.GetKeyDown(KeyCode.Q)) Drop();
-    }
-
-    private void PickUp()
-    {
         equipped = true;
         slotFull = true;
 
         //Make weapon a child of the camera and move it to default position
-        transform.SetParent(gunContainer);
+        transform.SetParent(container);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         transform.localScale = Vector3.one;
@@ -59,14 +52,16 @@ public class PickDropController : MonoBehaviour
         coll.isTrigger = true;
 
         //Enable script
-        gunScript.enabled = true;
+        fireWeapon.enabled = true;
+        coll.enabled = false;
     }
 
-    private void Drop()
+    public void Drop(Vector3 velocity, Transform fpsCam)
     {
+        fireWeapon.setInUse(false);
+
         equipped = false;
         slotFull = false;
-
         //Set parent to null
         transform.SetParent(null);
 
@@ -75,7 +70,7 @@ public class PickDropController : MonoBehaviour
         coll.isTrigger = false;
 
         //Gun carries momentum of player
-        rb.velocity = player.GetComponent<Rigidbody>().velocity;
+        rb.velocity = velocity;
 
         //AddForce
         rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
@@ -85,9 +80,9 @@ public class PickDropController : MonoBehaviour
         rb.AddTorque(new Vector3(random, random, random) * 10);
 
         //Disable script
-        gunScript.enabled = false;
+        fireWeapon.enabled = false;
+        coll.enabled = true;
     }
 }
-
 
 /* from: https://www.youtube.com/watch?v=8kKLUsn7tcg */

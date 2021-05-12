@@ -1,24 +1,79 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerShootController : Shooter
 {
     [SerializeField] protected Camera cam;
-    
-    void Awake(){
+    public TextMeshProUGUI bulletsText;
+    private PickDropController pickDrop;
+
+    public float pickUpRange = 5;
+
+    void Awake()
+    {
         setPoV(cam.transform);
+        pickDrop = gameObject.GetComponentInChildren<PickDropController>();
+    }
+
+    void UpdateText()
+    {
+        if (fireWeapon)
+            bulletsText.text = string.Format("ammo: {0}", fireWeapon.getClipValue());
+        else
+            bulletsText.text = "No weapon";
     }
 
     void Update()
-    {   
-        if(Input.GetButton("Fire1") && fireWeapon.getClipValue()>0){
+    {
+        UpdateText();
+
+        if (!fireWeapon)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                RaycastHit hit;
+                if (!Physics.Raycast(base.getPoV().position, base.getPoV().forward, out hit, pickUpRange)) return;
+
+                PickDropController newPickDrop = hit.transform.gameObject.GetComponent<PickDropController>();
+                if (newPickDrop)
+                {
+                    this.pick(newPickDrop);
+                }
+            }
+
+            return;
+        }
+
+        if (Input.GetButton("Fire1") && fireWeapon.getClipValue() > 0)
+        {
             fireWeapon.shoot(this);
         }
-        else if(Input.GetButton("Fire2")){ 
+        else if (Input.GetButton("Fire2"))
+        {
             meleeWeapon.shoot(this);
         }
-        else if(Input.GetKey(KeyCode.R)){
+        else if (Input.GetKey(KeyCode.R))
+        {
             fireWeapon.reload();
         }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            this.drop();
+        }
+    }
+
+    public void drop()
+    {
+        fireWeapon = null;
+        pickDrop.Drop(gameObject.GetComponent<Rigidbody>().velocity, cam.transform);
+        pickDrop = null;
+    }
+
+    public void pick(PickDropController newPickDrop)
+    {
+        pickDrop = newPickDrop;
+        fireWeapon = pickDrop.fireWeapon;
+        pickDrop.PickUp(cam.transform.GetChild(0));
     }
 
 }
