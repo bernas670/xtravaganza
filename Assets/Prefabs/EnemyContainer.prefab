@@ -426,7 +426,8 @@ PrefabInstance:
         type: 3}
       propertyPath: muzzleFlash
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6950896918635939447, guid: 0f4688711b7fb0841842bb8f692c6d17,
+        type: 3}
     - target: {fileID: 8857985419638254393, guid: aa4901c8ddaf26b4ba45f72b0d40fd02,
         type: 3}
       propertyPath: fpsCam
