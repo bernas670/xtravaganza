@@ -1,8 +1,10 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerShootController : Shooter
 {
     [SerializeField] protected Camera cam;
+    public TextMeshProUGUI bulletsText;
     private PickDropController pickDrop;
 
     public float pickUpRange = 5;
@@ -13,8 +15,18 @@ public class PlayerShootController : Shooter
         pickDrop = gameObject.GetComponentInChildren<PickDropController>();
     }
 
+    void UpdateText()
+    {
+        if (fireWeapon)
+            bulletsText.text = string.Format("ammo: {0}", fireWeapon.getClipValue());
+        else
+            bulletsText.text = "No weapon";
+    }
+
     void Update()
     {
+        UpdateText();
+
         if (!fireWeapon)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -53,7 +65,7 @@ public class PlayerShootController : Shooter
     public void drop()
     {
         fireWeapon = null;
-        pickDrop.Drop(gameObject.GetComponent<Rigidbody>().velocity);
+        pickDrop.Drop(gameObject.GetComponent<Rigidbody>().velocity, cam.transform);
         pickDrop = null;
     }
 

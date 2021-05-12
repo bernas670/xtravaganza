@@ -6,9 +6,15 @@
     {
         _health = init;
     }
+
     public void setHealth(int health)
     {
         _health = health;
+    }
+    
+    public int getHealth()
+    {
+        return _health;
     }
 
     public void TakeDamage(int damage)
