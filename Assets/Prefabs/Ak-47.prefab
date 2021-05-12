@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 8857985419638254391}
   - component: {fileID: 8857985419638254388}
   - component: {fileID: 8857985419638254393}
+  - component: {fileID: 7000104493036797025}
   m_Layer: 11
   m_Name: Ak-47
   m_TagString: Untagged
@@ -259,6 +260,29 @@ MonoBehaviour:
   dropForwardForce: 5
   dropUpwardForce: 5
   equipped: 1
+--- !u!114 &7000104493036797025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857985419225575869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1 &8857985419225575871
 GameObject:
   m_ObjectHideFlags: 0
