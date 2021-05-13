@@ -28,4 +28,8 @@ public class Player : Character
         Debug.Log("PLAYER DEAD");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public HealthStat getHealthStat(){
+        return _healthStat;
+    }
 }
