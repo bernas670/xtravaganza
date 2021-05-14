@@ -7,13 +7,12 @@ public abstract class PowerUp : MonoBehaviour
     protected GameObject player;
 
     void Awake(){
-        Debug.Log("POWER UP AWAKE");
         player = GameObject.Find("Player");
     }
 
     // When player collides with powerup, this must be hidden
     protected void hidePowerup(){
-        gameObject.SetActive(false);
+        gameObject.GetComponent<Renderer>().enabled = false;
     }
 
     protected void destroyPowerup(){
@@ -31,5 +30,11 @@ public abstract class PowerUp : MonoBehaviour
 
     // Remove the powerup  payload
     protected abstract void powerupExpire();
+
+    protected IEnumerator PowerUpTimer(float duration) {
+        yield return new WaitForSeconds(duration);
+        powerupExpire();
+    }   
+
 
 }

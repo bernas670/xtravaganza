@@ -2,22 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : PowerUp
-{   
+public class Invencible : PowerUp
+{       
+    private float _powerUpDuration = 5;  
     Player playerScript;
-    private int _healthBonus = 20;
+
+    private IEnumerator coroutine;
     void Start(){
         playerScript = player.GetComponent<Player>();
     }
-    
+
     // Initialize the powerup
     protected override void powerupPayload(){
-        playerScript.getHealthStat().TakePowerUp(_healthBonus);
-        powerupExpire();
-    }   
+        hidePowerup();
+        playerScript.setPlayerInvencible(true);
+        coroutine = PowerUpTimer(_powerUpDuration);
+        StartCoroutine(coroutine);
+    }
 
     // Remove the powerup  payload
     protected override void powerupExpire(){
+        playerScript.setPlayerInvencible(false);
         destroyPowerup();
     }
 
