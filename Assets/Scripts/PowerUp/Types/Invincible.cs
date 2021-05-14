@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Invencible : PowerUp
+public class Invincible : PowerUp
 {       
     private float _powerUpDuration = 5;  
     Player playerScript;
@@ -15,14 +15,14 @@ public class Invencible : PowerUp
     // Initialize the powerup
     protected override void powerupPayload(){
         hidePowerup();
-        playerScript.setPlayerInvencible(true);
+        playerScript.setPlayerInvincible(true);
         coroutine = PowerUpTimer(_powerUpDuration);
         StartCoroutine(coroutine);
     }
 
     // Remove the powerup  payload
     protected override void powerupExpire(){
-        playerScript.setPlayerInvencible(false);
+        playerScript.setPlayerInvincible(false);
         destroyPowerup();
     }
 

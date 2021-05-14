@@ -7,7 +7,7 @@ public class Player : Character
     public TextMeshProUGUI healthText;
 
     private int _lavaLayer;
-    private bool _isPlayerInvencible = false;
+    private bool _isPlayerInvincible = false;
 
 
     void Awake()
@@ -34,12 +34,12 @@ public class Player : Character
     public HealthStat getHealthStat(){
         return _healthStat;
     }
-    public void setPlayerInvencible(bool isPlayerInvencible){
-        _isPlayerInvencible = isPlayerInvencible;
+    public void setPlayerInvincible(bool isPlayerInvincible){
+        _isPlayerInvincible = isPlayerInvincible;
     }
 
     public void TakeDamage(int damage){
-        if(!_isPlayerInvencible){
+        if(!_isPlayerInvincible){
             _healthStat.TakeDamage(damage);
         }
 
