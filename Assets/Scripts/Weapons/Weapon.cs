@@ -1,30 +1,3 @@
-using UnityEngine;
-public abstract class Weapon : MonoBehaviour
-{
-    protected int _damage;
-    protected float _range;
-
-    [SerializeField] protected float _fireRate;
-    protected float _timeToFire;
-
-    public int getDamage()
-    {
-        return _damage;
-    }
-
-    public float getRange(){
-        return _range;
-    }
-
-    public float getFireRate(){
-        return _fireRate;
-    }
-
-    public float getTimeToFire(){
-        return _timeToFire;
-    }
-
-    public void setTimeToFire(float time){
-        _timeToFire = time;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a623b045b50a7c1150787d526122613e8d8096023918554425f642d980290cdb
+size 676

@@ -1,18 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ChaseAction : Action
-{
-    public override void Act(EnemyController controller){
-        faceTarget(controller);
-        controller.getAgent().SetDestination(controller.getTarget().position); /*move towards target*/
-    }
-
-    private void faceTarget(EnemyController controller)
-    {
-        Vector3 direction = (controller.getTarget().position - controller.gameObject.transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        controller.gameObject.transform.rotation = Quaternion.Slerp(controller.gameObject.transform.rotation, lookRotation, Time.deltaTime * 7.5f);
-    }  
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:f2b76ffbce01069b50840740da1c67a6ac816cb462ff2d93a4636a08cd350b17
+size 753

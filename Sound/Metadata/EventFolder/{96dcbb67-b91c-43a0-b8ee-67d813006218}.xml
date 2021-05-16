@@ -1,8 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<objects serializationModel="Studio.02.01.00">
-	<object class="MasterEventFolder" id="{96dcbb67-b91c-43a0-b8ee-67d813006218}">
-		<property name="name">
-			<value>Master</value>
-		</property>
-	</object>
-</objects>
+version https://git-lfs.github.com/spec/v1
+oid sha256:e6817e67f7e8d31a3b7255792e2a6499b8b591ffca3143c09cd9610fb8ac3114
+size 252

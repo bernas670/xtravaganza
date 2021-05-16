@@ -1,13 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CerelacKiller : FireWeapon {
-    public void Awake(){
-        _damage = 10;
-        _range = 15f;
-
-        _fireRate = 15f;
-        _timeToFire= 1f;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4ef2ddb9a894fb759f567f0f8d30388da5513d07df6e44fb9025e91d5b395a54
+size 347

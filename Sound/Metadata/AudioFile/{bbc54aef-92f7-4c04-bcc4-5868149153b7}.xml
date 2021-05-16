@@ -1,20 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<objects serializationModel="Studio.02.01.00">
-	<object class="AudioFile" id="{bbc54aef-92f7-4c04-bcc4-5868149153b7}">
-		<property name="assetPath">
-			<value>Soldier Footsteps Concrete1 (3).wav</value>
-		</property>
-		<property name="frequencyInKHz">
-			<value>48</value>
-		</property>
-		<property name="channelCount">
-			<value>2</value>
-		</property>
-		<property name="length">
-			<value>1.9199999999999999</value>
-		</property>
-		<relationship name="masterAssetFolder">
-			<destination>{2837b30f-5ba3-4c4a-9835-20fbbc03b493}</destination>
-		</relationship>
-	</object>
-</objects>
+version https://git-lfs.github.com/spec/v1
+oid sha256:4e0059327aae8c29bc60c93b778823a46f6bd4c9829207df134243c524e7cbd2
+size 622

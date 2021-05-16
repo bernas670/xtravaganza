@@ -1,23 +1,3 @@
-using UnityEngine;
-
-/* Player and enemies should extend this */
-public abstract class Shooter : MonoBehaviour
-{
-
-    [SerializeField] protected FireWeapon fireWeapon;
-    [SerializeField] protected MeleeWeapon meleeWeapon;
-
-    public void setFireWeapon(FireWeapon weapon){
-        this.fireWeapon = weapon;
-    }
-    public FireWeapon getFireWeapon(){
-        return this.fireWeapon;
-    }
-      public void setMeleeWeapon(MeleeWeapon weapon){
-        this.meleeWeapon = weapon;
-    }
-
-    public MeleeWeapon getMeleeWeapon(){
-        return this.meleeWeapon;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:abb5d253273cf98469df6d89ac4f1a8d3ba72e11c053083a33ec3ad25076b9a3
+size 777

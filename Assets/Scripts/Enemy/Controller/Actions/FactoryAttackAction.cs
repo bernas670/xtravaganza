@@ -1,21 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
-public class FactoryAttackAction
-{
-    public AttackAction createAttackAction(EnemyController controller, float distance){
-
-        AttackAction action;
-        
-        if (distance <= controller.getMeleeWeapon().getRange()){
-            action =  new MeleeAction();
-        } else {
-            action = new ShootAction();
-        }
-
-        return action;
-
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:32cf6fc2ba5baaebfa4cf0d6b4390e834f02c972c17e8ade7067ee1b1593729b
+size 448
