@@ -3,7 +3,6 @@ using TMPro;
 
 public class MovementController : MonoBehaviour
 {
-    private CharacterController _controller;
     private CameraController _camController;
     [HideInInspector]
     public Rigidbody rb;
@@ -11,7 +10,8 @@ public class MovementController : MonoBehaviour
     // temporary for debug purposes
     public TextMeshProUGUI horizontalSpeedText, verticalSpeedText;
 
-    private float WALL_DIST = 0.8f;
+    private float WALL_DIST = 1.6f;
+    private float MAX_GROUND_DIST = 1.1f;
     private float MIN_WALL_RUN_HEIGHT = 1.5f;
     private Vector3 _wishDir = Vector3.zero;
 
@@ -53,7 +53,7 @@ public class MovementController : MonoBehaviour
     }
 
     public bool IsGrounded() {
-        return Physics.Raycast(transform.position, -Vector3.up, 1.1f);
+        return Physics.Raycast(transform.position, -Vector3.up, MAX_GROUND_DIST);
     }
 
     public int GetWallRunFactor(out RaycastHit hit) {
