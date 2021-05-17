@@ -4,7 +4,7 @@ using TMPro;
 
 public class Player : Character
 {
-    public TextMeshProUGUI healthText;
+    public HealthBar healthBar;
 
     private int _lavaLayer;
     private bool _isPlayerInvincible = false;
@@ -16,10 +16,16 @@ public class Player : Character
         _lavaLayer = LayerMask.NameToLayer("Lava");
     }
 
-    void Update() {
-        healthText.text = string.Format("health: {0}", _healthStat.getHealth());
-    }    
+    private void Start() {
+        healthBar.SetMaxHealth(_healthStat.getHealth());
+    }
 
+    void Update() {
+        // FIXME: this does not seem to be the best way to update the GUI, 
+        // since it is called every frame instead of only when the event occurs
+        healthBar.SetHealth(_healthStat.getHealth());
+    }    
+ 
     void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.layer == _lavaLayer){
             Die();
