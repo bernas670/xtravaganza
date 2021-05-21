@@ -5,7 +5,10 @@ using UnityEngine;
 public class WeaponSwitchController : MonoBehaviour
 {   
     public int selectedWeapon = 0;
+    public Player player;
+    private PlayerShootController _shooter;
     void Start(){
+        _shooter = player.gameObject.GetComponent<PlayerShootController>();
         SelectWeapon();
     }
 
@@ -38,6 +41,10 @@ public class WeaponSwitchController : MonoBehaviour
             
             // if the weapon is selected set true, if it's not set false
             weapon.gameObject.SetActive(i == selectedWeapon);
+            if(i == selectedWeapon){
+                FireWeapon fWeapon = weapon.gameObject.GetComponent<FireWeapon>();
+                _shooter.setFireWeapon(fWeapon);
+            }
             i++;
         }
     }
