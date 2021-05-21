@@ -18,8 +18,10 @@ public class PlayerShootController : Shooter
 
     void UpdateText()
     {
-        if (fireWeapon)
+        if (fireWeapon){
             weaponUI.SetAmmo(fireWeapon.getClipValue(), fireWeapon.getReloadValue());
+            weaponUI.SetWeaponName(fireWeapon.gameObject.name);
+        }
         // bulletsText.text = string.Format("ammo: {0}", fireWeapon.getClipValue());
         else
             weaponUI.SetAmmo(0, 0);
