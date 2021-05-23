@@ -3,125 +3,152 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponSwitchController : MonoBehaviour
-{   
+{
     public int selectedWeapon = 0;
     public Player player;
     private PlayerShootController _shooter;
-
     private Transform _cameraTransform;
+    public List<GameObject> weapons = new List<GameObject>();
+    private int maxWeapons = 4;
+    public GameObject currentWeapon;
+    public static bool slotFull;
 
-     public List<GameObject> weapons;
-     public int maxWeapons = 4;
- 
-     // this variable represent the weapon you carry in your hand 
-     public GameObject currentWeapon;
- 
-     // this variable represent your hand which you set as the parent of your currentWeapon
-     public Transform hand;
-     public static bool slotFull;
-
-    void Start(){
+    void Start()
+    {
         _shooter = player.gameObject.GetComponent<PlayerShootController>();
+        
+        weapons.Add(_shooter.getFireWeapon().gameObject);
+        currentWeapon = _shooter.getFireWeapon().gameObject;
+
         _cameraTransform = _shooter.getPoV();
+
         SelectWeapon();
     }
 
-    void Update(){
+    void Update()
+    {
         int previousWeapon = selectedWeapon;
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f){
-            Debug.Log("Changed weapon");
-            if(selectedWeapon>= transform.childCount - 1)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && weapons.Count > 1)
+        {
+            if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
-            else 
+            else
                 selectedWeapon++;
         }
-        
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f){
-            if(selectedWeapon<= 0)
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f && weapons.Count > 1)
+        {
+            if (selectedWeapon <= 0)
                 selectedWeapon = transform.childCount - 1;
-            else 
+            else
                 selectedWeapon--;
+        }
+        else if (Input.GetKeyDown(KeyCode.Q) && currentWeapon) {
+            DropWeapon();
         }
 
         // If selected weapon changed, call selectweapon method to perform the weapon change
-        if(previousWeapon != selectedWeapon)
+        if (previousWeapon != selectedWeapon)
             SelectWeapon();
 
         RaycastHit hit;
         Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
-        if (Physics.Raycast(ray, out hit)) {
-             if (hit.transform.CompareTag("FireWeapon") && Input.GetKeyDown(KeyCode.E) && weapons.Count < maxWeapons) {
-                 
-                 PickWeapon(_cameraTransform.GetChild(0),hit.collider);
-             }
+        if (Physics.Raycast(ray, out hit))
+        {
+            if(hit.transform.CompareTag("FireWeapon")) {
+                FireWeapon weapon = hit.transform.gameObject.GetComponent<FireWeapon>();
+                if (Input.GetKeyDown(KeyCode.E) && weapons.Count < maxWeapons && !weapon.isInUse())
+                {            
+                    PickWeapon(_cameraTransform.GetChild(0), hit.collider);
+                }
+            }
         }
     }
 
-    void SelectWeapon(){
-        int i=0;
-        foreach(Transform weapon in transform){
-            
+    void SelectWeapon()
+    {
+        int i = 0;
+        foreach (GameObject weapon in weapons)
+        {
             // if the weapon is selected set true, if it's not set false
-            weapon.gameObject.SetActive(i == selectedWeapon);
-            if(i == selectedWeapon){
-                FireWeapon fWeapon = weapon.gameObject.GetComponent<FireWeapon>();
+            weapon.SetActive(i == selectedWeapon);
+            if (i == selectedWeapon)
+            {
+                FireWeapon fWeapon = weapon.GetComponent<FireWeapon>();
                 _shooter.setFireWeapon(fWeapon);
+                currentWeapon = weapon;
             }
             i++;
         }
     }
 
-    void PickWeapon(Transform container, Collider coll){
-             // PICKUP WEAPONS
-            // save the weapon                
-            weapons.Add(coll.gameObject);
-            
-            // hides the weapon because it's now in our 'inventory'
-            coll.gameObject.SetActive(false);
- 
-            coll.gameObject.GetComponent<FireWeapon>().setInUse(true);
-            //equipped = true;
+    void PickWeapon(Transform container, Collider coll)
+    {
+        if(weapons.Count == 0 ){
+            _shooter.setFireWeapon(coll.gameObject.GetComponent<FireWeapon>());
+            currentWeapon = coll.gameObject;
+        }
 
-            if(weapons.Count == maxWeapons) slotFull = true;
-                //Make weapon a child of the camera and move it to default position
-                coll.transform.SetParent(container);
-                coll.transform.localPosition = Vector3.zero;
-                coll.transform.localRotation = Quaternion.Euler(Vector3.zero);
-                coll.transform.localScale = Vector3.one;
+        // hides the weapon because it's now in our 'inventory'
+        coll.gameObject.SetActive(weapons.Count == 0);
 
-                //Make Rigidbody kinematic and BoxCollider a trigger
-                coll.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                coll.isTrigger = true;
+        // save the weapon                
+        weapons.Add(coll.gameObject);
 
-                //Enable script
-                coll.gameObject.GetComponent<FireWeapon>().enabled = true;
-                coll.enabled = false;
+        coll.gameObject.GetComponent<FireWeapon>().setInUse(true);
+
+        if (weapons.Count == maxWeapons) slotFull = true;
+
+        //Make weapon a child of the camera and move it to default position
+        coll.transform.SetParent(container);
+        coll.transform.localPosition = Vector3.zero;
+        coll.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        //Make Rigidbody kinematic and BoxCollider a trigger
+        coll.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        coll.isTrigger = true;
+
+        //Enable script
+        coll.gameObject.GetComponent<FireWeapon>().enabled = true;
     }
 
-    /*void DropWeapon(){
+    void DropWeapon(){
+        currentWeapon.GetComponent<FireWeapon>().setInUse(false);
 
-         // DROP WEAPONS
-         // So let's say you wanted to add a feature where you wanted to drop the weapon you carry in your hand
-         if (Input.GetKeyDown(dropKey) && currentWeapon != null) {
+        slotFull = false;
+
+        // First ensure we remove our hand as parent for the weapon
+        currentWeapon.transform.parent = null;
+
+        Rigidbody rb = currentWeapon.GetComponent<Rigidbody>();
+        BoxCollider coll = currentWeapon.GetComponent<BoxCollider>();
  
-             // First ensure we remove our hand as parent for the weapon
-             currentWeapon.transform.parent = null;
- 
-             // Move the weapon to the drop position
-             currentWeapon.transform.position = dropPoint.position;
- 
-             // Remove it from our 'inventory'            
-             var weaponInstanceId = currentWeapon.GetInstanceID();
-             for (int i = 0; i < weapons.Count; i++) {
-                 if (weapons[i].GetInstanceID() == weaponInstanceId) {
-                     weapons.RemoveAt(i);
-                     break;
-                 }
-             }
- 
-             // Remove it from our 'hand'
-             currentWeapon = null;
-         }
-    }*/
+        //Make Rigidbody not kinematic and BoxCollider normal
+        rb.isKinematic = false;
+        coll.isTrigger = false;
+
+        //Gun carries momentum of player
+        rb.velocity = player.gameObject.GetComponent<Rigidbody>().velocity;
+
+        //AddForce
+        rb.AddForce(_cameraTransform.forward * 2, ForceMode.Impulse);
+        rb.AddForce(_cameraTransform.up * 2, ForceMode.Impulse);
+        
+        //Add random rotation
+        float random = Random.Range(-1f, 1f);
+        rb.AddTorque(new Vector3(random, random, random) * 10);
+
+        //Disable script
+        currentWeapon.GetComponent<FireWeapon>().enabled = false;
+
+        _shooter.setFireWeapon(null);
+
+        weapons.Remove(currentWeapon);
+
+        if(weapons.Count > 0){
+            _shooter.setFireWeapon(weapons[0].GetComponent<FireWeapon>());
+            currentWeapon = weapons[0];
+            currentWeapon.SetActive(true);
+        }
+    }
 }
