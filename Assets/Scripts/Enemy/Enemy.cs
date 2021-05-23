@@ -10,9 +10,10 @@ public class Enemy : Character
     public override void Die()
     {
         EnemyController controller = gameObject.GetComponent<EnemyController>();
-        PickDropController pickdrop = controller.getFireWeapon().GetComponent<PickDropController>();
-        pickdrop.Drop(gameObject.GetComponent<Rigidbody>().velocity, transform);
+        controller.dropWeapon();
 
         Destroy(gameObject, 0);
     }
+
+
 }

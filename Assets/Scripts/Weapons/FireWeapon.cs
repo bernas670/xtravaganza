@@ -95,6 +95,9 @@ public abstract class FireWeapon : Weapon
         }
     }
 
+    public bool isInUse(){
+        return inUse;
+    }
     public void setInUse(bool value)
     {
         inUse = value;
