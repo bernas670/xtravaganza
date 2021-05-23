@@ -49,6 +49,11 @@ public abstract class FireWeapon : Weapon
         return _ammo.getClipValue();
     }
 
+    public int getReloadValue()
+    {
+        return _ammo.getReloadValue();
+    }
+
     public override void shoot(Shooter controller)
     {
         if (Time.time >= _timeToFire)
