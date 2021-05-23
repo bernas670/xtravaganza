@@ -4,7 +4,7 @@ using TMPro;
 public class PlayerShootController : Shooter
 {
     [SerializeField] protected Camera cam;
-    private PickDropController pickDrop;
+    //private PickDropController pickDrop;
 
     public WeaponUI weaponUI;
 
@@ -13,7 +13,7 @@ public class PlayerShootController : Shooter
     void Awake()
     {
         setPoV(cam.transform);
-        pickDrop = gameObject.GetComponentInChildren<PickDropController>();
+        //pickDrop = gameObject.GetComponentInChildren<PickDropController>();
     }
 
     void UpdateText()
@@ -32,12 +32,12 @@ public class PlayerShootController : Shooter
         UpdateText();
 
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            RaycastHit hit;
-            if (!Physics.Raycast(base.getPoV().position, base.getPoV().forward, out hit, pickUpRange)) return;
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+          //  RaycastHit hit;
+           // if (!Physics.Raycast(base.getPoV().position, base.getPoV().forward, out hit, pickUpRange)) return;
 
-            PickDropController newPickDrop = hit.transform.gameObject.GetComponent<PickDropController>();
+           /* PickDropController newPickDrop = hit.transform.gameObject.GetComponent<PickDropController>();
             if (newPickDrop)
             {
                 if (fireWeapon)
@@ -45,8 +45,8 @@ public class PlayerShootController : Shooter
                     this.drop();
                 }
                 this.pick(newPickDrop);
-            }
-        }
+            }*/
+        //}
 
 
         if (!fireWeapon)
@@ -66,13 +66,13 @@ public class PlayerShootController : Shooter
         {
             fireWeapon.reload();
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        /*else if (Input.GetKeyDown(KeyCode.Q))
         {
             this.drop();
-        }
+        }*/
     }
 
-    public void drop()
+    /*public void drop()
     {
         fireWeapon = null;
         pickDrop.Drop(gameObject.GetComponent<Rigidbody>().velocity, cam.transform);
@@ -84,6 +84,6 @@ public class PlayerShootController : Shooter
         pickDrop = newPickDrop;
         fireWeapon = pickDrop.fireWeapon;
         pickDrop.PickUp(cam.transform.GetChild(0));
-    }
+    }*/
 
 }

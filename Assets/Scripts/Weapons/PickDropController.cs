@@ -12,9 +12,21 @@ public class PickDropController : MonoBehaviour
     public bool equipped;
     public static bool slotFull;
 
+    private FireWeapon[] fireWeaponsArray;
+
+
     void Awake()
     {
         fireWeapon = gameObject.GetComponent<FireWeapon>();
+        GameObject[] fWeapons = GameObject.FindGameObjectsWithTag("FireWeapon");
+        fireWeaponsArray = new FireWeapon[fWeapons.Length];
+
+        int i =0;
+        foreach(GameObject fw in fWeapons){
+            fireWeaponsArray[i] = fw.GetComponent<FireWeapon>();
+            i++;
+        }
+
     }
     
     private void Start()

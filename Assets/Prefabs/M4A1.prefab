@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5570097137744044521}
   - component: {fileID: 5570097137742717387}
   - component: {fileID: 5570097137741619979}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: M4A1_Sopmod_Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 5570097137744044523}
   - component: {fileID: 5570097137742717389}
   - component: {fileID: 5570097137741619981}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: M4A1_Sopmod_Iron_Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 5570097137744044525}
   - component: {fileID: 5570097137742717391}
   - component: {fileID: 5570097137741619983}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: M4A1_Sopmod_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,9 +251,9 @@ GameObject:
   - component: {fileID: 5570097137743657834}
   - component: {fileID: 5570097137743657836}
   - component: {fileID: 5570097137743657835}
-  m_Layer: 0
-  m_Name: M4A1 Sopmod
-  m_TagString: Untagged
+  m_Layer: 11
+  m_Name: M4A1
+  m_TagString: FireWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,8 +265,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5570097137743625679}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.19}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5570097137744044525}
@@ -274,7 +274,7 @@ Transform:
   - {fileID: 5570097137744044521}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5570097137743657833
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -302,8 +302,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.17564762, y: 0.38223225, z: 1}
-  m_Center: {x: 0.15410751, y: -0.16732141, z: 0}
+  m_Size: {x: 0.31683785, y: 0.42215538, z: 2.1940534}
+  m_Center: {x: 0.027132303, y: -0.2128858, z: -0.16591728}
 --- !u!114 &5570097137743657836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +321,7 @@ MonoBehaviour:
   impactEffect: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980,
     type: 3}
   inUse: 0
+  isEquipped: 0
 --- !u!114 &5570097137743657835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +329,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5570097137743625679}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36b0ed422c787c447b985ab1eec70cbe, type: 3}
   m_Name: 
