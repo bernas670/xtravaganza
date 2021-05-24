@@ -58,10 +58,10 @@ public abstract class FireWeapon : Weapon
     {
         if (Time.time >= _timeToFire)
         {
-            if (controller.name == "Player")
-            {
+            //if (controller.name == "Player")
+            //{
                 muzzleFlash.Play();
-            }
+            //}
 
             //  This should be outside the if statement. But since we only have 1 weapon enemy is decreasing the ammo aswell;
             decreaseAmmo();
