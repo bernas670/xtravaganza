@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fireRate: 0
-  muzzleFlash: {fileID: 4545539109591386368, guid: a90d671cf1866cc448658ba0a2e57f58,
+  muzzleFlash: {fileID: 9022593465271377608, guid: 5dfb7b721c359584f915973c0c5ba8bf,
     type: 3}
   impactEffect: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980,
     type: 3}
