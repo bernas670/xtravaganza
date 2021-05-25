@@ -149,6 +149,6 @@ public class WeaponSwitchController : MonoBehaviour
             _shooter.setFireWeapon(weapons[0].GetComponent<FireWeapon>());
             currentWeapon = weapons[0];
             currentWeapon.SetActive(true);
-        }
+        }else currentWeapon = null;
     }
 }

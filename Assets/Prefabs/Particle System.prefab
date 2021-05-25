@@ -38,7 +38,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9022593464370175360}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 9022593465271377608}
   - component: {fileID: 9022593465271377610}
   m_Layer: 0
-  m_Name: Particle System (1) 1
+  m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
