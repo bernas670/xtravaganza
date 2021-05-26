@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:27d5943fc41355e4edb31973f4944380341036a1ef7235fd45dfc219a22040e1
-size 242
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Dagger : MeleeWeapon {
+    public void Awake(){
+        _damage = 15;
+        _range = 5f;
+
+        _fireRate = 8f;
+        _timeToFire= 1f;
+    }
+}

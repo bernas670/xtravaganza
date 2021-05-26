@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b6720670066d239e031d10da5bc90d64dbbb856069d3b9a9075835871da00a48
-size 172
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public abstract class Action
+{
+    public abstract void Act (EnemyController controller);
+}
