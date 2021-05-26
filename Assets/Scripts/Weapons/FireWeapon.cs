@@ -9,7 +9,7 @@ public abstract class FireWeapon : Weapon
     public GameObject impactEffect;
 
     public bool inUse;
-
+    public bool isEquipped;
     public void reload()
     {
         // Verify if has bullets to reload and wepon is not full
@@ -58,10 +58,10 @@ public abstract class FireWeapon : Weapon
     {
         if (Time.time >= _timeToFire)
         {
-            if (controller.name == "Player")
-            {
+            //if (controller.name == "Player")
+            //{
                 muzzleFlash.Play();
-            }
+            //}
 
             //  This should be outside the if statement. But since we only have 1 weapon enemy is decreasing the ammo aswell;
             decreaseAmmo();
@@ -95,8 +95,15 @@ public abstract class FireWeapon : Weapon
         }
     }
 
+    public bool isInUse(){
+        return inUse;
+    }
     public void setInUse(bool value)
     {
         inUse = value;
+    }
+
+    public void SetIsEquipped(bool value){
+        isEquipped = value;
     }
 }

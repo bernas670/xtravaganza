@@ -44,7 +44,7 @@ public class Player : Character
         _isPlayerInvincible = isPlayerInvincible;
     }
 
-    public void TakeDamage(int damage){
+    public override void TakeDamage(int damage){
         if(!_isPlayerInvincible){
             _healthStat.TakeDamage(damage);
         }
