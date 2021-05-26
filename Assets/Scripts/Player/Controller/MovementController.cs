@@ -38,6 +38,21 @@ public class MovementController : MonoBehaviour
         _wishDir.z = Input.GetAxis("Vertical");
         _wishDir = transform.TransformDirection(_wishDir);
 
+        Vector2 velocity = new Vector2(rb.velocity.x, rb.velocity.z);
+        Vector2 forwardDir = new Vector2(transform.forward.x, transform.forward.z);
+        Vector2 rightDir = new Vector2(transform.right.x, transform.right.z);
+        float zCoef = Vector2.Dot(velocity.normalized, forwardDir.normalized);
+        float xCoef = Vector2.Dot(velocity.normalized, rightDir.normalized);
+        float direction = Mathf.Sin(Vector2.Angle(velocity, forwardDir));
+
+        Debug.Log("Wish dir X = " + zCoef);
+        Debug.Log("Wish dir Z = " + xCoef);
+        Debug.Log((_hVel * xCoef) * 100 / 15);
+
+        animator.SetFloat("zVelocity", _hVel * zCoef);
+        animator.SetFloat("xVelocity", (_hVel * xCoef) / 15);
+        animator.SetFloat("direction", direction);
+
         _movementSM.HandleInput();
 
         // FIXME: REMOVE, temporary for debug purposes
@@ -50,18 +65,6 @@ public class MovementController : MonoBehaviour
         _hVel = Mathf.Sqrt(Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.z, 2));
         _vVel = rb.velocity.y;
 
-
-        Vector2 velocity = new Vector2(rb.velocity.x, rb.velocity.z);
-        Vector2 forwardDir = new Vector2(transform.forward.x, transform.forward.z);
-        Vector2 rightDir = new Vector2(transform.right.x, transform.right.z);
-        float zCoef = Vector2.Dot(velocity, forwardDir);
-        float xCoef = Vector2.Dot(velocity, rightDir);
-
-        // Debug.Log("ZCoef = " + zCoef);
-        Debug.Log("XCoef = " + xCoef);
-
-        animator.SetFloat("zVelocity", _hVel * zCoef);
-        animator.SetFloat("xVelocity", _hVel * xCoef);
         _movementSM.PhysicsUpdate();
     }
 
