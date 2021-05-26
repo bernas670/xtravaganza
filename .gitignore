@@ -79,3 +79,7 @@ InitTestScene*.unity
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/vscode,unity
+
+Assets/Editor Default Resources/*
+Assets/Gizmos/*
+Assets/Plugins/*
