@@ -13,6 +13,7 @@ public abstract class PowerUp : MonoBehaviour
     // When player collides with powerup, this must be hidden
     protected void hidePowerup(){
         gameObject.GetComponent<Renderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 
     protected void destroyPowerup(){
