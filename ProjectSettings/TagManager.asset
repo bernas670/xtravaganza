@@ -14,11 +14,11 @@ TagManager:
   - 
   - 
   - Ground
+  - Wall
   - whatIsPlayer
-  - 
-  - 
-  - 
-  - 
+  - Weapon
+  - Player
+  - Lava
   - 
   - 
   - 

@@ -1,35 +1,48 @@
 using UnityEngine;
-
+using TMPro;
 public class PlayerShootController : Shooter
 {
     [SerializeField] protected Camera cam;
-    
+
+    public WeaponUI weaponUI;
+
+    public float pickUpRange = 5;
+
+    void Awake()
+    {
+        setPoV(cam.transform);
+    }
+
+    void UpdateText()
+    {
+        if (fireWeapon){
+            weaponUI.SetAmmo(fireWeapon.getClipValue(), fireWeapon.getReloadValue());
+            weaponUI.SetWeaponName(fireWeapon.gameObject.name);
+        }
+        else{
+            weaponUI.SetAmmo(0, 0);
+            weaponUI.SetWeaponName("None");
+        }
+    }
 
     void Update()
-    {   
-        if(Input.GetButton("Fire1")){
-            shoot(fireWeapon);
+    {
+        UpdateText();
+
+        if (!fireWeapon) return;
+
+        if (Input.GetButton("Fire1") && fireWeapon.getClipValue() > 0)
+        {
+            fireWeapon.shoot(this);
         }
-        else if(Input.GetButton("Fire2")){
-            shoot(meleeWeapon);
+        else if (Input.GetButton("Fire2"))
+        {
+            meleeWeapon.shoot(this);
         }
-    }
-    public void shoot(Weapon weapon)
-    {   
-        Debug.Log("Player Shot : " + weapon);
-        if (Time.time >= weapon.getTimeToFire())
-        {       
-            weapon.setTimeToFire( Time.time + 1f / weapon.getFireRate());
-            RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.getRange()))
-            {
-                if (hit.transform.name == "Enemy")
-                {
-                    Debug.Log("Player Shot");
-                    Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
-                    enemy.TakeDamage(weapon.getDamage());
-                }
-            }
+        else if (Input.GetKey(KeyCode.R))
+        {
+            fireWeapon.reload();
         }
     }
+
 }

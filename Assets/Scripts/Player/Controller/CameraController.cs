@@ -12,6 +12,9 @@ public class CameraController : MonoBehaviour
 
     private float _headRotation = 0f;
 
+    private float _tilt;
+    private float _camTiltTime = 5;
+    private float _tiltError = 0.000001f;
 
     void Start()
     {
@@ -28,6 +31,23 @@ public class CameraController : MonoBehaviour
 
         _headRotation += rotY;
         _headRotation = Mathf.Clamp(_headRotation, minHeadRotation, maxHeadRotation);
-        cam.transform.localEulerAngles = new Vector3(_headRotation, 0, 0);
+        cam.transform.localEulerAngles = new Vector3(_headRotation, 0, _tilt);
+    }
+
+    public void Tilt(float max) {
+        _tilt = Mathf.Lerp(_tilt, max, _camTiltTime * Time.deltaTime);
+    }
+
+    public IEnumerator AsyncTilt(float target)
+    {
+        float _lastTilt = _tilt;
+        while(Mathf.Abs(_tilt - target) >= _tiltError) {
+            if(Mathf.Abs(_lastTilt) < Mathf.Abs(_tilt)) break;
+
+            _tilt = Mathf.Lerp(_tilt, target, _camTiltTime * Time.deltaTime);
+            _lastTilt = _tilt;
+            yield return null;
+        }
+
     }
 }

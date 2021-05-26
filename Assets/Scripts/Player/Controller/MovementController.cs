@@ -1,57 +1,116 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class MovementController : MonoBehaviour
 {
-
-    public float speed = 10f;
-    public float jumpHeight = 2f;
-    public float groundDistance = 0.1f;
-
-    public LayerMask groundLayer;
-
-    private Rigidbody _body;
-    private Transform _groundChecker;
-    private Vector3 _inputs = Vector3.zero;
-    private bool _isGrounded = true;
+    private CharacterController _controller;
+    private CameraController _camController;
+    [HideInInspector]
+    public Rigidbody rb;
 
     // temporary for debug purposes
-    public TextMeshProUGUI velocityText;
+    public TextMeshProUGUI horizontalSpeedText, verticalSpeedText;
 
+    private float WALL_DIST = 0.8f;
+    private float MIN_WALL_RUN_HEIGHT = 1.5f;
+    private Vector3 _wishDir = Vector3.zero;
+
+    private float _hVel = 0f;
+    private float _vVel = 0f;
+
+    private StateMachine _movementSM;
 
     void Start()
     {
-        _body = GetComponent<Rigidbody>();
-        _groundChecker = transform.GetChild(0);
+        _camController = GetComponent<CameraController>();
+        rb = GetComponent<Rigidbody>();
+
+        _movementSM = new StateMachine();
+        GroundState ground = new GroundState(this, _movementSM);
+        _movementSM.Initialize(ground);
     }
 
     void Update()
     {
-        _isGrounded = IsGrounded();
+        _wishDir = Vector3.zero;
+        _wishDir.x = Input.GetAxis("Horizontal");
+        _wishDir.z = Input.GetAxis("Vertical");
+        _wishDir = transform.TransformDirection(_wishDir);
 
-        _inputs = Vector3.zero;
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        _inputs = (_body.transform.right * x + _body.transform.forward * z).normalized;
+        _movementSM.HandleInput();
 
-        if (Input.GetButtonDown("Jump") && _isGrounded)
-        {
-            _body.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
-        }
-
-        // temporary for debug purposes
-        velocityText.text = _body.velocity.ToString();
+        // FIXME: REMOVE, temporary for debug purposes
+        horizontalSpeedText.text = string.Format("hspeed: {0}", _hVel.ToString("#.00"));
+        verticalSpeedText.text = string.Format("vspeed: {0}", _vVel.ToString("#.00"));
     }
 
     void FixedUpdate()
     {
-        _body.MovePosition(_body.position + _inputs * speed * Time.fixedDeltaTime);
+        _hVel = Mathf.Sqrt(Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.z, 2));
+        _vVel = rb.velocity.y;
+
+        _movementSM.PhysicsUpdate();
     }
 
-    bool IsGrounded()
+    public bool IsGrounded() {
+        return Physics.Raycast(transform.position, -Vector3.up, 1.1f);
+    }
+
+    public int GetWallRunFactor(out RaycastHit hit) {
+        RaycastHit left, right;
+        bool rightWall = Physics.Raycast(transform.position, transform.right, out right, WALL_DIST);
+        bool leftWall = Physics.Raycast(transform.position, -transform.right, out left, WALL_DIST);
+
+        if(leftWall && rightWall) {
+            hit = new RaycastHit();
+            return 0;
+        }
+
+        if(leftWall) {
+            hit = left;
+            return -1;
+        }
+        
+        hit = right;
+        return 1;
+    }
+
+    public bool CanWallRun()
     {
-        return Physics.CheckSphere(_groundChecker.position, groundDistance, groundLayer, QueryTriggerInteraction.Ignore);
+        bool rightWall = Physics.Raycast(transform.position, transform.right, WALL_DIST);
+        bool leftWall = Physics.Raycast(transform.position, -transform.right, WALL_DIST);
+        
+        return !Physics.Raycast(transform.position, Vector3.down, MIN_WALL_RUN_HEIGHT) && (leftWall || rightWall);
+    }
+
+    public void Accelerate(float maxSpeed, float acceleration, float deltaTime)
+    {
+        Vector3 vel = rb.velocity;
+        vel.y = 0;
+
+        float currentSpeed = Vector3.Dot(vel, _wishDir);
+        float addSpeed = Mathf.Clamp(maxSpeed - currentSpeed, 0, acceleration * deltaTime);
+
+        rb.AddForce(_wishDir * addSpeed, ForceMode.VelocityChange);
+    }
+
+    public void ApplyFriction(float friction, float maxSpeed, float deltaTime)
+    {
+        float drop = friction * deltaTime;
+        float speed = Mathf.Clamp(rb.velocity.magnitude - drop, 0, maxSpeed);
+
+        Vector3 velocity = rb.velocity.normalized * speed;
+        velocity.y = rb.velocity.y;
+        rb.velocity = velocity;
+    }
+
+    public void Tilt(float target, bool async = false) {
+        if(async) {
+            StartCoroutine(_camController.AsyncTilt(target));
+            return;
+        }
+
+        _camController.Tilt(target);
     }
 
 

@@ -49,6 +49,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.log
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -69,7 +70,6 @@ crashlytics-build.properties
 InitTestScene*.unity.meta
 InitTestScene*.unity
 
-
 ### vscode ###
 .vscode/*
 # !.vscode/settings.json
@@ -79,3 +79,10 @@ InitTestScene*.unity
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/vscode,unity
+
+Assets/Editor Default Resources/*
+Assets/Editor Default Resources.meta
+Assets/Gizmos/*
+Assets/Gizmos.meta
+Assets/Plugins/*
+Assets/Plugins.meta
