@@ -38,7 +38,7 @@ MonoBehaviour:
   Path: Sound/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637564256127765403
+  lastModified: 637576239162324013
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -65,7 +65,7 @@ MonoBehaviour:
   - {fileID: -2235933626178614404}
   StringsBanks:
   - {fileID: 5497076871154316931}
-  stringsBankWriteTime: 637564256127782225
+  stringsBankWriteTime: 637576239162363697
   cacheVersion: 6
 --- !u!114 &4290918255701956508
 MonoBehaviour:
@@ -105,7 +105,7 @@ MonoBehaviour:
   Path: Sound/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637564256127782225
+  lastModified: 637576239162363697
   LoadResult: 0
   FileSizes:
   - Name: Desktop
