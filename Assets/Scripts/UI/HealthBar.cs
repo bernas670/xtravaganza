@@ -1,3 +1,29 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:db3b88851fdcf7cebb8d62da49ed5182d4b24c95875fc45379ea23c54546a1ce
-size 553
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class HealthBar : MonoBehaviour
+{
+    
+    public TextMeshProUGUI text;
+    public GameObject bar;
+
+    private Slider slider;
+
+    private void Start() {
+        slider = bar.GetComponent<Slider>();
+    }
+
+    public void SetMaxHealth(int health) {
+        text.text = health.ToString();
+
+        slider.maxValue = health;
+        slider.value = health;
+    }
+
+    public void SetHealth(int health) {
+        text.text = health.ToString();
+        
+        slider.value = health;
+    }
+}

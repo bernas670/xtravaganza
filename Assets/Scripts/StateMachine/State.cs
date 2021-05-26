@@ -1,3 +1,30 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0f490511ed8adf40511c50471cb51a96e7aa9ef8ed03484c26f89c07e237a8a0
-size 405
+﻿using UnityEngine;
+
+public abstract class State {
+
+    protected StateMachine _sm;
+
+    public State(StateMachine stateMachine) {
+        _sm = stateMachine;
+    }
+
+    public virtual void Enter() {
+
+    }
+
+    public virtual void HandleInput() {
+
+    }
+
+    public virtual void LogicUpdate() {
+
+    }
+
+    public virtual void PhysicsUpdate() {
+        
+    }
+
+    public virtual void Exit() {
+
+    }
+}

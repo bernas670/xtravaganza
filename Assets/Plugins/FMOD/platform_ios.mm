@@ -1,3 +1,27 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:854f716e6e9ad9b2f8c26d4438176d3f801f2a644d5a5e825d3f4bc8142f585c
-size 884
+#import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+
+void (*gSuspendCallback)(bool suspend);
+
+extern "C" void RegisterSuspendCallback(void (*callback)(bool))
+{
+    if (!gSuspendCallback)
+    {
+        gSuspendCallback = callback;
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:AVAudioSessionInterruptionNotification object:nil queue:nil usingBlock:^(NSNotification *notification)
+        {
+              bool began = [[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] intValue] == AVAudioSessionInterruptionTypeBegan;
+              
+              if (!began)
+              {
+                  [[AVAudioSession sharedInstance] setActive:TRUE error:nil];
+              }
+              
+              if (gSuspendCallback)
+              {
+                  gSuspendCallback(began);
+              }
+          }];
+    }
+}

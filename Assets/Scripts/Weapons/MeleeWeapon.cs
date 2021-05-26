@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c22ef74f2b45dedc3e786519526ae840c3fd6996b215ba905de5c1c933538a75
-size 1002
+using UnityEngine;
+public abstract class MeleeWeapon : Weapon
+{
+    public override void shoot(Shooter controller)
+    {
+        if (Time.time >= _timeToFire)
+        {
+            setTimeToFire(Time.time + 1f / _fireRate);
+            RaycastHit hit;
+            if (Physics.Raycast(controller.getPoV().position, controller.getPoV().forward, out hit, _range))
+            {
+                if (hit.transform.name == "Player") /* controller = enemy */
+                {
+                    Player player = hit.transform.gameObject.GetComponent<Player>();
+                    player.TakeDamage(_damage);
+                }
+                else if (hit.transform.name == "Enemy") /* controller = player || enemy */
+                {
+                    Debug.Log("MELEE: \t" + controller.gameObject.name + " attacked enemy");
+                    Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
+                    enemy.TakeDamage(_damage);
+                }
+            }
+        }
+    }
+}

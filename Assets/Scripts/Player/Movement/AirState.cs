@@ -1,3 +1,35 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:76e462af1cc09cdb3fa05f895887311de15afcc2b3e6e1499d9f9e0f839f8418
-size 956
+﻿using UnityEngine;
+
+public class AirState : MovementState
+{
+    private Transform _transform;
+    private const float AIR_MAX_SPEED = 3.0f;
+    private const float AIR_ACCEL = 150f;
+
+    public AirState(MovementController controller, StateMachine stateMachine) : base(controller, stateMachine) { }
+
+    public override void Enter()
+    {
+        base.Enter();
+        _transform = _controller.transform;
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        if (_controller.IsGrounded()) {
+            // Debug.Log("Air -> Ground");
+            _sm.ChangeState(new GroundState(_controller, _sm));
+            return;
+        }
+        
+        if (_controller.CanWallRun()) {
+            // Debug.Log("Air -> WallRun");
+            _sm.ChangeState(new WallRunningState(_controller, _sm));
+            return;
+        }
+        
+        _controller.Accelerate(AIR_MAX_SPEED, AIR_ACCEL, Time.fixedDeltaTime);
+    }
+}

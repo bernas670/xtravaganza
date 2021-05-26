@@ -1,3 +1,48 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4751dcbe6c0ec3d3609d5d4108c9c6e718962e14fb747e33846d4feca1a4986d
-size 1187
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEditor;
+using UnityEngine;
+
+namespace FMODUnity
+{
+    public class EditorParamRef : ScriptableObject
+    {
+        [SerializeField]
+        public string Name;
+        [SerializeField]
+        public float Min;
+        [SerializeField]
+        public float Max;
+        [SerializeField]
+        public float Default;
+        [SerializeField]
+        public ParameterID ID;
+
+        [Serializable]
+        public struct ParameterID
+        {
+            public static implicit operator ParameterID(FMOD.Studio.PARAMETER_ID source)
+            {
+                return new ParameterID {
+                    data1 = source.data1,
+                    data2 = source.data2,
+                };
+            }
+
+            public static implicit operator FMOD.Studio.PARAMETER_ID(ParameterID source)
+            {
+                return new FMOD.Studio.PARAMETER_ID {
+                    data1 = source.data1,
+                    data2 = source.data2,
+                };
+            }
+
+            public uint data1;
+            public uint data2;
+        }
+
+        public bool Exists;
+    }
+}

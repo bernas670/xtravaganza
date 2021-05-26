@@ -1,3 +1,42 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0d0a226cf2a6f6ba6c8fe15e47e259e7ae3cd26af9e5cda9a8f3f1856b6c379e
-size 1238
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace FMODUnity
+{
+    class EventCache : ScriptableObject
+    {
+        public static int CurrentCacheVersion = 6;
+
+        [SerializeField]
+        public List<EditorBankRef> EditorBanks;
+        [SerializeField]
+        public List<EditorEventRef> EditorEvents;
+        [SerializeField]
+        public List<EditorParamRef> EditorParameters;
+        [SerializeField]
+        public List<EditorBankRef> MasterBanks;
+        [SerializeField]
+        public List<EditorBankRef> StringsBanks;
+        [SerializeField]
+        Int64 stringsBankWriteTime;
+        [SerializeField]
+        public int cacheVersion;
+
+        public DateTime StringsBankWriteTime
+        {
+            get { return new DateTime(stringsBankWriteTime); }
+            set { stringsBankWriteTime = value.Ticks; }
+        }
+
+        public EventCache()
+        {
+            EditorBanks = new List<EditorBankRef>();
+            EditorEvents = new List<EditorEventRef>();
+            EditorParameters = new List<EditorParamRef>();
+            MasterBanks = new List<EditorBankRef>();
+            StringsBanks = new List<EditorBankRef>();
+            stringsBankWriteTime = 0;
+        }
+    }
+}

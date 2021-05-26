@@ -1,3 +1,56 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6910760a2eb0e7361cb4b5ddf3b0f20ce809710ab41a7ee7c1198c1e29217d85
-size 908
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
+
+public class Player : Character
+{
+    public HealthBar healthBar;
+
+    private int _lavaLayer;
+    private bool _isPlayerInvincible = false;
+
+
+    void Awake()
+    {
+        _healthStat = new HealthStat(100);
+        _lavaLayer = LayerMask.NameToLayer("Lava");
+    }
+
+    private void Start() {
+        healthBar.SetMaxHealth(_healthStat.getHealth());
+    }
+
+    void Update() {
+        // FIXME: this does not seem to be the best way to update the GUI, 
+        // since it is called every frame instead of only when the event occurs
+        healthBar.SetHealth(_healthStat.getHealth());
+    }    
+ 
+    void OnCollisionEnter(Collision collision) {
+        if(collision.gameObject.layer == _lavaLayer){
+            Die();
+        }
+    }
+
+    public override void Die(){
+        Debug.Log("PLAYER DEAD");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public HealthStat getHealthStat(){
+        return _healthStat;
+    }
+    public void setPlayerInvincible(bool isPlayerInvincible){
+        _isPlayerInvincible = isPlayerInvincible;
+    }
+
+    public void TakeDamage(int damage){
+        if(!_isPlayerInvincible){
+            _healthStat.TakeDamage(damage);
+        }
+
+        if(_healthStat.isDead()){
+            this.Die();
+        }
+    }
+}

@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:420afd87652d21f964c4450c137adc30b8e27a518a1f8f8d57aac0f6f76820bf
-size 465
+using UnityEngine;
+
+public class Enemy : Character
+{
+    void Awake()
+    {
+        _healthStat = new HealthStat(50);
+    }
+
+    public override void Die()
+    {
+        EnemyController controller = gameObject.GetComponent<EnemyController>();
+        PickDropController pickdrop = controller.getFireWeapon().GetComponent<PickDropController>();
+        pickdrop.Drop(gameObject.GetComponent<Rigidbody>().velocity, transform);
+
+        Destroy(gameObject, 0);
+    }
+}

@@ -1,3 +1,48 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:fc12ae9256c65220c77f19ab17fae0baf9a72010e68be2027a26703b7f6e2af2
-size 1267
+﻿using UnityEngine;
+
+namespace FMODUnity
+{
+    [AddComponentMenu("FMOD Studio/FMOD Studio Listener")]
+    public class StudioListener : MonoBehaviour
+    {
+        Rigidbody rigidBody;
+        Rigidbody2D rigidBody2D;
+
+        public GameObject attenuationObject;
+
+        public int ListenerNumber = -1;
+
+        void OnEnable()
+        {
+            RuntimeUtils.EnforceLibraryOrder();
+            rigidBody = gameObject.GetComponent<Rigidbody>();
+            rigidBody2D = gameObject.GetComponent<Rigidbody2D>();
+            ListenerNumber = RuntimeManager.AddListener(this);
+        }
+
+        void OnDisable()
+        {
+            RuntimeManager.RemoveListener(this);
+        }
+
+        void Update()
+        {
+            if (ListenerNumber >= 0 && ListenerNumber < FMOD.CONSTANTS.MAX_LISTENERS)
+            {
+                SetListenerLocation();
+            }
+        }
+
+        void SetListenerLocation()
+        {
+            if (rigidBody)
+            {
+                RuntimeManager.SetListenerLocation(ListenerNumber, gameObject, rigidBody, attenuationObject);
+            }
+            else
+            {
+                RuntimeManager.SetListenerLocation(ListenerNumber, gameObject, rigidBody2D, attenuationObject);
+            }
+        }
+    }
+}

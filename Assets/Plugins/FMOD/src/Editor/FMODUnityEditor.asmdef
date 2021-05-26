@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:85a3a50f979fc1c917c4cdcf95c2a126a5ff3908fdd857d021d18f5338bbb0b6
-size 668
+{
+    "name": "FMODUnityEditor",
+    "references": [
+        "FMODUnity"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.timeline",
+            "expression": "1.0.0",
+            "define": "UNITY_TIMELINE_EXIST"
+        },
+        {
+            "name": "com.unity.addressables",
+            "expression": "1.0.0",
+            "define": "UNITY_ADDRESSABLES_EXIST"
+        }
+    ],
+    "noEngineReferences": false
+}
