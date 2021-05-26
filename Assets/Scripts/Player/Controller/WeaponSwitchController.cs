@@ -51,15 +51,17 @@ public class WeaponSwitchController : MonoBehaviour
         if (previousWeapon != selectedWeapon)
             SelectWeapon();
 
-        RaycastHit hit;
-        Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
-        if (Physics.Raycast(ray, out hit))
-        {
-            if(hit.transform.CompareTag("FireWeapon")) {
-                FireWeapon weapon = hit.transform.gameObject.GetComponent<FireWeapon>();
-                if (Input.GetKeyDown(KeyCode.E) && weapons.Count < maxWeapons && !weapon.isInUse())
-                {            
-                    PickWeapon(_cameraTransform.GetChild(0), hit.collider);
+        else if(Input.GetKeyDown(KeyCode.E)){
+            RaycastHit hit;
+            Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if(hit.transform.CompareTag("FireWeapon")) {
+                    FireWeapon weapon = hit.transform.gameObject.GetComponent<FireWeapon>();
+                    if (Input.GetKeyDown(KeyCode.E) && weapons.Count < maxWeapons && !weapon.isInUse())
+                    {            
+                        PickWeapon(_cameraTransform.GetChild(0), hit.collider);
+                    }
                 }
             }
         }
