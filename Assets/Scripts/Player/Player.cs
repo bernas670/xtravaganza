@@ -7,6 +7,8 @@ public class Player : Character
     public HealthBar healthBar;
 
     private int _lavaLayer;
+    private bool _isPlayerInvincible = false;
+
 
     void Awake()
     {
@@ -33,5 +35,22 @@ public class Player : Character
     public override void Die(){
         Debug.Log("PLAYER DEAD");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public HealthStat getHealthStat(){
+        return _healthStat;
+    }
+    public void setPlayerInvincible(bool isPlayerInvincible){
+        _isPlayerInvincible = isPlayerInvincible;
+    }
+
+    public void TakeDamage(int damage){
+        if(!_isPlayerInvincible){
+            _healthStat.TakeDamage(damage);
+        }
+
+        if(_healthStat.isDead()){
+            this.Die();
+        }
     }
 }
