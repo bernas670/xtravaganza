@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8b8e8c60a60e855ac4e344b8d224168c03e4cabbd10f554a1a1ca887131a7c10
-size 1063
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerMaster" id="{1109117d-d553-4e3b-ae28-12d58058cd67}">
+		<property name="name">
+			<value>Master Bus</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{9469eaa5-f724-42e8-b4ba-ec34742cb8f6}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{d6907f08-8e64-44c3-923f-b4f486b6d8db}</destination>
+		</relationship>
+		<relationship name="mixer">
+			<destination>{9ddcc5f5-8952-4884-a0df-1f1b587a8083}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{9469eaa5-f724-42e8-b4ba-ec34742cb8f6}">
+		<relationship name="effects">
+			<destination>{57952149-64e7-4719-802f-3150c1c326a7}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{d6907f08-8e64-44c3-923f-b4f486b6d8db}">
+		<property name="overridingOutputFormat">
+			<value>2</value>
+		</property>
+	</object>
+	<object class="MixerBusFader" id="{57952149-64e7-4719-802f-3150c1c326a7}" />
+</objects>

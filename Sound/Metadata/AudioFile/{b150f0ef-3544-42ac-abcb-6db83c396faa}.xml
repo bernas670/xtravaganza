@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3d85156c9341613aec59512abf3c5bc5981130851585ba4e4dafd7882b570e55
-size 612
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{b150f0ef-3544-42ac-abcb-6db83c396faa}">
+		<property name="assetPath">
+			<value>Soldier BodySound (1).wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.9199999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2837b30f-5ba3-4c4a-9835-20fbbc03b493}</destination>
+		</relationship>
+	</object>
+</objects>

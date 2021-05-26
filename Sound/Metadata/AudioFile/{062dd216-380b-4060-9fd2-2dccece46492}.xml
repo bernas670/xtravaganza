@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a21691e7667d489434ad092af08ddc7986de990d54ef6ae052df394db7b62546
-size 611
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{062dd216-380b-4060-9fd2-2dccece46492}">
+		<property name="assetPath">
+			<value>PowerUp Laughter (2).wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.8399999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2837b30f-5ba3-4c4a-9835-20fbbc03b493}</destination>
+		</relationship>
+	</object>
+</objects>

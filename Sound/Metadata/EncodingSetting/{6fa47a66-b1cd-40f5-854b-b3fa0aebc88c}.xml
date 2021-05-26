@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6fafefb2d2f55afea3c1fda0c8099754c100f0e790b8235933bf9abf1ce1dc99
-size 559
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="EncodingSetting" id="{6fa47a66-b1cd-40f5-854b-b3fa0aebc88c}">
+		<property name="encodingFormat">
+			<value>3</value>
+		</property>
+		<property name="quality">
+			<value>37</value>
+		</property>
+		<relationship name="platform">
+			<destination>{a44cfe81-20d8-4b89-a9c2-6d9bd82d4493}</destination>
+		</relationship>
+		<relationship name="encodable">
+			<destination>{a44cfe81-20d8-4b89-a9c2-6d9bd82d4493}</destination>
+		</relationship>
+	</object>
+</objects>

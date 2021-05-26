@@ -1,3 +1,35 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:609e4bc5bcb3e306e49e58d321aab572cacda3280a9b57c0c9d929d497b79675
-size 1022
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{08fe9e10-e1a9-4e38-8496-1e6bbde15aaa}">
+		<property name="name">
+			<value>Surface</value>
+		</property>
+		<relationship name="folder">
+			<destination>{513e4ff6-b3e7-4a68-9b34-4ae1919445b7}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{683cbc1f-8166-461a-826f-b5c3938bf843}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{683cbc1f-8166-461a-826f-b5c3938bf843}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Concrete</value>
+			<value>Metal</value>
+		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

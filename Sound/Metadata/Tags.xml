@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d054048ef8e5e98e6a5f98a5f8c5f056b5b2450132f7c50ab517b2f60ca8dd39
-size 250
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MasterTagFolder" id="{2c958364-2de8-4583-a727-fc765c1180b1}">
+		<property name="name">
+			<value>Master</value>
+		</property>
+	</object>
+</objects>

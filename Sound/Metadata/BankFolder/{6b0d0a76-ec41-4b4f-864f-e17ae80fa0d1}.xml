@@ -1,3 +1,4 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3c4e860c8e8ce1f95e1a7564f2354a4721095236137583be06933197aa2883b5
-size 178
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MasterBankFolder" id="{6b0d0a76-ec41-4b4f-864f-e17ae80fa0d1}" />
+</objects>
