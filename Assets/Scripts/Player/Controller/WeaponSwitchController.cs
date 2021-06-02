@@ -17,6 +17,10 @@ public class WeaponSwitchController : MonoBehaviour
     private Transform _player_ref_RH;
     private Transform _player_ref_LH;
 
+    private RigBuilder _rigBuilder;
+    private GameObject _rightHand;
+    private GameObject _leftHand;
+
     void Start()
     {
         _shooter = player.gameObject.GetComponent<PlayerShootController>();
@@ -28,7 +32,10 @@ public class WeaponSwitchController : MonoBehaviour
         
         _player_ref_RH = GameObject.Find("Alien").transform.Find("player_ref_right_hand");
         _player_ref_LH = GameObject.Find("Alien").transform.Find("player_ref_left_hand");
+        _rigBuilder = GameObject.Find("Alien").GetComponent<RigBuilder>();
 
+        _rightHand = GameObject.Find("RightHandIK");
+        _leftHand = GameObject.Find("LeftHandIK");
       
         SelectWeapon();
     }
@@ -36,30 +43,7 @@ public class WeaponSwitchController : MonoBehaviour
     void Update()
     {
         int previousWeapon = selectedWeapon;
-        GameObject rightHand = GameObject.Find("RightHandIK");
-        GameObject leftHand = GameObject.Find("LeftHandIK");
         
-        if(!currentWeapon){
-            //Update weapon references. 
-            if(rightHand && leftHand){
-                rightHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
-                leftHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
-                rightHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
-                leftHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
-            }   
-        }
-        else {
-            //Update weapon references. 
-            if(rightHand && leftHand){
-                Debug.Log(currentWeapon);
-                Debug.Log(currentWeapon.gameObject.transform.Find("ref_right_hand"));
-                rightHand.GetComponent<TwoBoneIKConstraint>().data.target = currentWeapon.gameObject.transform.Find("ref_right_hand");
-                leftHand.GetComponent<TwoBoneIKConstraint>().data.target = currentWeapon.gameObject.transform.Find("ref_left_hand");
-                rightHand.GetComponent<TwoBoneIKConstraint>().weight = 1;
-                leftHand.GetComponent<TwoBoneIKConstraint>().weight = 1;
-            }   
-        }
-
         if (Input.GetAxis("Mouse ScrollWheel") > 0f && weapons.Count > 1)
         {
             if (selectedWeapon >= transform.childCount - 1)
@@ -111,6 +95,8 @@ public class WeaponSwitchController : MonoBehaviour
                 FireWeapon fWeapon = weapon.GetComponent<FireWeapon>();
                 _shooter.setFireWeapon(fWeapon);
                 currentWeapon = weapon;
+
+                updateRigWeaponReference();
             }
             i++;
         }
@@ -122,6 +108,7 @@ public class WeaponSwitchController : MonoBehaviour
         if(weapons.Count == 0 ){
             _shooter.setFireWeapon(coll.gameObject.GetComponent<FireWeapon>());
             currentWeapon = coll.gameObject;
+            updateRigWeaponReference();
         }
 
         // hides the weapon because it's now in our 'inventory'
@@ -148,7 +135,8 @@ public class WeaponSwitchController : MonoBehaviour
     }
 
     void DropWeapon(){
-
+      
+     
         currentWeapon.GetComponent<FireWeapon>().setInUse(false);
 
         slotFull = false;
@@ -185,6 +173,31 @@ public class WeaponSwitchController : MonoBehaviour
             _shooter.setFireWeapon(weapons[0].GetComponent<FireWeapon>());
             currentWeapon = weapons[0];
             currentWeapon.SetActive(true);
-        }else currentWeapon = null;
+            updateRigWeaponReference();
+        }else{
+            currentWeapon = null;
+            clearRigWeaponReference();
+        }
+        
+            
+    }
+
+     //Update weapon references
+    void updateRigWeaponReference(){
+        Debug.Log(currentWeapon);
+        Debug.Log(currentWeapon.gameObject.transform.Find("ref_right_hand"));
+        _rightHand.GetComponent<TwoBoneIKConstraint>().data.target = currentWeapon.gameObject.transform.Find("ref_right_hand");
+        _leftHand.GetComponent<TwoBoneIKConstraint>().data.target = currentWeapon.gameObject.transform.Find("ref_left_hand");
+        _rightHand.GetComponent<TwoBoneIKConstraint>().weight = 1;
+        _leftHand.GetComponent<TwoBoneIKConstraint>().weight = 1;
+        _rigBuilder.Build();
+    }
+
+    // detach the weapon from player;
+    void clearRigWeaponReference(){
+        _rightHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
+        _leftHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
+        _rightHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
+        _leftHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
     }
 }
