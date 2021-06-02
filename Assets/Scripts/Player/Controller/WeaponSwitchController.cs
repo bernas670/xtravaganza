@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class WeaponSwitchController : MonoBehaviour
 {
@@ -112,6 +113,7 @@ public class WeaponSwitchController : MonoBehaviour
 
         //Enable script
         coll.gameObject.GetComponent<FireWeapon>().enabled = true;
+        coll.gameObject.GetComponent<FMODUnity.StudioEventEmitter>().Play();
     }
 
     void DropWeapon(){
@@ -142,6 +144,8 @@ public class WeaponSwitchController : MonoBehaviour
 
         //Disable script
         currentWeapon.GetComponent<FireWeapon>().enabled = false;
+        //Play the drop sound
+        //_cameraTransform.GetChild(0).GetComponent<FMODUnity.StudioEventEmitter>().Play();
 
         _shooter.setFireWeapon(null);
 
