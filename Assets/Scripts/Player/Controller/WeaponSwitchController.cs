@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class WeaponSwitchController : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class WeaponSwitchController : MonoBehaviour
     public GameObject currentWeapon;
     public static bool slotFull;
 
+    private Transform _player_ref_RH;
+    private Transform _player_ref_LH;
+
     void Start()
     {
         _shooter = player.gameObject.GetComponent<PlayerShootController>();
@@ -21,13 +25,40 @@ public class WeaponSwitchController : MonoBehaviour
         currentWeapon = _shooter.getFireWeapon().gameObject;
 
         _cameraTransform = _shooter.getPoV();
+        
+        _player_ref_RH = GameObject.Find("Alien").transform.Find("player_ref_right_hand");
+        _player_ref_LH = GameObject.Find("Alien").transform.Find("player_ref_left_hand");
 
+      
         SelectWeapon();
     }
 
     void Update()
     {
         int previousWeapon = selectedWeapon;
+        GameObject rightHand = GameObject.Find("RightHandIK");
+        GameObject leftHand = GameObject.Find("LeftHandIK");
+        
+        if(!currentWeapon){
+            //Update weapon references. 
+            if(rightHand && leftHand){
+                rightHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
+                leftHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
+                rightHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
+                leftHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
+            }   
+        }
+        else {
+            //Update weapon references. 
+            if(rightHand && leftHand){
+                Debug.Log(currentWeapon);
+                Debug.Log(currentWeapon.gameObject.transform.Find("ref_right_hand"));
+                rightHand.GetComponent<TwoBoneIKConstraint>().data.target = currentWeapon.gameObject.transform.Find("ref_right_hand");
+                leftHand.GetComponent<TwoBoneIKConstraint>().data.target = currentWeapon.gameObject.transform.Find("ref_left_hand");
+                rightHand.GetComponent<TwoBoneIKConstraint>().weight = 1;
+                leftHand.GetComponent<TwoBoneIKConstraint>().weight = 1;
+            }   
+        }
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f && weapons.Count > 1)
         {
@@ -44,6 +75,7 @@ public class WeaponSwitchController : MonoBehaviour
                 selectedWeapon--;
         }
         else if (Input.GetKeyDown(KeyCode.Q) && currentWeapon) {
+        
             DropWeapon();
         }
 
@@ -85,7 +117,8 @@ public class WeaponSwitchController : MonoBehaviour
     }
 
     void PickWeapon(Transform container, Collider coll)
-    {
+    {   
+    
         if(weapons.Count == 0 ){
             _shooter.setFireWeapon(coll.gameObject.GetComponent<FireWeapon>());
             currentWeapon = coll.gameObject;
@@ -115,6 +148,7 @@ public class WeaponSwitchController : MonoBehaviour
     }
 
     void DropWeapon(){
+
         currentWeapon.GetComponent<FireWeapon>().setInUse(false);
 
         slotFull = false;

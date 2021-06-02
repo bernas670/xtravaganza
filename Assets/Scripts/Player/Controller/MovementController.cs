@@ -45,9 +45,9 @@ public class MovementController : MonoBehaviour
         float xCoef = Vector2.Dot(velocity.normalized, rightDir.normalized);
         float direction = Mathf.Sin(Vector2.Angle(velocity, forwardDir));
 
-        Debug.Log("Wish dir X = " + zCoef);
-        Debug.Log("Wish dir Z = " + xCoef);
-        Debug.Log((_hVel * xCoef) * 100 / 15);
+        //Debug.Log("Wish dir X = " + zCoef);
+        //Debug.Log("Wish dir Z = " + xCoef);
+        //Debug.Log((_hVel * xCoef) * 100 / 15);
 
         animator.SetFloat("zVelocity", _hVel * zCoef);
         animator.SetFloat("xVelocity", (_hVel * xCoef) / 15);

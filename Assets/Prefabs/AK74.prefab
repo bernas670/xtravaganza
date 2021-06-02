@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6675695861085288747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2014543228248803000}
+  m_Layer: 11
+  m_Name: ref_left_hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2014543228248803000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675695861085288747}
+  m_LocalRotation: {x: -0.8803862, y: -0.006283475, z: -0.1158783, w: -0.4598402}
+  m_LocalPosition: {x: 0.0609, y: -0.0498, z: -0.1086}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8624699325493113438}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -233.922, y: -20.872986, z: -11.52301}
 --- !u!1 &8624699325493113412
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,6 +44,7 @@ GameObject:
   - component: {fileID: 8624699325493113409}
   - component: {fileID: 8624699325493113410}
   - component: {fileID: 8624699325493113411}
+  - component: {fileID: 9013681540211741919}
   m_Layer: 11
   m_Name: AK74
   m_TagString: FireWeapon
@@ -36,6 +67,8 @@ Transform:
   - {fileID: 8624699326028984073}
   - {fileID: 8624699325819655059}
   - {fileID: 6012287433735400711}
+  - {fileID: 200650973282406739}
+  - {fileID: 2014543228248803000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -133,6 +166,18 @@ MonoBehaviour:
     type: 3}
   inUse: 1
   isEquipped: 0
+--- !u!114 &9013681540211741919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8624699325493113412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48948dfe9d76b07488dacd46a7955fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8624699325819655060
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +415,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &8664142155802771465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200650973282406739}
+  m_Layer: 11
+  m_Name: ref_right_hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200650973282406739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8664142155802771465}
+  m_LocalRotation: {x: -0.5073286, y: 0.4980302, z: -0.27524284, w: 0.64716697}
+  m_LocalPosition: {x: -0.034, y: -0.103, z: 0.1956}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8624699325493113438}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 202.488, y: -89.328, z: 471.173}
 --- !u!1001 &3339805477295174604
 PrefabInstance:
   m_ObjectHideFlags: 0
