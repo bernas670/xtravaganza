@@ -1,18 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
 
 public class WeaponSwitchController : MonoBehaviour
 {
     public int selectedWeapon = 0;
     public Player player;
-    private PlayerShootController _shooter;
-    private Transform _cameraTransform;
     public List<GameObject> weapons = new List<GameObject>();
-    private int maxWeapons = 4;
     public GameObject currentWeapon;
     public static bool slotFull;
+
+    [FMODUnity.EventRef]
+    public string pickEvent;
+
+    private PlayerShootController _shooter;
+    private Transform _cameraTransform;
+    private int maxWeapons = 4;
 
     void Start()
     {
@@ -113,7 +115,8 @@ public class WeaponSwitchController : MonoBehaviour
 
         //Enable script
         coll.gameObject.GetComponent<FireWeapon>().enabled = true;
-        coll.gameObject.GetComponent<FMODUnity.StudioEventEmitter>().Play();
+        //Play pickup sound
+        FMODUnity.RuntimeManager.PlayOneShotAttached(pickEvent, _cameraTransform.gameObject);
     }
 
     void DropWeapon(){

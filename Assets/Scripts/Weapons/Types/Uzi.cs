@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 public class Uzi : FireWeapon {
     public void Awake(){
         _damage = 10;
