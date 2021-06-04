@@ -11,15 +11,17 @@ public class WeaponSwitchController : MonoBehaviour
 
     [FMODUnity.EventRef]
     public string pickEvent;
+    public float pickSoundInterval = 0.5f;
 
     private PlayerShootController _shooter;
     private Transform _cameraTransform;
     private int maxWeapons = 4;
+    private float lastPickSoundTime = 0;
 
     void Start()
     {
         _shooter = player.gameObject.GetComponent<PlayerShootController>();
-        
+
         weapons.Add(_shooter.getFireWeapon().gameObject);
         currentWeapon = _shooter.getFireWeapon().gameObject;
 
@@ -46,28 +48,41 @@ public class WeaponSwitchController : MonoBehaviour
             else
                 selectedWeapon--;
         }
-        else if (Input.GetKeyDown(KeyCode.Q) && currentWeapon) {
+        else if (Input.GetKeyDown(KeyCode.Q) && currentWeapon)
+        {
             DropWeapon();
         }
 
         // If selected weapon changed, call selectweapon method to perform the weapon change
         if (previousWeapon != selectedWeapon)
+        {
             SelectWeapon();
-
-        else if(Input.GetKeyDown(KeyCode.E)){
+            if (Time.time - lastPickSoundTime >= pickSoundInterval) {
+                PlayPickSound();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
             RaycastHit hit;
             Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
             if (Physics.Raycast(ray, out hit))
             {
-                if(hit.transform.CompareTag("FireWeapon")) {
+                if (hit.transform.CompareTag("FireWeapon"))
+                {
                     FireWeapon weapon = hit.transform.gameObject.GetComponent<FireWeapon>();
                     if (Input.GetKeyDown(KeyCode.E) && weapons.Count < maxWeapons && !weapon.isInUse())
-                    {            
+                    {
                         PickWeapon(_cameraTransform.GetChild(0), hit.collider);
                     }
                 }
             }
         }
+    }
+
+    void PlayPickSound()
+    {
+        lastPickSoundTime = Time.time;
+        FMODUnity.RuntimeManager.PlayOneShotAttached(pickEvent, _cameraTransform.gameObject);
     }
 
     void SelectWeapon()
@@ -89,7 +104,8 @@ public class WeaponSwitchController : MonoBehaviour
 
     void PickWeapon(Transform container, Collider coll)
     {
-        if(weapons.Count == 0 ){
+        if (weapons.Count == 0)
+        {
             _shooter.setFireWeapon(coll.gameObject.GetComponent<FireWeapon>());
             currentWeapon = coll.gameObject;
         }
@@ -115,11 +131,11 @@ public class WeaponSwitchController : MonoBehaviour
 
         //Enable script
         coll.gameObject.GetComponent<FireWeapon>().enabled = true;
-        //Play pickup sound
-        FMODUnity.RuntimeManager.PlayOneShotAttached(pickEvent, _cameraTransform.gameObject);
+        PlayPickSound();
     }
 
-    void DropWeapon(){
+    void DropWeapon()
+    {
         currentWeapon.GetComponent<FireWeapon>().setInUse(false);
 
         slotFull = false;
@@ -129,7 +145,7 @@ public class WeaponSwitchController : MonoBehaviour
 
         Rigidbody rb = currentWeapon.GetComponent<Rigidbody>();
         BoxCollider coll = currentWeapon.GetComponent<BoxCollider>();
- 
+
         //Make Rigidbody not kinematic and BoxCollider normal
         rb.isKinematic = false;
         coll.isTrigger = false;
@@ -140,24 +156,24 @@ public class WeaponSwitchController : MonoBehaviour
         //AddForce
         rb.AddForce(_cameraTransform.forward * 2, ForceMode.Impulse);
         rb.AddForce(_cameraTransform.up * 2, ForceMode.Impulse);
-        
+
         //Add random rotation
         float random = Random.Range(-1f, 1f);
         rb.AddTorque(new Vector3(random, random, random) * 10);
 
         //Disable script
         currentWeapon.GetComponent<FireWeapon>().enabled = false;
-        //Play the drop sound
-        //_cameraTransform.GetChild(0).GetComponent<FMODUnity.StudioEventEmitter>().Play();
 
         _shooter.setFireWeapon(null);
 
         weapons.Remove(currentWeapon);
 
-        if(weapons.Count > 0){
+        if (weapons.Count > 0)
+        {
             _shooter.setFireWeapon(weapons[0].GetComponent<FireWeapon>());
             currentWeapon = weapons[0];
             currentWeapon.SetActive(true);
-        }else currentWeapon = null;
+        }
+        else currentWeapon = null;
     }
 }
