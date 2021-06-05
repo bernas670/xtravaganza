@@ -7,9 +7,14 @@ public abstract class FireWeapon : Weapon
 
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
+    public FMODUnity.StudioEventEmitter dropEmitter;
 
     public bool inUse;
     public bool isEquipped;
+    public float dropSoundInterval = 0.5f;
+
+    private float lastPlayTime = 0;
+
     public void reload()
     {
         // Verify if has bullets to reload and wepon is not full
@@ -60,7 +65,7 @@ public abstract class FireWeapon : Weapon
         {
             //if (controller.name == "Player")
             //{
-                muzzleFlash.Play();
+            muzzleFlash.Play();
             //}
 
             //  This should be outside the if statement. But since we only have 1 weapon enemy is decreasing the ammo aswell;
@@ -95,15 +100,27 @@ public abstract class FireWeapon : Weapon
         }
     }
 
-    public bool isInUse(){
+    public bool isInUse()
+    {
         return inUse;
     }
+
     public void setInUse(bool value)
     {
         inUse = value;
     }
 
-    public void SetIsEquipped(bool value){
+    public void SetIsEquipped(bool value)
+    {
         isEquipped = value;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!dropEmitter.IsPlaying() || Time.time - lastPlayTime >= dropSoundInterval)
+        {
+            lastPlayTime = Time.time;
+            dropEmitter.Play();
+        }
     }
 }
