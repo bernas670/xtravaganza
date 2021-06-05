@@ -12,6 +12,6 @@ public class Scientist : Character
         ScientistController controller = gameObject.GetComponent<ScientistController>();
         controller.communicateDeath();
 
-        Destroy(gameObject, 0);
+        Destroy(gameObject, 3);
     }
 }

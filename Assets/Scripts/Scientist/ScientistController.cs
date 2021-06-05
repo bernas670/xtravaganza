@@ -24,42 +24,35 @@ public class ScientistController : MonoBehaviour
 
     void Update()
     {       
-        _agent.destination = getWayPointList() [nextWayPoint].position;
-        //_agent.isStopped = false;
+        float distanceToPlayer = Vector3.Distance( transform.position, _player.transform.position);
+        
+        if(distanceToPlayer > 40f && distanceToPlayer < 100f){
+            _animator.SetBool("isRunning", false);
+            _animator.SetBool("isSafe", true);
 
-        if (_agent.remainingDistance <= _agent.stoppingDistance && !_agent.pathPending) 
-        {
-            nextWayPoint = (nextWayPoint + 1) % getWayPointList().Count;
+
+            _agent.destination = _wayPointList[nextWayPoint].position;
+            if (_agent.remainingDistance <= _agent.stoppingDistance && !_agent.pathPending) 
+            {
+                nextWayPoint = (nextWayPoint + 1) % _wayPointList.Count;
+
+                /* TODO: stop between points */
+            }
         }
-    }
+        else if(distanceToPlayer < 40f && distanceToPlayer > 20f) {
+            _animator.SetTrigger("isTerrified");
+            _animator.SetBool("isRunning", false);
+            _animator.SetBool("isSafe", false);
 
-    public void UpdateState()
-    {   
-        if( Vector3.Distance( transform.position, _player.transform.position) < 20f) {
+        } else if(distanceToPlayer < 20f) {  
+            _animator.SetBool("isSafe", false); 
             _animator.SetBool("isRunning", true);
-            //path finding system 
-        } else {
-            //scientist feels terrified
-
         }
-
-        // work (walk)
-    }
-
-    // Getters
-    public NavMeshAgent getAgent(){
-        return _agent;
-    }
-
-    public Transform getTarget(){
-        return _player.transform;
     }
     
-    public List<Transform> getWayPointList(){
-        return _wayPointList;
-    }
-
     public void communicateDeath(){
+        _animator.SetTrigger("isDead");
+
         Player player = _player.GetComponent<Player>();
         player.becomeEvil();
     }

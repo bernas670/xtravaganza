@@ -4,26 +4,29 @@ ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
-      74: -7939427304113156520
-    second: Armature.006|Crawl Backwards
+      74: 7418266279980398901
+    second: Armature.007|Crawl Backwards
   - first:
-      74: -7509397596191043124
-    second: 'Armature.006|Death Crouch '
+      74: 3631404749317181152
+    second: 'Armature.007|Death Crouched '
   - first:
-      74: -8586418162008576046
-    second: Armature.006|Death Standing
+      74: -3017899811146608949
+    second: 'Armature.007|Death Standing '
   - first:
-      74: -8388897898722970345
-    second: Armature.006|Run
+      74: -9005339065587299986
+    second: 'Armature.007|Idle '
   - first:
-      74: 8569506084829067744
-    second: Armature.006|Run Backwards
+      74: 831738511862657306
+    second: Armature.007|Run
   - first:
-      74: 8162777290642830474
-    second: 'Armature.006|Terrified '
+      74: -4130443504153032666
+    second: Armature.007|Run Backwards
   - first:
-      74: -414842847253401159
-    second: Armature.006|Walk
+      74: 6455566110350083618
+    second: 'Armature.007|Terrified '
+  - first:
+      74: -5336391137730374089
+    second: 'Armature.007|Walk '
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -53,8 +56,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature.006|Crawl Backwards
-      takeName: Armature.006|Crawl Backwards
+      name: Armature.007|Crawl Backwards
+      takeName: Armature.007|Crawl Backwards
       internalID: 0
       firstFrame: 0
       lastFrame: 119
@@ -82,8 +85,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: 'Armature.006|Death Crouch '
-      takeName: 'Armature.006|Death Crouch '
+      name: 'Armature.007|Death Crouched '
+      takeName: 'Armature.007|Death Crouched '
       internalID: 0
       firstFrame: 0
       lastFrame: 56
@@ -111,8 +114,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.006|Death Standing
-      takeName: Armature.006|Death Standing
+      name: 'Armature.007|Death Standing '
+      takeName: 'Armature.007|Death Standing '
       internalID: 0
       firstFrame: 0
       lastFrame: 78
@@ -140,11 +143,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.006|Run
-      takeName: Armature.006|Run
+      name: 'Armature.007|Idle '
+      takeName: 'Armature.007|Idle '
       internalID: 0
       firstFrame: 0
-      lastFrame: 33
+      lastFrame: 250
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -169,8 +172,37 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.006|Run Backwards
-      takeName: Armature.006|Run Backwards
+      name: Armature.007|Run
+      takeName: Armature.007|Run
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 33
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature.007|Run Backwards
+      takeName: Armature.007|Run Backwards
       internalID: 0
       firstFrame: 0
       lastFrame: 22
@@ -198,8 +230,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: 'Armature.006|Terrified '
-      takeName: 'Armature.006|Terrified '
+      name: 'Armature.007|Terrified '
+      takeName: 'Armature.007|Terrified '
       internalID: 0
       firstFrame: 0
       lastFrame: 600
@@ -227,8 +259,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.006|Walk
-      takeName: Armature.006|Walk
+      name: 'Armature.007|Walk '
+      takeName: 'Armature.007|Walk '
       internalID: 0
       firstFrame: 0
       lastFrame: 37
