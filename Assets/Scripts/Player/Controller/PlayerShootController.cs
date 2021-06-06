@@ -16,12 +16,12 @@ public class PlayerShootController : Shooter
     void UpdateText()
     {
         if (fireWeapon){
-            weaponUI.SetAmmo(fireWeapon.getClipValue(), fireWeapon.getReloadValue());
-            weaponUI.SetWeaponName(fireWeapon.gameObject.name);
+            //weaponUI.SetAmmo(fireWeapon.getClipValue(), fireWeapon.getReloadValue());
+            //weaponUI.SetWeaponName(fireWeapon.gameObject.name);
         }
         else{
-            weaponUI.SetAmmo(0, 0);
-            weaponUI.SetWeaponName("None");
+            //weaponUI.SetAmmo(0, 0);
+            //weaponUI.SetWeaponName("None");
         }
     }
 
@@ -37,7 +37,7 @@ public class PlayerShootController : Shooter
         }
         else if (Input.GetButton("Fire2"))
         {
-            meleeWeapon.shoot(this);
+            //meleeWeapon.shoot(this);
         }
         else if (Input.GetKey(KeyCode.R))
         {
