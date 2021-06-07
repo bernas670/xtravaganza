@@ -37,21 +37,18 @@ public class MovementController : MonoBehaviour
         _wishDir.x = Input.GetAxis("Horizontal");
         _wishDir.z = Input.GetAxis("Vertical");
         _wishDir = transform.TransformDirection(_wishDir);
-
-        Vector2 velocity = new Vector2(rb.velocity.x, rb.velocity.z);
-        Vector2 forwardDir = new Vector2(transform.forward.x, transform.forward.z);
-        Vector2 rightDir = new Vector2(transform.right.x, transform.right.z);
-        float zCoef = Vector2.Dot(velocity.normalized, forwardDir.normalized);
-        float xCoef = Vector2.Dot(velocity.normalized, rightDir.normalized);
-        float direction = Mathf.Sin(Vector2.Angle(velocity, forwardDir));
+        _wishDir.Normalize();
 
         //Debug.Log("Wish dir X = " + zCoef);
         //Debug.Log("Wish dir Z = " + xCoef);
         //Debug.Log((_hVel * xCoef) * 100 / 15);
 
-        animator.SetFloat("zVelocity", _hVel * zCoef);
-        animator.SetFloat("xVelocity", (_hVel * xCoef) / 15);
-        animator.SetFloat("direction", direction);
+        Vector3 velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        float zVelocity = Vector3.Dot(velocity.normalized, transform.forward);
+        float xVelocity = Vector3.Dot(velocity.normalized, transform.right);
+
+        animator.SetFloat("zVelocity", zVelocity);
+        animator.SetFloat("xVelocity", xVelocity);
 
         _movementSM.HandleInput();
 
