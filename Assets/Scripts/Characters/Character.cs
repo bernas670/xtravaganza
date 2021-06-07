@@ -9,14 +9,21 @@ public class Character : MonoBehaviour
         return _healthStat;
     }
 
-    public virtual void TakeDamage(int damage){
+    public virtual void TakeDamage(int damage)
+    {
+        if (_healthStat.isDead())
+        {
+            return;
+        }
+
         _healthStat.TakeDamage(damage);
 
-        if(_healthStat.isDead()){
+        if (_healthStat.isDead())
+        {
             this.Die();
         }
     }
 
-    public virtual void Die(){}
+    public virtual void Die() { }
 
 }

@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class EnemyController : Shooter
 {
     private NavMeshAgent _agent;
+    private Animator _animator;
     private Transform _target;
     public GameObject _player;
 
@@ -16,10 +17,14 @@ public class EnemyController : Shooter
     [HideInInspector] public int nextWayPoint;
 
     private bool _isEvil;
+    private bool _isDead = false;
 
-    void Awake(){
-        _isEvil = Random.Range(0,2) == 0;
+    void Awake()
+    {
+        _isEvil = Random.Range(0, 2) == 0;
         setPoV(this.transform);
+
+        _animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -30,15 +35,27 @@ public class EnemyController : Shooter
     }
 
     void Update()
-    {       
+    {
         UpdateState();
+
+        float velX = Vector3.Dot(_agent.velocity, transform.right);
+        float velZ = Vector3.Dot(_agent.velocity, transform.forward);
+
+        _animator.SetFloat("VelocityX", velX, 0.1f, Time.deltaTime);
+        _animator.SetFloat("VelocityZ", velZ, 0.1f, Time.deltaTime);
     }
 
     // State Machine
     public void UpdateState()
-    {   
-       float distance = Vector3.Distance(_target.position, transform.position);
-       if (distance > fireWeapon.getRange() || !fireWeapon){
+    {
+        float distance = Vector3.Distance(_target.position, transform.position);
+
+        if (_isDead) {
+            DyingAction dying = new DyingAction();
+            dying.Act(this);
+        }
+        else if (!fireWeapon || distance > fireWeapon.getRange())
+        {
             //patrol;   
             //Change the patrolling points created in Scene;
             PatrolAction patrol = new PatrolAction();
@@ -46,7 +63,9 @@ public class EnemyController : Shooter
             //  ------------TODO----------------------------
             //Use raycast, if player is in sight, chase him.
 
-       } else { 
+        }
+        else
+        {
             //if(!_isEvil) break;
             ChaseAction chase = new ChaseAction();
             chase.Act(this);
@@ -54,30 +73,34 @@ public class EnemyController : Shooter
             FactoryAttackAction fact = new FactoryAttackAction();
             AttackAction action = fact.createAttackAction(this, distance);
             action.Act(this);
-       }
-       
+        }
+
     }
 
     // Getters
-    public NavMeshAgent getAgent(){
+    public NavMeshAgent getAgent()
+    {
         return _agent;
     }
 
-    public Transform getTarget(){
+    public Transform getTarget()
+    {
         return _target;
     }
-    
-    public List<Transform> getWayPointList(){
+
+    public List<Transform> getWayPointList()
+    {
         return _wayPointList;
     }
 
-    public void dropWeapon(){
+    public void dropWeapon()
+    {
         fireWeapon.setInUse(false);
         fireWeapon.gameObject.transform.parent = null;
 
         Rigidbody rb = fireWeapon.GetComponent<Rigidbody>();
         BoxCollider coll = fireWeapon.GetComponent<BoxCollider>();
- 
+
         //Make Rigidbody not kinematic and BoxCollider normal
         rb.isKinematic = false;
         coll.isTrigger = false;
@@ -95,5 +118,12 @@ public class EnemyController : Shooter
         //Disable script
         fireWeapon.enabled = false;
         fireWeapon = null;
+    }
+
+    public void CommunicateDeath()
+    {
+        dropWeapon();
+        _isDead = true;
+        _animator.SetTrigger("isDead");
     }
 }
