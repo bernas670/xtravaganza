@@ -17,13 +17,12 @@ public class Player : Character
     }
 
     private void Start() {
-        //healthBar.SetMaxHealth(_healthStat.getHealth());
+        healthBar.SetMaxHealth(_healthStat.getHealth());
     }
 
     void Update() {
-        // FIXME: this does not seem to be the best way to update the GUI, 
         // since it is called every frame instead of only when the event occurs
-        //healthBar.SetHealth(_healthStat.getHealth());
+        healthBar.SetHealth(_healthStat.getHealth());
     }    
  
     void OnCollisionEnter(Collision collision) {

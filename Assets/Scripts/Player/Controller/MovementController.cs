@@ -39,9 +39,8 @@ public class MovementController : MonoBehaviour
 
         _movementSM.HandleInput();
 
-        // FIXME: REMOVE, temporary for debug purposes
-        //horizontalSpeedText.text = string.Format("hspeed: {0}", _hVel.ToString("#.00"));
-        //verticalSpeedText.text = string.Format("vspeed: {0}", _vVel.ToString("#.00"));
+        horizontalSpeedText.text = string.Format("hspeed: {0}", _hVel.ToString("#.00"));
+        verticalSpeedText.text = string.Format("vspeed: {0}", _vVel.ToString("#.00"));
     }
 
     void FixedUpdate()
