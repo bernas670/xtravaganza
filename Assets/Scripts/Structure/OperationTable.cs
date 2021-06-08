@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class OperationTable : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private GameObject _door;
 
-    private Door _door;
     void Awake()
-    {   
-        GameObject go = GameObject.FindGameObjectWithTag("LockedDoor");
-        if(go)
-        _door = go.GetComponent<Door>(); 
+    {
+        _door = GameObject.FindGameObjectWithTag("LockedDoor");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionStay()
     {
-        
-    }
-    
-    private void OnCollisionStay(){
-        if(Input.GetKeyDown(KeyCode.O)){
-            Debug.Log("Unlocked Door");
-            _door.unlockDoor();
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            if (_door)
+            {
+                Debug.Log("Unlocked Door");
+                Renderer r = gameObject.GetComponent<MeshRenderer>();
+                r.materials[2].color = Color.green;
+                _door.GetComponent<Door>().unlockDoor();
+            }
         }
     }
 }

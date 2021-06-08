@@ -25,10 +25,14 @@ public class Door : MonoBehaviour
         else unlockDoor();
     }
 
-    void Update() {
-        if (opening) {
+    void Update()
+    {
+        if (opening)
+        {
             transform.position = Vector3.Lerp(transform.position, openDoor, Time.deltaTime * 2.0f);
-        } else if (closing) {
+        }
+        else if (closing)
+        {
             transform.position = Vector3.Lerp(transform.position, closeDoor, Time.deltaTime * 2.0f);
         }
     }
