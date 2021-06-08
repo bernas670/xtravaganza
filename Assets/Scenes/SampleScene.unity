@@ -1877,6 +1877,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3609936514602012393, guid: e82581f1fed08e547b5f4d9b79f65b66,
+        type: 3}
+      propertyPath: m_Carve
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609936514602012393, guid: e82581f1fed08e547b5f4d9b79f65b66,
+        type: 3}
+      propertyPath: m_Shape
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609936514602012393, guid: e82581f1fed08e547b5f4d9b79f65b66,
+        type: 3}
+      propertyPath: m_Extents.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609936514602012393, guid: e82581f1fed08e547b5f4d9b79f65b66,
+        type: 3}
+      propertyPath: m_Extents.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609936514602012393, guid: e82581f1fed08e547b5f4d9b79f65b66,
+        type: 3}
+      propertyPath: m_Extents.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5660862619344358878, guid: e82581f1fed08e547b5f4d9b79f65b66,
         type: 3}
       propertyPath: m_Name
@@ -2097,7 +2122,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 40
   m_IsActive: 1
 --- !u!64 &616232530
 MeshCollider:
@@ -5469,6 +5494,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6061470673112273326, guid: e1b3a22b3024f854a96bea8e5361b0a8,
         type: 3}
+      propertyPath: m_Speed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6061470673112273326, guid: e1b3a22b3024f854a96bea8e5361b0a8,
+        type: 3}
       propertyPath: m_Radius
       value: 2
       objectReference: {fileID: 0}
@@ -5719,6 +5749,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609936514602012393, guid: e82581f1fed08e547b5f4d9b79f65b66,
+        type: 3}
+      propertyPath: m_Shape
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609936514602012393, guid: e82581f1fed08e547b5f4d9b79f65b66,
+        type: 3}
+      propertyPath: m_Extents.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609936514602012393, guid: e82581f1fed08e547b5f4d9b79f65b66,
+        type: 3}
+      propertyPath: m_Extents.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609936514602012393, guid: e82581f1fed08e547b5f4d9b79f65b66,
+        type: 3}
+      propertyPath: m_Extents.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5660862619344358878, guid: e82581f1fed08e547b5f4d9b79f65b66,
         type: 3}
