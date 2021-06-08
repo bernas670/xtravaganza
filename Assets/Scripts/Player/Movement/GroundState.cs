@@ -11,12 +11,17 @@ public class GroundState : MovementState
     private bool _wishJump = false;
     private float _timeBetweenSounds = 0;
 
+    private float _frequencyAdjustment = 4;
+    private float _minVelocity = 2;
+    private float _minInterval = 0.2f;
+
     public GroundState(MovementController controller, StateMachine stateMachine) : base(controller, stateMachine) { }
 
     public override void Enter()
     {
         base.Enter();
         _rb = _controller.rb;
+        //Arbitrarily large number so the sound is played on the first update
         _timeBetweenSounds = 1000;
     }
 
@@ -26,9 +31,9 @@ public class GroundState : MovementState
 
         Vector3 velocity = new Vector3(_controller.rb.velocity.x, 0 , _controller.rb.velocity.z);
         // Footstep sounds
-        if (velocity.magnitude > 2.0f)
+        if (velocity.magnitude > _minVelocity)
         {
-            float interval = Mathf.Max(4 / velocity.magnitude, 0.2f);
+            float interval = Mathf.Max(_frequencyAdjustment / velocity.magnitude, _minInterval);
             Debug.Log(interval);
             _timeBetweenSounds += Time.deltaTime;
             if (_timeBetweenSounds >= interval)
