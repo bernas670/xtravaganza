@@ -12,6 +12,8 @@ public class ScientistController : MonoBehaviour
     private Rigidbody _rigidbody;
     private Animator _animator;
 
+    private Scientist _scientist;
+
     // Contains the locations where the enemie can go.
     [SerializeField] List<Transform> _wayPointList;
     [HideInInspector] public int nextWayPoint;
@@ -22,13 +24,19 @@ public class ScientistController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _animator = gameObject.GetComponent<Animator>();
         _rigidbody = gameObject.GetComponent<Rigidbody>();
+        _scientist = gameObject.GetComponent<Scientist>();
 
     }
 
     void Update()
     {       
-        float distanceToPlayer = Vector3.Distance( transform.position, _player.transform.position);
+        if(_scientist.isDead()){
+            _agent.Stop(); //stops scientist from running away
+            return;
+        }
         
+        float distanceToPlayer = Vector3.Distance( transform.position, _player.transform.position);
+
         if(distanceToPlayer > 40f && distanceToPlayer < 100f){
             _agent.Resume();
 
@@ -37,7 +45,7 @@ public class ScientistController : MonoBehaviour
 
 
             _agent.destination = _wayPointList[nextWayPoint].position;
-            if (_agent.remainingDistance <= _agent.stoppingDistance && !_agent.pathPending) 
+            if (_agent.remainingDistance <= _agent.stoppingDistance && !_agent.pathPending && !_scientist.isDead()) 
             {
                 nextWayPoint = (nextWayPoint + 1) % _wayPointList.Count;
 
@@ -56,7 +64,7 @@ public class ScientistController : MonoBehaviour
             
             _animator.SetBool("isSafe", false); 
             _animator.SetBool("isRunning", true);
-
+            
             RunFromAlien();
         }
         //resetVelocity(startVelocity, startAngVelocity);
@@ -65,7 +73,6 @@ public class ScientistController : MonoBehaviour
     
     public void communicateDeath(){
         _animator.SetTrigger("isDead");
-
         Player player = _player.GetComponent<Player>();
         player.becomeEvil();
     }
@@ -89,7 +96,7 @@ public class ScientistController : MonoBehaviour
         NavMeshHit hit;    // stores the output in a variable called hit
 
          // 5 is the distance to check, assumes you use default for the NavMesh Layer name
-        NavMesh.SamplePosition(runTo, out hit, 5, 1 << NavMesh.GetNavMeshLayerFromName("Default")); 
+        NavMesh.SamplePosition(runTo, out hit, 5, 1 << NavMesh.GetNavMeshLayerFromName("Walkable")); 
          //Debug.Log("hit = " + hit + " hit.position = " + hit.position);
 
          // reset the transform back to our start transform
