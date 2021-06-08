@@ -20,11 +20,13 @@ public class MovementController : MonoBehaviour
     private float _vVel = 0f;
 
     private StateMachine _movementSM;
+    private FMODUnity.StudioEventEmitter _eventEmitter;    
 
     void Start()
     {
         _camController = GetComponent<CameraController>();
         rb = GetComponent<Rigidbody>();
+        _eventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
 
         _movementSM = new StateMachine();
         GroundState ground = new GroundState(this, _movementSM);
@@ -43,12 +45,13 @@ public class MovementController : MonoBehaviour
         //Debug.Log("Wish dir Z = " + xCoef);
         //Debug.Log((_hVel * xCoef) * 100 / 15);
 
+        // Animations
         Vector3 velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         float zVelocity = Vector3.Dot(velocity.normalized, transform.forward);
         float xVelocity = Vector3.Dot(velocity.normalized, transform.right);
 
         animator.SetFloat("zVelocity", zVelocity);
-        animator.SetFloat("xVelocity", xVelocity);
+        animator.SetFloat("xVelocity", xVelocity);       
 
         _movementSM.HandleInput();
 
@@ -65,41 +68,48 @@ public class MovementController : MonoBehaviour
         _movementSM.PhysicsUpdate();
     }
 
-    public bool IsGrounded() {
+    public bool IsGrounded()
+    {
         return Physics.Raycast(transform.position, -Vector3.up, MAX_GROUND_DIST);
     }
 
-    public int GetWallRunFactor(out RaycastHit hit) {
+    public int GetWallRunFactor(out RaycastHit hit)
+    {
         RaycastHit left, right;
         bool rightWall = Physics.Raycast(transform.position, transform.right, out right, WALL_DIST);
         bool leftWall = Physics.Raycast(transform.position, -transform.right, out left, WALL_DIST);
 
-        if(leftWall && rightWall) {
+        if (leftWall && rightWall)
+        {
             hit = new RaycastHit();
             return 0;
         }
 
-        if(leftWall) {
+        if (leftWall)
+        {
             hit = left;
             return -1;
         }
-        
+
         hit = right;
         return 1;
     }
-    
-    public int GetWallRunFactor() {
+
+    public int GetWallRunFactor()
+    {
         bool rightWall = Physics.Raycast(transform.position, transform.right, WALL_DIST);
         bool leftWall = Physics.Raycast(transform.position, -transform.right, WALL_DIST);
 
-        if(leftWall && rightWall) {
+        if (leftWall && rightWall)
+        {
             return 0;
         }
 
-        if(leftWall) {
+        if (leftWall)
+        {
             return -1;
         }
-        
+
         return 1;
     }
 
@@ -107,7 +117,7 @@ public class MovementController : MonoBehaviour
     {
         bool rightWall = Physics.Raycast(transform.position, transform.right, WALL_DIST);
         bool leftWall = Physics.Raycast(transform.position, -transform.right, WALL_DIST);
-        
+
         return !Physics.Raycast(transform.position, Vector3.down, MIN_WALL_RUN_HEIGHT) && (leftWall || rightWall);
     }
 
@@ -132,8 +142,10 @@ public class MovementController : MonoBehaviour
         rb.velocity = velocity;
     }
 
-    public void Tilt(float target, bool async = false) {
-        if(async) {
+    public void Tilt(float target, bool async = false)
+    {
+        if (async)
+        {
             StartCoroutine(_camController.AsyncTilt(target));
             return;
         }
@@ -141,5 +153,7 @@ public class MovementController : MonoBehaviour
         _camController.Tilt(target);
     }
 
-
+    public void Step() {
+        _eventEmitter.Play();
+    }
 }
