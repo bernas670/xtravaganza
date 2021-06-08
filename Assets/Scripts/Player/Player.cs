@@ -21,7 +21,6 @@ public class Player : Character
     }
 
     void Update() {
-        // FIXME: this does not seem to be the best way to update the GUI, 
         // since it is called every frame instead of only when the event occurs
         healthBar.SetHealth(_healthStat.getHealth());
     }    
