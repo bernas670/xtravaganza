@@ -87,6 +87,21 @@ public class MovementController : MonoBehaviour
         hit = right;
         return 1;
     }
+    
+    public int GetWallRunFactor() {
+        bool rightWall = Physics.Raycast(transform.position, transform.right, WALL_DIST);
+        bool leftWall = Physics.Raycast(transform.position, -transform.right, WALL_DIST);
+
+        if(leftWall && rightWall) {
+            return 0;
+        }
+
+        if(leftWall) {
+            return -1;
+        }
+        
+        return 1;
+    }
 
     public bool CanWallRun()
     {

@@ -185,7 +185,6 @@ public class WeaponSwitchController : MonoBehaviour
      //Update weapon references
     void updateRigWeaponReference(){
         Debug.Log(currentWeapon);
-        Debug.Log(currentWeapon.gameObject.transform.Find("ref_right_hand"));
         _rightHand.GetComponent<TwoBoneIKConstraint>().data.target = currentWeapon.gameObject.transform.Find("ref_right_hand");
         _leftHand.GetComponent<TwoBoneIKConstraint>().data.target = currentWeapon.gameObject.transform.Find("ref_left_hand");
         _rightHand.GetComponent<TwoBoneIKConstraint>().weight = 1;

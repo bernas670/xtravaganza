@@ -18,6 +18,8 @@ public class WallRunningState : MovementState
         _transform = _controller.transform;
         _rb = _controller.rb;
         _rb.useGravity = false;
+        _controller.animator.SetBool("isWallRunning", true);
+        _controller.animator.SetInteger("wallRunningFactor", _controller.GetWallRunFactor());
     }
 
     public override void HandleInput()
@@ -71,5 +73,6 @@ public class WallRunningState : MovementState
         base.Exit();
         _rb.useGravity = true;
         _controller.Tilt(0, true);
+        _controller.animator.SetBool("isWallRunning", false);
     }
 }
