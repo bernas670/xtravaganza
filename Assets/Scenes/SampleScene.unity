@@ -933,6 +933,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113411, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: isEquipped
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8624699325493113412, guid: 8db53459e0764364094e558d9eb16e4c,
         type: 3}
       propertyPath: m_Name
@@ -8134,6 +8139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 963194227}
+  rotationPivot: {fileID: 1853650359}
   sensitivity: 0.55
   minHeadRotation: -45
   maxHeadRotation: 45
@@ -8263,7 +8269,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859380758}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5a3402ff495ffed838c5df3329cd4c2f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4

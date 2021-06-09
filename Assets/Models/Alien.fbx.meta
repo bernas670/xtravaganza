@@ -713,7 +713,7 @@ ModelImporter:
       name: Wall Run Left
       takeName: Armature|Wall Run Left
       internalID: 0
-      firstFrame: 0
+      firstFrame: 6
       lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
@@ -742,15 +742,15 @@ ModelImporter:
       name: Wall Run Right
       takeName: Armature|Wall Run Right
       internalID: 0
-      firstFrame: 0
-      lastFrame: 28
+      firstFrame: 6
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

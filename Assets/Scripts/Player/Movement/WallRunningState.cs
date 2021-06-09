@@ -8,7 +8,7 @@ public class WallRunningState : MovementState
 
     private float _wallRunGravity = -Physics.gravity.y * 0.3f;
     private float _wallRunJumpForce = 6f;
-    private float _wallRunCamTilt = 20;
+    private float _wallRunCamTilt = 25;
 
     public WallRunningState(MovementController controller, StateMachine stateMachine) : base(controller, stateMachine) { }
 
