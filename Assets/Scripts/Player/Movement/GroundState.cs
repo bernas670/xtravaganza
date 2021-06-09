@@ -6,7 +6,7 @@ public class GroundState : MovementState
     private const float GROUND_MAX_SPEED = 15f;
     private const float GROUND_ACCEL = 10f * GROUND_MAX_SPEED;
     private const float GROUND_FRICTION = 3f * GROUND_MAX_SPEED;
-    private const float JUMP_HEIGHT = 2f;
+    private const float JUMP_HEIGHT = 4f;
 
     private bool _wishJump = false;
 
