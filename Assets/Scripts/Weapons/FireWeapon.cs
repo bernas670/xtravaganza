@@ -59,16 +59,13 @@ public abstract class FireWeapon : Weapon
         return _ammo.getReloadValue();
     }
 
+
+// TODO: refactor
     public override void shoot(Shooter controller)
     {
         if (Time.time >= _timeToFire)
         {
-            //if (controller.name == "Player")
-            //{
             muzzleFlash.Play();
-            //}
-
-            //  This should be outside the if statement. But since we only have 1 weapon enemy is decreasing the ammo aswell;
             decreaseAmmo();
             setTimeToFire(Time.time + 1f / _fireRate);
 
@@ -89,6 +86,14 @@ public abstract class FireWeapon : Weapon
 
                     GameObject temObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     temObj.transform.parent = enemy.transform;
+                    Destroy(temObj, 2f);
+                }
+                else if (hit.transform.tag == "Scientist"){
+
+                    Scientist scientist = hit.transform.gameObject.GetComponent<Scientist>();
+                    scientist.TakeDamage(_damage);
+                    GameObject temObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    temObj.transform.parent = scientist.transform;
                     Destroy(temObj, 2f);
                 }
                 else
