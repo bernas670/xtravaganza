@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{57769253-f846-4423-9100-c7270199c7a5}">
+		<property name="name">
+			<value>Gun1_loopcondition</value>
+		</property>
+		<relationship name="folder">
+			<destination>{513e4ff6-b3e7-4a68-9b34-4ae1919445b7}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{19ba4ff5-08f1-4945-8cb6-4bb4eecd42a9}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{19ba4ff5-08f1-4945-8cb6-4bb4eecd42a9}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -127,7 +127,7 @@
 			<destination>{69bf78bb-2181-43d5-8e81-09f51b93688b}</destination>
 		</relationship>
 		<relationship name="triggerConditions">
-			<destination>{bf3a63ea-2a83-46f9-a110-9a787214b24a}</destination>
+			<destination>{bd674e6d-c178-4ba9-b8d5-6d79b0f4ebe6}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{10c4d113-ba65-4535-86f8-2df324aae737}">
@@ -144,7 +144,17 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{c580aedd-82de-4238-974e-fe439298f32b}" />
-	<object class="EventCondition" id="{bf3a63ea-2a83-46f9-a110-9a787214b24a}" />
+	<object class="ParameterCondition" id="{bd674e6d-c178-4ba9-b8d5-6d79b0f4ebe6}">
+		<property name="minimum">
+			<value>0</value>
+		</property>
+		<property name="maximum">
+			<value>1</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{19ba4ff5-08f1-4945-8cb6-4bb4eecd42a9}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{5cfdf4f0-80b6-452a-ba08-9e7313d8a433}" />
 	<object class="SpatialiserEffect" id="{cd926448-cdbd-40e8-8f62-10b53ce7e2be}" />
 	<object class="MixerBusFader" id="{413f49bd-bae0-4d29-8f05-f30c6ce8b906}" />
