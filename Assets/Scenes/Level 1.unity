@@ -505,13 +505,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5123762506294369934, guid: 81f8acfaa26509144a85d6503013fd14,
         type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5123762506294369934, guid: 81f8acfaa26509144a85d6503013fd14,
+        type: 3}
       propertyPath: orthographic
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5123762506294369934, guid: 81f8acfaa26509144a85d6503013fd14,
         type: 3}
       propertyPath: field of view
-      value: 62.6
+      value: 51.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5123762506294369934, guid: 81f8acfaa26509144a85d6503013fd14,
+        type: 3}
+      propertyPath: orthographic size
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7073457848567457117, guid: 81f8acfaa26509144a85d6503013fd14,
         type: 3}
