@@ -1,6 +1,7 @@
 ﻿public class HealthStat
 {
     protected int _health;
+    
 
     public HealthStat(int init)
     {
