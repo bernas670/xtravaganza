@@ -184,7 +184,7 @@
 			<value>2500</value>
 		</property>
 		<property name="spawnRate">
-			<value>10</value>
+			<value>30</value>
 		</property>
 		<property name="maximumScatterDistance">
 			<value>25</value>
@@ -193,7 +193,7 @@
 			<value>-6</value>
 		</property>
 		<property name="pitchRandomization">
-			<value>1</value>
+			<value>5</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{f7f80429-ffd2-4e3d-aa73-b22234b8cd78}</destination>
