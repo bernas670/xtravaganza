@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class Player : Character
 {
@@ -10,6 +11,8 @@ public class Player : Character
 
     private int totalScientists;
     private int pointsToEvil;
+    public GameObject gotHitScreen;
+
 
 
     void Awake()
@@ -27,6 +30,13 @@ public class Player : Character
     void Update() {
         // since it is called every frame instead of only when the event occurs
         healthBar.SetHealth(_healthStat.getHealth());
+        if(gotHitScreen.GetComponent<Image>().color.a > 0){
+            var color = gotHitScreen.GetComponent<Image>().color;
+            color.a -=0.05f;
+            gotHitScreen.GetComponent<Image>().color = color;
+        }else {
+            gotHitScreen.SetActive(false);
+        }
     }    
  
     void OnCollisionEnter(Collision collision) {
@@ -50,11 +60,20 @@ public class Player : Character
     public override void TakeDamage(int damage){
         if(!_isPlayerInvincible){
             _healthStat.TakeDamage(damage);
+            gotHitFeedback();
         }
 
         if(_healthStat.isDead()){
             this.Die();
         }
+    }
+
+    private void gotHitFeedback(){
+        gotHitScreen.SetActive(true);
+        var color = gotHitScreen.GetComponent<Image>().color;
+        color.a = 0.3f;
+        gotHitScreen.GetComponent<Image>().color = color;
+
     }
 
     public void becomeEvil(){
