@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations.Rigging;
 
 // This will contain the State Machine for the Enemy actions.
 
@@ -19,8 +20,11 @@ public class EnemyController : Shooter
     private bool _isEvil;
     private bool _isDead = false;
 
-    void Awake()
-    {
+    private GameObject _rightHand;
+    private GameObject _leftHand;
+
+
+    void Awake(){
         _isEvil = Random.Range(0, 2) == 0;
         setPoV(this.transform);
 
@@ -32,6 +36,8 @@ public class EnemyController : Shooter
         _player = GameObject.Find("Player"); // Make this a singleton + game manager
         _target = _player.transform; /* Make this a singleton + game manager*/
         _agent = GetComponent<NavMeshAgent>();
+        _rightHand = GameObject.Find("RightHandIK");
+        _leftHand = GameObject.Find("LeftHandIK");
     }
 
     void Update()
@@ -51,6 +57,7 @@ public class EnemyController : Shooter
         float distance = Vector3.Distance(_target.position, transform.position);
 
         if (_isDead) {
+            clearRigWeaponReference();
             DyingAction dying = new DyingAction();
             dying.Act(this);
         }
@@ -63,10 +70,7 @@ public class EnemyController : Shooter
             //  ------------TODO----------------------------
             //Use raycast, if player is in sight, chase him.
 
-        }
-        else
-        {
-            //if(!_isEvil) break;
+       } else { 
             ChaseAction chase = new ChaseAction();
             chase.Act(this);
             // Choose the attack method
@@ -125,5 +129,14 @@ public class EnemyController : Shooter
         dropWeapon();
         _isDead = true;
         _animator.SetTrigger("isDead");
+    }
+
+        // detach the weapon from player;
+    void clearRigWeaponReference()
+    {
+        _rightHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
+        _leftHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
+        _rightHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
+        _leftHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
     }
 }
