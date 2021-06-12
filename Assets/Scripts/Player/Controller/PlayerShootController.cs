@@ -37,7 +37,7 @@ public class PlayerShootController : Shooter
         }
         else if (Input.GetButton("Fire2"))
         {
-            meleeWeapon.shoot(this);
+            //meleeWeapon.shoot(this);
         }
         else if (Input.GetKey(KeyCode.R))
         {

@@ -15,10 +15,8 @@ public class EnemyController : Shooter
     [SerializeField] List<Transform> _wayPointList;
     [HideInInspector] public int nextWayPoint;
 
-    private bool _isEvil;
 
     void Awake(){
-        _isEvil = Random.Range(0,2) == 0;
         setPoV(this.transform);
     }
 
@@ -47,7 +45,6 @@ public class EnemyController : Shooter
             //Use raycast, if player is in sight, chase him.
 
        } else { 
-            //if(!_isEvil) break;
             ChaseAction chase = new ChaseAction();
             chase.Act(this);
             // Choose the attack method

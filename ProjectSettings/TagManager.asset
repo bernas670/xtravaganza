@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - FireWeapon
+  - LockedDoor
   - Scientist
   layers:
   - Default
