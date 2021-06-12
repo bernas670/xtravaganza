@@ -1386,6 +1386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 245420820}
   - component: {fileID: 245420822}
+  - component: {fileID: 245420823}
   - component: {fileID: 245420821}
   m_Layer: 12
   m_Name: Alien
@@ -1455,6 +1456,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &245420823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245420819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72e57339514e61f44ab5f3d6ea7ae097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1848419418}
 --- !u!1 &262023830
 GameObject:
   m_ObjectHideFlags: 0
@@ -6574,7 +6588,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4493585093827132993, guid: cafdb99443c7f3248afbd591af503b4b, type: 3}
+  m_Mesh: {fileID: 4493585093827132993, guid: 83516bb3e72591c478dc90407065ccda, type: 3}
   m_Bones:
   - {fileID: 1690695563}
   - {fileID: 435060847}
@@ -7583,6 +7597,7 @@ MonoBehaviour:
   meleeWeapon: {fileID: 262023831}
   cam: {fileID: 963194227}
   weaponUI: {fileID: 420439596}
+  animator: {fileID: 245420822}
   pickUpRange: 5
 --- !u!114 &1848419419
 MonoBehaviour:
