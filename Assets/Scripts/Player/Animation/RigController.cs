@@ -8,6 +8,7 @@ public class RigController : MonoBehaviour
     private RigBuilder _rigBuilder;
     private TwoBoneIKConstraint _rightHand;
     private TwoBoneIKConstraint _leftHand;
+    private Rig _aimRig;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class RigController : MonoBehaviour
         _rigBuilder = alien.GetComponent<RigBuilder>();
         _rightHand = rigLayer.Find("RightHandIK").GetComponent<TwoBoneIKConstraint>();
         _leftHand = rigLayer.Find("LeftHandIK").GetComponent<TwoBoneIKConstraint>();
+        _aimRig = alien.Find("AimRig").GetComponent<Rig>();
     }
 
     //Update weapon references
@@ -46,6 +48,10 @@ public class RigController : MonoBehaviour
         else if (rig == "leftHand" && _leftHand.data.target != null)
         {
             _leftHand.weight = weight;
+        }
+        else if (rig == "aimRig")
+        {
+            _aimRig.weight = weight;
         }
     }
 }
