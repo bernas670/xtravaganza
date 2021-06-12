@@ -10,8 +10,8 @@ public class MovementController : MonoBehaviour
     public TextMeshProUGUI horizontalSpeedText, verticalSpeedText;
 
     private CameraController _camController;
-    private float WALL_DIST = 1.6f;
-    private float MAX_GROUND_DIST = 1.1f;
+    private float WALL_DIST = 3.2f;
+    private float MAX_GROUND_DIST = 2.2f;
     private float MIN_WALL_RUN_HEIGHT = 1.5f;
     private Vector3 _wishDir = Vector3.zero;
 
