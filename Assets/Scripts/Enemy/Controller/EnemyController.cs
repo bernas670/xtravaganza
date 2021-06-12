@@ -65,8 +65,8 @@ public class EnemyController : Shooter
         {
             //patrol;   
             //Change the patrolling points created in Scene;
-            //PatrolAction patrol = new PatrolAction();
-            //patrol.Act(this);
+            PatrolAction patrol = new PatrolAction();
+            patrol.Act(this);
             //  ------------TODO----------------------------
             //Use raycast, if player is in sight, chase him.
 
