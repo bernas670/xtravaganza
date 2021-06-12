@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -11,12 +10,17 @@ public class WeaponSwitchController : MonoBehaviour
     public Player player;
     public List<GameObject> weapons = new List<GameObject>();
     public GameObject currentWeapon;
+    [FMODUnity.EventRef]
+    public string pickEvent;
+    public float pickSoundInterval = 0.5f;
 
     private Animator _animator;
     private PlayerShootController _shooter;
     private Transform _cameraTransform;
     private int maxWeapons = 4;
+    private float lastPickSoundTime = 0;
 
+    // Check if needed
     private Transform _player_ref_RH;
     private Transform _player_ref_LH;
 
@@ -69,8 +73,12 @@ public class WeaponSwitchController : MonoBehaviour
 
         // If selected weapon changed, call selectweapon method to perform the weapon change
         if (previousWeapon != selectedWeapon)
+        {
             SelectWeapon();
-
+            if (Time.time - lastPickSoundTime >= pickSoundInterval) {
+                PlayPickSound();
+            }
+        }
         else if (Input.GetKeyDown(KeyCode.E))
         {
             RaycastHit hit;
@@ -87,6 +95,12 @@ public class WeaponSwitchController : MonoBehaviour
                 }
             }
         }
+    }
+
+    void PlayPickSound()
+    {
+        lastPickSoundTime = Time.time;
+        FMODUnity.RuntimeManager.PlayOneShotAttached(pickEvent, _cameraTransform.gameObject);
     }
 
     void SelectWeapon()
@@ -142,6 +156,7 @@ public class WeaponSwitchController : MonoBehaviour
 
         //Enable script
         coll.gameObject.GetComponent<FireWeapon>().enabled = true;
+        PlayPickSound();
     }
 
     void DropWeapon()
@@ -187,12 +202,12 @@ public class WeaponSwitchController : MonoBehaviour
             _animator.SetBool("has" + newFireWeapon.getType(), true);
             currentWeapon = weapons[0];
             currentWeapon.SetActive(true);
-            updateRigWeaponReference();
+            //updateRigWeaponReference();
         }
         else
         {
             currentWeapon = null;
-            clearRigWeaponReference();
+            //clearRigWeaponReference();
         }
     }
 

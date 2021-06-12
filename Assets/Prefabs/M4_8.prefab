@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 2017303569255703696}
   - component: {fileID: 4331897568753730261}
   - component: {fileID: 2716678851220738945}
-  - component: {fileID: 7466061764614001423}
+  - component: {fileID: 3749711158785976468}
   m_Layer: 11
   m_Name: M4_8
   m_TagString: FireWeapon
@@ -354,9 +354,10 @@ MonoBehaviour:
   muzzleFlash: {fileID: 5365373574556648083}
   impactEffect: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980,
     type: 3}
+  dropEmitter: {fileID: 3749711158785976468}
   inUse: 0
   isEquipped: 0
---- !u!114 &7466061764614001423
+--- !u!114 &3749711158785976468
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,9 +366,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 9191724860870608772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48948dfe9d76b07488dacd46a7955fa1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Johannes/WeaponDrop
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &9191724860870608774
 GameObject:
   m_ObjectHideFlags: 0

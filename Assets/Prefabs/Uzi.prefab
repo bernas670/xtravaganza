@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8311741328867004610}
   - component: {fileID: 1532602676889507546}
   - component: {fileID: 798373221939579720}
-  - component: {fileID: 1607430678032449189}
+  - component: {fileID: 840972776713415870}
   m_Layer: 0
   m_Name: Uzi
   m_TagString: Untagged
@@ -135,9 +135,10 @@ MonoBehaviour:
   muzzleFlash: {fileID: 6900961511239499691}
   impactEffect: {fileID: 1000011190285628, guid: beb3acff7ab73944fb8f470f24d74ed3,
     type: 3}
+  dropEmitter: {fileID: 840972776713415870}
   inUse: 0
   isEquipped: 0
---- !u!114 &1607430678032449189
+--- !u!114 &840972776713415870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,9 +147,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2824039230446170400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48948dfe9d76b07488dacd46a7955fa1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Johannes/WeaponDrop
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &2824039230446170402
 GameObject:
   m_ObjectHideFlags: 0

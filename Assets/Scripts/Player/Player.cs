@@ -5,15 +5,19 @@ using TMPro;
 public class Player : Character
 {
     public HealthBar healthBar;
-
     private int _lavaLayer;
     private bool _isPlayerInvincible = false;
+
+    private int totalScientists;
+    private int pointsToEvil;
 
 
     void Awake()
     {
         _healthStat = new HealthStat(100);
         _lavaLayer = LayerMask.NameToLayer("Lava");
+        totalScientists = GameObject.FindGameObjectsWithTag("Scientist").Length;
+        pointsToEvil = totalScientists/2; // 50%
     }
 
     private void Start() {
@@ -21,7 +25,6 @@ public class Player : Character
     }
 
     void Update() {
-        // FIXME: this does not seem to be the best way to update the GUI, 
         // since it is called every frame instead of only when the event occurs
         healthBar.SetHealth(_healthStat.getHealth());
     }    
@@ -52,5 +55,14 @@ public class Player : Character
         if(_healthStat.isDead()){
             this.Die();
         }
+    }
+
+    public void becomeEvil(){
+        pointsToEvil--;
+
+        if(pointsToEvil == 0) {
+            //muda de cor
+        }
+        Debug.Log("points to evil:" + pointsToEvil);
     }
 }
