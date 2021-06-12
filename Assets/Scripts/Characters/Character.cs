@@ -3,6 +3,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     protected HealthStat _healthStat;
+    protected bool _isDead;
 
     public HealthStat getHealth()
     {
@@ -25,5 +26,15 @@ public class Character : MonoBehaviour
     }
 
     public virtual void Die() { }
+
+    public void setIsDead(){
+        _isDead = true;
+    }
+
+    public bool isDead(){
+        return _isDead;
+    }
+
+
 
 }
