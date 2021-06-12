@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Pistol : FireWeapon {
     public void Awake(){
         _damage = 20;
@@ -13,5 +9,9 @@ public class Pistol : FireWeapon {
 
         setAmmoValue(30);
         setClipValue(_initialAmmo);
+    }
+
+    public override string getType() {
+        return "Pistol";
     }
 }

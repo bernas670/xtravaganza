@@ -5,14 +5,17 @@ using UnityEngine.Animations.Rigging;
 
 public class WeaponSwitchController : MonoBehaviour
 {
+    public static bool slotFull;
+
     public int selectedWeapon = 0;
     public Player player;
+    public List<GameObject> weapons = new List<GameObject>();
+    public GameObject currentWeapon;
+
+    private Animator _animator;
     private PlayerShootController _shooter;
     private Transform _cameraTransform;
-    public List<GameObject> weapons = new List<GameObject>();
     private int maxWeapons = 4;
-    public GameObject currentWeapon;
-    public static bool slotFull;
 
     private Transform _player_ref_RH;
     private Transform _player_ref_LH;
@@ -24,26 +27,27 @@ public class WeaponSwitchController : MonoBehaviour
     void Start()
     {
         _shooter = player.gameObject.GetComponent<PlayerShootController>();
-        
+        _animator = player.gameObject.GetComponentsInChildren<Animator>()[0];
+
         weapons.Add(_shooter.getFireWeapon().gameObject);
         currentWeapon = _shooter.getFireWeapon().gameObject;
 
         _cameraTransform = _shooter.getPoV();
-        
+
         _player_ref_RH = GameObject.Find("Alien").transform.Find("player_ref_right_hand");
         _player_ref_LH = GameObject.Find("Alien").transform.Find("player_ref_left_hand");
         _rigBuilder = GameObject.Find("Alien").GetComponent<RigBuilder>();
 
         _rightHand = GameObject.Find("RightHandIK");
         _leftHand = GameObject.Find("LeftHandIK");
-      
+
         SelectWeapon();
     }
 
     void Update()
     {
         int previousWeapon = selectedWeapon;
-        
+
         if (Input.GetAxis("Mouse ScrollWheel") > 0f && weapons.Count > 1)
         {
             if (selectedWeapon >= transform.childCount - 1)
@@ -58,8 +62,8 @@ public class WeaponSwitchController : MonoBehaviour
             else
                 selectedWeapon--;
         }
-        else if (Input.GetKeyDown(KeyCode.Q) && currentWeapon) {
-        
+        else if (Input.GetKeyDown(KeyCode.Q) && currentWeapon)
+        {
             DropWeapon();
         }
 
@@ -67,15 +71,17 @@ public class WeaponSwitchController : MonoBehaviour
         if (previousWeapon != selectedWeapon)
             SelectWeapon();
 
-        else if(Input.GetKeyDown(KeyCode.E)){
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
             RaycastHit hit;
             Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
             if (Physics.Raycast(ray, out hit))
             {
-                if(hit.transform.CompareTag("FireWeapon")) {
+                if (hit.transform.CompareTag("FireWeapon"))
+                {
                     FireWeapon weapon = hit.transform.gameObject.GetComponent<FireWeapon>();
                     if (Input.GetKeyDown(KeyCode.E) && weapons.Count < maxWeapons && !weapon.isInUse())
-                    {            
+                    {
                         PickWeapon(_cameraTransform.GetChild(0), hit.collider);
                     }
                 }
@@ -86,6 +92,7 @@ public class WeaponSwitchController : MonoBehaviour
     void SelectWeapon()
     {
         int i = 0;
+        _animator.SetBool("has" + currentWeapon.GetComponent<FireWeapon>().getType(), false);
         foreach (GameObject weapon in weapons)
         {
             // if the weapon is selected set true, if it's not set false
@@ -95,6 +102,7 @@ public class WeaponSwitchController : MonoBehaviour
                 FireWeapon fWeapon = weapon.GetComponent<FireWeapon>();
                 _shooter.setFireWeapon(fWeapon);
                 currentWeapon = weapon;
+                _animator.SetBool("has"+fWeapon.getType(), true);
 
                 updateRigWeaponReference();
             }
@@ -103,10 +111,12 @@ public class WeaponSwitchController : MonoBehaviour
     }
 
     void PickWeapon(Transform container, Collider coll)
-    {   
-    
-        if(weapons.Count == 0 ){
-            _shooter.setFireWeapon(coll.gameObject.GetComponent<FireWeapon>());
+    {
+        if (weapons.Count == 0)
+        {
+            FireWeapon fireWeapon = coll.gameObject.GetComponent<FireWeapon>();
+            _shooter.setFireWeapon(fireWeapon);
+            _animator.SetBool("has" + fireWeapon.getType(), true);
             currentWeapon = coll.gameObject;
             updateRigWeaponReference();
         }
@@ -134,10 +144,10 @@ public class WeaponSwitchController : MonoBehaviour
         coll.gameObject.GetComponent<FireWeapon>().enabled = true;
     }
 
-    void DropWeapon(){
-      
-     
-        currentWeapon.GetComponent<FireWeapon>().setInUse(false);
+    void DropWeapon()
+    {
+        FireWeapon fireWeapon = currentWeapon.GetComponent<FireWeapon>();
+        fireWeapon.setInUse(false);
 
         slotFull = false;
 
@@ -146,7 +156,7 @@ public class WeaponSwitchController : MonoBehaviour
 
         Rigidbody rb = currentWeapon.GetComponent<Rigidbody>();
         BoxCollider coll = currentWeapon.GetComponent<BoxCollider>();
- 
+
         //Make Rigidbody not kinematic and BoxCollider normal
         rb.isKinematic = false;
         coll.isTrigger = false;
@@ -157,34 +167,38 @@ public class WeaponSwitchController : MonoBehaviour
         //AddForce
         rb.AddForce(_cameraTransform.forward * 2, ForceMode.Impulse);
         rb.AddForce(_cameraTransform.up * 2, ForceMode.Impulse);
-        
+
         //Add random rotation
         float random = Random.Range(-1f, 1f);
         rb.AddTorque(new Vector3(random, random, random) * 10);
 
         //Disable script
-        currentWeapon.GetComponent<FireWeapon>().enabled = false;
+        fireWeapon.enabled = false;
+        _animator.SetBool("has" + fireWeapon.getType(), false);
 
         _shooter.setFireWeapon(null);
 
-        weapons.Remove(currentWeapon);
+        weapons.Remove(currentWeapon);        
 
-        if(weapons.Count > 0){
-            _shooter.setFireWeapon(weapons[0].GetComponent<FireWeapon>());
+        if (weapons.Count > 0)
+        {
+            FireWeapon newFireWeapon = weapons[0].GetComponent<FireWeapon>();
+            _shooter.setFireWeapon(newFireWeapon);
+            _animator.SetBool("has" + newFireWeapon.getType(), true);
             currentWeapon = weapons[0];
             currentWeapon.SetActive(true);
             updateRigWeaponReference();
-        }else{
+        }
+        else
+        {
             currentWeapon = null;
             clearRigWeaponReference();
         }
-        
-            
     }
 
-     //Update weapon references
-    void updateRigWeaponReference(){
-        Debug.Log(currentWeapon);
+    //Update weapon references
+    void updateRigWeaponReference()
+    {
         _rightHand.GetComponent<TwoBoneIKConstraint>().data.target = currentWeapon.gameObject.transform.Find("ref_right_hand");
         _leftHand.GetComponent<TwoBoneIKConstraint>().data.target = currentWeapon.gameObject.transform.Find("ref_left_hand");
         _rightHand.GetComponent<TwoBoneIKConstraint>().weight = 1;
@@ -193,7 +207,8 @@ public class WeaponSwitchController : MonoBehaviour
     }
 
     // detach the weapon from player;
-    void clearRigWeaponReference(){
+    void clearRigWeaponReference()
+    {
         _rightHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
         _leftHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
         _rightHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
