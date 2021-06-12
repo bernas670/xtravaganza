@@ -23,7 +23,7 @@ public class WeaponSwitchController : MonoBehaviour
     void Start()
     {
         _shooter = player.gameObject.GetComponent<PlayerShootController>();
-        _rig = player.gameObject.GetComponent<RigController>();
+        _rig = player.gameObject.GetComponentsInChildren<RigController>()[0];
         _animator = player.gameObject.GetComponentsInChildren<Animator>()[0];
 
         weapons.Add(_shooter.getFireWeapon().gameObject);

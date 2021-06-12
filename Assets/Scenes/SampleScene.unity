@@ -1388,6 +1388,7 @@ GameObject:
   - component: {fileID: 245420822}
   - component: {fileID: 245420823}
   - component: {fileID: 245420824}
+  - component: {fileID: 245420825}
   - component: {fileID: 245420821}
   m_Layer: 12
   m_Name: Alien
@@ -1480,6 +1481,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 606134e006ce4a74dab463d63b539371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &245420825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245420819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8b20ea8d76ecf4d9c835e9ab3c80eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &262023830
@@ -6312,7 +6325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478520041}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.599, y: -0.33, z: 0.6}
+  m_LocalPosition: {x: 0.599, y: -0.33, z: 0.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 164911791}
@@ -7490,7 +7503,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833853224}
   m_LocalRotation: {x: -0.7071068, y: -6.619619e-10, z: -3.7293638e-10, w: 0.7071067}
-  m_LocalPosition: {x: 0.146, y: 2.522, z: 0.247}
+  m_LocalPosition: {x: -4.440892e-16, y: 2.8942962, z: 0.00000045514952}
   m_LocalScale: {x: 35.31673, y: 35.31673, z: 35.316734}
   m_Children: []
   m_Father: {fileID: 245420820}
@@ -7624,7 +7637,6 @@ GameObject:
   - component: {fileID: 1848419415}
   - component: {fileID: 1848419416}
   - component: {fileID: 1848419418}
-  - component: {fileID: 1848419420}
   - component: {fileID: 1848419419}
   m_Layer: 0
   m_Name: Player
@@ -7755,18 +7767,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 6.4
---- !u!114 &1848419420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848419412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff8b20ea8d76ecf4d9c835e9ab3c80eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1853650358
 GameObject:
   m_ObjectHideFlags: 0

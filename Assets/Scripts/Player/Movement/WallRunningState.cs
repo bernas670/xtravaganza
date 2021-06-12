@@ -17,7 +17,7 @@ public class WallRunningState : MovementState
     {
         base.Enter();
         _transform = _controller.transform;
-        _rig = _controller.GetComponent<RigController>();
+        _rig = _controller.GetComponentsInChildren<RigController>()[0];
         _rb = _controller.rb;
         _rb.useGravity = false;
         _controller.animator.SetBool("isWallRunning", true);

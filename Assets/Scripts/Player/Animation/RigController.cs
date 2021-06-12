@@ -12,12 +12,11 @@ public class RigController : MonoBehaviour
 
     void Start()
     {
-        Transform alien = transform.Find("Alien");
-        Transform rigLayer = alien.Find("RigLayer");
-        _rigBuilder = alien.GetComponent<RigBuilder>();
+        Transform rigLayer = transform.Find("RigLayer");
+        _rigBuilder = GetComponent<RigBuilder>();
         _rightHand = rigLayer.Find("RightHandIK").GetComponent<TwoBoneIKConstraint>();
         _leftHand = rigLayer.Find("LeftHandIK").GetComponent<TwoBoneIKConstraint>();
-        _aimRig = alien.Find("AimRig").GetComponent<Rig>();
+        _aimRig = transform.Find("AimRig").GetComponent<Rig>();
     }
 
     //Update weapon references

@@ -25,7 +25,7 @@ public class Player : Character
 
         _mainCam = Camera.main;
         _deathCam = transform.Find("DeathCamera").GetComponent<Camera>();
-        _rig = GetComponent<RigController>();
+        _rig = GetComponentsInChildren<RigController>()[0];
         _gunContainer = transform.Find("Main Camera").Find("GunContainer").gameObject;
     }
 
