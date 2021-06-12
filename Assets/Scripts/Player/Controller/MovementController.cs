@@ -4,13 +4,12 @@ using TMPro;
 public class MovementController : MonoBehaviour
 {
     public Animator animator;
-    private CameraController _camController;
     [HideInInspector]
     public Rigidbody rb;
-
     // temporary for debug purposes
     public TextMeshProUGUI horizontalSpeedText, verticalSpeedText;
 
+    private CameraController _camController;
     private float WALL_DIST = 1.6f;
     private float MAX_GROUND_DIST = 1.1f;
     private float MIN_WALL_RUN_HEIGHT = 1.5f;
@@ -38,10 +37,6 @@ public class MovementController : MonoBehaviour
         _wishDir.z = Input.GetAxis("Vertical");
         _wishDir = transform.TransformDirection(_wishDir);
         _wishDir.Normalize();
-
-        //Debug.Log("Wish dir X = " + zCoef);
-        //Debug.Log("Wish dir Z = " + xCoef);
-        //Debug.Log((_hVel * xCoef) * 100 / 15);
 
         Vector3 velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         float zVelocity = Vector3.Dot(velocity.normalized, transform.forward);

@@ -3,6 +3,7 @@
 public class WallRunningState : MovementState
 {
     private Transform _transform;
+    private RigController _rig;
     private Rigidbody _rb;
     private bool _wishJump = false;
 
@@ -16,10 +17,12 @@ public class WallRunningState : MovementState
     {
         base.Enter();
         _transform = _controller.transform;
+        _rig = _controller.GetComponent<RigController>();
         _rb = _controller.rb;
         _rb.useGravity = false;
         _controller.animator.SetBool("isWallRunning", true);
         _controller.animator.SetInteger("wallRunningFactor", _controller.GetWallRunFactor());
+        _rig.setRigWeight("leftHand", 0.1f);
     }
 
     public override void HandleInput()
@@ -74,5 +77,6 @@ public class WallRunningState : MovementState
         _rb.useGravity = true;
         _controller.Tilt(0, true);
         _controller.animator.SetBool("isWallRunning", false);
+        _rig.setRigWeight("leftHand", 1f);
     }
 }
