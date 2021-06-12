@@ -50,13 +50,15 @@ public class Player : Character
 
     public override void Die()
     {
-        Debug.Log("PLAYER DEAD");
         Destroy(_gunContainer);
         _animator.SetBool("isDead", true);        
         _mainCam.enabled = false;
         _deathCam.enabled = true;
         _rig.clearRigWeaponReference();
-        _rig.setRigWeight("aimRig", 0);        
+        _rig.setRigWeight("aimRig", 0);
+        GetComponent<MovementController>().enabled = false;
+        GetComponent<CameraController>().enabled = false;
+        GetComponent<PlayerShootController>().enabled = false;
     }
 
     public HealthStat getHealthStat()
