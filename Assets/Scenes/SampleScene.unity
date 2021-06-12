@@ -7496,6 +7496,7 @@ GameObject:
   - component: {fileID: 1848419415}
   - component: {fileID: 1848419416}
   - component: {fileID: 1848419418}
+  - component: {fileID: 1848419420}
   - component: {fileID: 1848419419}
   m_Layer: 0
   m_Name: Player
@@ -7624,6 +7625,18 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 6.4
+--- !u!114 &1848419420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848419412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8b20ea8d76ecf4d9c835e9ab3c80eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1853650358
 GameObject:
   m_ObjectHideFlags: 0

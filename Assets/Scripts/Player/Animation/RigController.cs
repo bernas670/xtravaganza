@@ -39,11 +39,11 @@ public class RigController : MonoBehaviour
 
     public void setRigWeight(string rig, float weight)
     {
-        if (rig == "righHand")
+        if (rig == "righHand" && _rightHand.data.target != null)
         {
             _rightHand.weight = weight;
         }
-        else if (rig == "leftHand")
+        else if (rig == "leftHand" && _leftHand.data.target != null)
         {
             _leftHand.weight = weight;
         }
