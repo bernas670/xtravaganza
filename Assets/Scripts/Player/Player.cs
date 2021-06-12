@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class Player : Character
 {
@@ -10,6 +12,9 @@ public class Player : Character
 
     private int totalScientists;
     private int pointsToEvil;
+
+    public Scene level1;
+    public Scene level2;
 
 
     void Awake()
@@ -27,6 +32,23 @@ public class Player : Character
     void Update() {
         // since it is called every frame instead of only when the event occurs
         healthBar.SetHealth(_healthStat.getHealth());
+
+
+        //test
+        if(Input.GetKeyDown(KeyCode.L)){
+        
+                string pathToScene = SceneUtility.GetScenePathByBuildIndex(1);
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(pathToScene);
+                Debug.Log("LgCoreReloader: Reloading to scene(0): " + sceneName);
+
+                SceneManager.LoadScene(sceneName);
+                gameObject.transform.position = new Vector3(-400, 322, 79);
+
+                //SceneManager.MoveGameObjectToScene(gameObject, sceneName);
+
+               // SceneManager.LoadScene(SceneManager.GetSceneByBuildIndex(1).name, LoadSceneMode.Single);     
+               // Debug.Log(SceneManager.GetSceneByBuildIndex(1).buildIndex);
+        }
     }    
  
     void OnCollisionEnter(Collision collision) {
