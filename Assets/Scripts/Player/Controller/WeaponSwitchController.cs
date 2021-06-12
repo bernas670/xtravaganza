@@ -202,12 +202,12 @@ public class WeaponSwitchController : MonoBehaviour
             _animator.SetBool("has" + newFireWeapon.getType(), true);
             currentWeapon = weapons[0];
             currentWeapon.SetActive(true);
-            //updateRigWeaponReference();
+            updateRigWeaponReference();
         }
         else
         {
             currentWeapon = null;
-            //clearRigWeaponReference();
+            clearRigWeaponReference();
         }
     }
 

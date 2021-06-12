@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 1851ea1590976a448a825237509e5c24,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6207,7 +6207,7 @@ MonoBehaviour:
   player: {fileID: 1848419417}
   weapons: []
   currentWeapon: {fileID: 0}
-  pickEvent: 
+  pickEvent: event:/Johannes/WeaponPickUp
   pickSoundInterval: 0.5
 --- !u!1 &1499433967
 GameObject:
@@ -7623,7 +7623,7 @@ MonoBehaviour:
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMaxDistance: 6.4
 --- !u!1 &1853650358
 GameObject:
   m_ObjectHideFlags: 0
