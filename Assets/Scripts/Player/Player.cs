@@ -111,7 +111,7 @@ public class Player : Character
 
     public void becomeEvil()
     {
-        pointsToEvil--;
+        _pointsToEvil--;
 
         if (_pointsToEvil <= 0)
         {
