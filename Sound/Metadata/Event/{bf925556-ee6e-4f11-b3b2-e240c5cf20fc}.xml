@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{bf925556-ee6e-4f11-b3b2-e240c5cf20fc}">
 		<property name="name">
-			<value>Guntest</value>
+			<value>Gun_8f</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -118,7 +118,7 @@
 			<value>0</value>
 		</property>
 		<property name="length">
-			<value>0.19952619252408132</value>
+			<value>0.125</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{7d331e8c-73a9-4570-beec-8addb6544f35}</destination>
