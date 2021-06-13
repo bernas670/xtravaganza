@@ -12,18 +12,31 @@ public class WeaponUI : MonoBehaviour
 
     public TextMeshProUGUI weaponsList;
 
-    public void SetAmmo(int clip, int ammo) {
+    public void SetAmmo(int clip, int ammo)
+    {
         ammoText.text = string.Format("{0} / {1}", clip, ammo);
     }
 
-    public void SetWeaponName(string name){
+    public void SetWeaponName(string name)
+    {
         weaponNameText.text = name;
     }
-   public void updateWeaponsList(List<GameObject> weapons){
-       weaponsList.text = "";
-       if(weapons.Count == 0) weaponsList.text = "Empty bag";
-        foreach (GameObject weapon in weapons){
-            weaponsList.text += weapon.name + "\n";
+
+    public void updateWeaponsList(List<GameObject> weapons, int currentIndex)
+    {
+        weaponsList.text = "";
+
+        if (weapons.Count == 0)
+        {
+            weaponsList.text = "Empty bag";
         }
-   }        
+
+        for (int i = weapons.Count - 1; i >= 0; i--)
+        {
+            int j = (i + currentIndex) % weapons.Count;
+            if (j == currentIndex) continue;
+
+            weaponsList.text += weapons[j].name + "\n";
+        }
+    }
 }
