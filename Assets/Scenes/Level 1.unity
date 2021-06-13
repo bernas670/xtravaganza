@@ -528,7 +528,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mirror
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8324375889157141284, guid: 81f8acfaa26509144a85d6503013fd14, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 81f8acfaa26509144a85d6503013fd14, type: 3}
 --- !u!1 &32331284
 GameObject:
@@ -4979,7 +4980,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 93599047}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7071738614871731617, guid: 97f93a50485ba5f4ea52c7bf577b75f2, type: 3}
+    - {fileID: 7071738614874730523, guid: 97f93a50485ba5f4ea52c7bf577b75f2, type: 3}
+    - {fileID: 7071738614943819193, guid: 97f93a50485ba5f4ea52c7bf577b75f2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 97f93a50485ba5f4ea52c7bf577b75f2, type: 3}
 --- !u!1 &362127301
 GameObject:
