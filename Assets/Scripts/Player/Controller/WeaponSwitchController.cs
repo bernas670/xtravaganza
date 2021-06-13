@@ -5,6 +5,7 @@ public class WeaponSwitchController : MonoBehaviour
 {
     public static bool slotFull;
 
+    public WeaponUI weaponUI;
     public int selectedWeapon = 0;
     public Player player;
     public List<GameObject> weapons = new List<GameObject>();
@@ -33,6 +34,7 @@ public class WeaponSwitchController : MonoBehaviour
         _cameraTransform = _shooter.getPoV();
 
         SelectWeapon();
+        weaponUI.updateWeaponsList(weapons, selectedWeapon);
     }
 
     void Update()
@@ -110,6 +112,8 @@ public class WeaponSwitchController : MonoBehaviour
             }
             i++;
         }
+
+        weaponUI.updateWeaponsList(weapons, selectedWeapon);
     }
 
     void PickWeapon(Transform container, Collider coll)
@@ -146,6 +150,8 @@ public class WeaponSwitchController : MonoBehaviour
         //Enable script
         coll.gameObject.GetComponent<FireWeapon>().enabled = true;
         PlayPickSound();
+        weaponUI.updateWeaponsList(weapons, selectedWeapon);
+
     }
 
     void DropWeapon()
@@ -187,17 +193,14 @@ public class WeaponSwitchController : MonoBehaviour
 
         if (weapons.Count > 0)
         {
-            FireWeapon newFireWeapon = weapons[0].GetComponent<FireWeapon>();
-            _shooter.setFireWeapon(newFireWeapon);
-            _animator.SetBool("has" + newFireWeapon.getType(), true);
-            currentWeapon = weapons[0];
-            currentWeapon.SetActive(true);
-            _rig.updateRigWeaponReference(currentWeapon.transform.Find("ref_right_hand"), currentWeapon.transform.Find("ref_left_hand"));
+            selectedWeapon = 0;
+            SelectWeapon();
         }
         else
         {
             currentWeapon = null;
             _rig.clearRigWeaponReference();
+            weaponUI.updateWeaponsList(weapons, selectedWeapon);
         }
     }
 }
