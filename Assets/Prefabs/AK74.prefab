@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6675695861085288747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2014543228248803000}
+  m_Layer: 11
+  m_Name: ref_left_hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2014543228248803000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675695861085288747}
+  m_LocalRotation: {x: -0.8803862, y: -0.006283475, z: -0.1158783, w: -0.4598402}
+  m_LocalPosition: {x: 0.0609, y: -0.0498, z: -0.1086}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8624699325493113438}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -233.922, y: -20.872986, z: -11.52301}
 --- !u!1 &8624699325493113412
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,12 +61,14 @@ Transform:
   m_GameObject: {fileID: 8624699325493113412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1.5}
+  m_LocalScale: {x: 3, y: 3, z: 2.5}
   m_Children:
   - {fileID: 8624699326179498889}
   - {fileID: 8624699326028984073}
   - {fileID: 8624699325819655059}
   - {fileID: 6012287433735400711}
+  - {fileID: 200650973282406739}
+  - {fileID: 2014543228248803000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -396,6 +428,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &8664142155802771465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200650973282406739}
+  m_Layer: 11
+  m_Name: ref_right_hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200650973282406739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8664142155802771465}
+  m_LocalRotation: {x: -0.5073286, y: 0.4980302, z: -0.27524284, w: 0.64716697}
+  m_LocalPosition: {x: -0.034, y: -0.103, z: 0.1956}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8624699325493113438}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 202.488, y: -89.328, z: 471.173}
 --- !u!1001 &3339805477295174604
 PrefabInstance:
   m_ObjectHideFlags: 0

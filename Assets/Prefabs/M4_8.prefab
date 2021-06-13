@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2344660820938585016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2545140840561134386}
+  m_Layer: 0
+  m_Name: ref_left_hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2545140840561134386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2344660820938585016}
+  m_LocalRotation: {x: 0.076524824, y: -0.9825851, z: 0.01901508, w: 0.16825274}
+  m_LocalPosition: {x: 0.063, y: 0.018, z: -0.042}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.6666667}
+  m_Children: []
+  m_Father: {fileID: 9191724860870908836}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 3.6190002, y: -160.82901, z: -8.295}
+--- !u!1 &5647083190746526008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4511969938336719348}
+  m_Layer: 0
+  m_Name: ref_right_hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4511969938336719348
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5647083190746526008}
+  m_LocalRotation: {x: 0.5650298, y: -0.5281131, z: 0.27623156, w: -0.57055587}
+  m_LocalPosition: {x: -0.003, y: -0.024, z: 0.253}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.6666667}
+  m_Children: []
+  m_Father: {fileID: 9191724860870908836}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: -20.671001, y: 102.11301, z: -77.100006}
 --- !u!1 &9191724860870608768
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +249,7 @@ Transform:
   m_GameObject: {fileID: 9191724860870608772}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1.5}
+  m_LocalScale: {x: 3, y: 3, z: 2.5}
   m_Children:
   - {fileID: 9191724860870908838}
   - {fileID: 9191724860870908834}
@@ -197,6 +257,8 @@ Transform:
   - {fileID: 9191724860870908846}
   - {fileID: 9191724860870908844}
   - {fileID: 5365373574556648080}
+  - {fileID: 4511969938336719348}
+  - {fileID: 2545140840561134386}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

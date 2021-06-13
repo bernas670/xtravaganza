@@ -6,13 +6,7 @@ public class HealthBar : MonoBehaviour
 {
     
     public TextMeshProUGUI text;
-    public GameObject bar;
-
-    private Slider slider;
-
-    private void Start() {
-        slider = bar.GetComponent<Slider>();
-    }
+    public Slider slider;
 
     public void SetMaxHealth(int health) {
         text.text = health.ToString();

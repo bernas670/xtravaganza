@@ -10,4 +10,8 @@ public class Pistol : FireWeapon {
         setAmmoValue(30);
         setClipValue(_initialAmmo);
     }
+
+    public override string getType() {
+        return "Pistol";
+    }
 }

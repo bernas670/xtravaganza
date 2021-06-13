@@ -15,6 +15,15 @@ public abstract class FireWeapon : Weapon
 
     private float lastPlayTime = 0;
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!dropEmitter.IsPlaying() || Time.time - lastPlayTime >= dropSoundInterval)
+        {
+            lastPlayTime = Time.time;
+            dropEmitter.Play();
+        }
+    }
+
     public void reload()
     {
         // Verify if has bullets to reload and wepon is not full
@@ -120,12 +129,5 @@ public abstract class FireWeapon : Weapon
         isEquipped = value;
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (!dropEmitter.IsPlaying() || Time.time - lastPlayTime >= dropSoundInterval)
-        {
-            lastPlayTime = Time.time;
-            dropEmitter.Play();
-        }
-    }
+    public abstract string getType();    
 }
