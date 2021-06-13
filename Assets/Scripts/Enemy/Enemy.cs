@@ -10,10 +10,9 @@ public class Enemy : Character
     public override void Die()
     {
         EnemyController controller = gameObject.GetComponent<EnemyController>();
-        controller.dropWeapon();
+        controller.CommunicateDeath();
 
-        Destroy(gameObject, 0);
+        Destroy(gameObject, 3);
     }
-
-
+    
 }

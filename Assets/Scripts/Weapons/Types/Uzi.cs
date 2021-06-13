@@ -10,4 +10,8 @@ public class Uzi : FireWeapon {
         setAmmoValue(135);
         setClipValue(_initialAmmo);
     }
+
+    public override string getType() {
+        return "Rifle";
+    }
 }

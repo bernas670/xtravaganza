@@ -3,17 +3,19 @@ using UnityEngine;
 
 public class WeaponSwitchController : MonoBehaviour
 {
+    public static bool slotFull;
+
     public int selectedWeapon = 0;
     public Player player;
     public List<GameObject> weapons = new List<GameObject>();
     public GameObject currentWeapon;
-    public static bool slotFull;
-
     [FMODUnity.EventRef]
     public string pickEvent;
     public float pickSoundInterval = 0.5f;
 
+    private Animator _animator;
     private PlayerShootController _shooter;
+    private RigController _rig;
     private Transform _cameraTransform;
     private int maxWeapons = 4;
     private float lastPickSoundTime = 0;
@@ -21,9 +23,12 @@ public class WeaponSwitchController : MonoBehaviour
     void Start()
     {
         _shooter = player.gameObject.GetComponent<PlayerShootController>();
+        _rig = player.gameObject.GetComponentsInChildren<RigController>()[0];
+        _animator = player.gameObject.GetComponentsInChildren<Animator>()[0];
 
         weapons.Add(_shooter.getFireWeapon().gameObject);
         currentWeapon = _shooter.getFireWeapon().gameObject;
+        currentWeapon.GetComponent<BoxCollider>().enabled = false;
 
         _cameraTransform = _shooter.getPoV();
 
@@ -57,7 +62,8 @@ public class WeaponSwitchController : MonoBehaviour
         if (previousWeapon != selectedWeapon)
         {
             SelectWeapon();
-            if (Time.time - lastPickSoundTime >= pickSoundInterval) {
+            if (Time.time - lastPickSoundTime >= pickSoundInterval)
+            {
                 PlayPickSound();
             }
         }
@@ -88,6 +94,7 @@ public class WeaponSwitchController : MonoBehaviour
     void SelectWeapon()
     {
         int i = 0;
+        _animator.SetBool("has" + currentWeapon.GetComponent<FireWeapon>().getType(), false);
         foreach (GameObject weapon in weapons)
         {
             // if the weapon is selected set true, if it's not set false
@@ -97,6 +104,9 @@ public class WeaponSwitchController : MonoBehaviour
                 FireWeapon fWeapon = weapon.GetComponent<FireWeapon>();
                 _shooter.setFireWeapon(fWeapon);
                 currentWeapon = weapon;
+                _animator.SetBool("has" + fWeapon.getType(), true);
+
+                _rig.updateRigWeaponReference(currentWeapon.transform.Find("ref_right_hand"), currentWeapon.transform.Find("ref_left_hand"));
             }
             i++;
         }
@@ -106,8 +116,11 @@ public class WeaponSwitchController : MonoBehaviour
     {
         if (weapons.Count == 0)
         {
-            _shooter.setFireWeapon(coll.gameObject.GetComponent<FireWeapon>());
+            FireWeapon fireWeapon = coll.gameObject.GetComponent<FireWeapon>();
+            _shooter.setFireWeapon(fireWeapon);
+            _animator.SetBool("has" + fireWeapon.getType(), true);
             currentWeapon = coll.gameObject;
+            _rig.updateRigWeaponReference(currentWeapon.transform.Find("ref_right_hand"), currentWeapon.transform.Find("ref_left_hand"));
         }
 
         // hides the weapon because it's now in our 'inventory'
@@ -125,8 +138,9 @@ public class WeaponSwitchController : MonoBehaviour
         coll.transform.localPosition = Vector3.zero;
         coll.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-        //Make Rigidbody kinematic and BoxCollider a trigger
+        //Make Rigidbody kinematic, enable BoxCollider and make it a trigger
         coll.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        coll.enabled = false;
         coll.isTrigger = true;
 
         //Enable script
@@ -136,7 +150,8 @@ public class WeaponSwitchController : MonoBehaviour
 
     void DropWeapon()
     {
-        currentWeapon.GetComponent<FireWeapon>().setInUse(false);
+        FireWeapon fireWeapon = currentWeapon.GetComponent<FireWeapon>();
+        fireWeapon.setInUse(false);
 
         slotFull = false;
 
@@ -149,6 +164,7 @@ public class WeaponSwitchController : MonoBehaviour
         //Make Rigidbody not kinematic and BoxCollider normal
         rb.isKinematic = false;
         coll.isTrigger = false;
+        coll.enabled = true;
 
         //Gun carries momentum of player
         rb.velocity = player.gameObject.GetComponent<Rigidbody>().velocity;
@@ -162,7 +178,8 @@ public class WeaponSwitchController : MonoBehaviour
         rb.AddTorque(new Vector3(random, random, random) * 10);
 
         //Disable script
-        currentWeapon.GetComponent<FireWeapon>().enabled = false;
+        fireWeapon.enabled = false;
+        _animator.SetBool("has" + fireWeapon.getType(), false);
 
         _shooter.setFireWeapon(null);
 
@@ -170,10 +187,17 @@ public class WeaponSwitchController : MonoBehaviour
 
         if (weapons.Count > 0)
         {
-            _shooter.setFireWeapon(weapons[0].GetComponent<FireWeapon>());
+            FireWeapon newFireWeapon = weapons[0].GetComponent<FireWeapon>();
+            _shooter.setFireWeapon(newFireWeapon);
+            _animator.SetBool("has" + newFireWeapon.getType(), true);
             currentWeapon = weapons[0];
             currentWeapon.SetActive(true);
+            _rig.updateRigWeaponReference(currentWeapon.transform.Find("ref_right_hand"), currentWeapon.transform.Find("ref_left_hand"));
         }
-        else currentWeapon = null;
+        else
+        {
+            currentWeapon = null;
+            _rig.clearRigWeaponReference();
+        }
     }
 }

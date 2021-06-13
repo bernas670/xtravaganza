@@ -15,6 +15,10 @@ public class StateMachine {
         _currentState = newState;
         newState.Enter();
     }
+    
+    public State GetState() {
+        return _currentState;
+    }
 
     public void HandleInput() {
         _currentState.HandleInput();
