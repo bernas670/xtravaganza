@@ -3,16 +3,16 @@ using TMPro;
 
 public class MovementController : MonoBehaviour
 {
-    private CharacterController _controller;
-    private CameraController _camController;
+    public Animator animator;
     [HideInInspector]
     public Rigidbody rb;
-
     // temporary for debug purposes
     public TextMeshProUGUI horizontalSpeedText, verticalSpeedText;
 
-    private float WALL_DIST = 0.8f;
-    private float MIN_WALL_RUN_HEIGHT = 1.5f;
+    private CameraController _camController;
+    private float WALL_DIST = 3.2f;
+    private float MAX_GROUND_DIST = 2.5f;
+    private float MIN_WALL_RUN_HEIGHT = 2.5f;
     private Vector3 _wishDir = Vector3.zero;
 
     private float _hVel = 0f;
@@ -36,10 +36,17 @@ public class MovementController : MonoBehaviour
         _wishDir.x = Input.GetAxis("Horizontal");
         _wishDir.z = Input.GetAxis("Vertical");
         _wishDir = transform.TransformDirection(_wishDir);
+        _wishDir.Normalize();
+
+        Vector3 velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        float zVelocity = Vector3.Dot(velocity.normalized, transform.forward);
+        float xVelocity = Vector3.Dot(velocity.normalized, transform.right);
+
+        animator.SetFloat("zVelocity", zVelocity, 0.1f, Time.deltaTime);
+        animator.SetFloat("xVelocity", xVelocity, 0.1f, Time.deltaTime);
 
         _movementSM.HandleInput();
 
-        // FIXME: REMOVE, temporary for debug purposes
         horizontalSpeedText.text = string.Format("hspeed: {0}", _hVel.ToString("#.00"));
         verticalSpeedText.text = string.Format("vspeed: {0}", _vVel.ToString("#.00"));
     }
@@ -52,26 +59,48 @@ public class MovementController : MonoBehaviour
         _movementSM.PhysicsUpdate();
     }
 
-    public bool IsGrounded() {
-        return Physics.Raycast(transform.position, -Vector3.up, 1.1f);
+    public bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, MAX_GROUND_DIST);
     }
 
-    public int GetWallRunFactor(out RaycastHit hit) {
+    public int GetWallRunFactor(out RaycastHit hit)
+    {
         RaycastHit left, right;
         bool rightWall = Physics.Raycast(transform.position, transform.right, out right, WALL_DIST);
         bool leftWall = Physics.Raycast(transform.position, -transform.right, out left, WALL_DIST);
 
-        if(leftWall && rightWall) {
+        if (leftWall && rightWall)
+        {
             hit = new RaycastHit();
             return 0;
         }
 
-        if(leftWall) {
+        if (leftWall)
+        {
             hit = left;
             return -1;
         }
-        
+
         hit = right;
+        return 1;
+    }
+
+    public int GetWallRunFactor()
+    {
+        bool rightWall = Physics.Raycast(transform.position, transform.right, WALL_DIST);
+        bool leftWall = Physics.Raycast(transform.position, -transform.right, WALL_DIST);
+
+        if (leftWall && rightWall)
+        {
+            return 0;
+        }
+
+        if (leftWall)
+        {
+            return -1;
+        }
+
         return 1;
     }
 
@@ -79,7 +108,7 @@ public class MovementController : MonoBehaviour
     {
         bool rightWall = Physics.Raycast(transform.position, transform.right, WALL_DIST);
         bool leftWall = Physics.Raycast(transform.position, -transform.right, WALL_DIST);
-        
+
         return !Physics.Raycast(transform.position, Vector3.down, MIN_WALL_RUN_HEIGHT) && (leftWall || rightWall);
     }
 
@@ -104,8 +133,10 @@ public class MovementController : MonoBehaviour
         rb.velocity = velocity;
     }
 
-    public void Tilt(float target, bool async = false) {
-        if(async) {
+    public void Tilt(float target, bool async = false)
+    {
+        if (async)
+        {
             StartCoroutine(_camController.AsyncTilt(target));
             return;
         }
@@ -113,5 +144,8 @@ public class MovementController : MonoBehaviour
         _camController.Tilt(target);
     }
 
-
+    public bool IsWallRunning()
+    {
+        return _movementSM.GetState() is WallRunningState;
+    }
 }

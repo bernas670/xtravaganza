@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - FireWeapon
+  - LockedDoor
+  - Scientist
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - Weapon
   - Player
   - Lava
-  - 
+  - PlayerHead
   - 
   - 
   - 

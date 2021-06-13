@@ -12,6 +12,7 @@ public class AirState : MovementState
     {
         base.Enter();
         _transform = _controller.transform;
+        _controller.animator.SetBool("isJumping", true);
     }
 
     public override void PhysicsUpdate()
@@ -31,5 +32,10 @@ public class AirState : MovementState
         }
         
         _controller.Accelerate(AIR_MAX_SPEED, AIR_ACCEL, Time.fixedDeltaTime);
+    }
+
+    public override void Exit()
+    {
+        _controller.animator.SetBool("isJumping", false);
     }
 }

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations.Rigging;
 
 // This will contain the State Machine for the Enemy actions.
 
 public class EnemyController : Shooter
 {
     private NavMeshAgent _agent;
+    private Animator _animator;
     private Transform _target;
     public GameObject _player;
 
@@ -16,10 +18,19 @@ public class EnemyController : Shooter
     [HideInInspector] public int nextWayPoint;
 
     private bool _isEvil;
+    private bool _isDead = false;
+    private bool _isChasing = false;
 
-    void Awake(){
-        _isEvil = Random.Range(0,2) == 0;
+    public GameObject rightHand;
+    public GameObject leftHand;
+
+
+    void Awake()
+    {
+        _isEvil = Random.Range(0, 2) == 0;
         setPoV(this.transform);
+
+        _animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -30,54 +41,81 @@ public class EnemyController : Shooter
     }
 
     void Update()
-    {       
+    {
         UpdateState();
+
+        float velX = Vector3.Dot(_agent.velocity.normalized, transform.right);
+        float velZ = Vector3.Dot(_agent.velocity.normalized, transform.forward);
+
+        if (!_isChasing)
+        {
+            velX /= 1.5f;
+            velZ /= 1.5f;
+        }
+
+        _animator.SetFloat("VelocityX", velX, 0.1f, Time.deltaTime);
+        _animator.SetFloat("VelocityZ", velZ, 0.1f, Time.deltaTime);
     }
 
     // State Machine
     public void UpdateState()
-    {   
-       float distance = Vector3.Distance(_target.position, transform.position);
-       if (distance > fireWeapon.getRange() || !fireWeapon){
+    {
+        float distance = Vector3.Distance(_target.position, transform.position);
+
+        if (_isDead)
+        {
+            clearRigWeaponReference();
+            DyingAction dying = new DyingAction();
+            dying.Act(this);
+        }
+        else if (!fireWeapon || distance > fireWeapon.getRange())
+        {
             //patrol;   
             //Change the patrolling points created in Scene;
+            _isChasing = false;
             PatrolAction patrol = new PatrolAction();
             patrol.Act(this);
             //  ------------TODO----------------------------
             //Use raycast, if player is in sight, chase him.
 
-       } else { 
-            //if(!_isEvil) break;
+        }
+        else
+        {
+            _isChasing = true;
             ChaseAction chase = new ChaseAction();
             chase.Act(this);
             // Choose the attack method
             FactoryAttackAction fact = new FactoryAttackAction();
             AttackAction action = fact.createAttackAction(this, distance);
             action.Act(this);
-       }
-       
+        }
+
     }
 
     // Getters
-    public NavMeshAgent getAgent(){
+    public NavMeshAgent getAgent()
+    {
         return _agent;
     }
 
-    public Transform getTarget(){
+    public Transform getTarget()
+    {
         return _target;
     }
-    
-    public List<Transform> getWayPointList(){
+
+    public List<Transform> getWayPointList()
+    {
         return _wayPointList;
     }
 
-    public void dropWeapon(){
+    public void dropWeapon()
+    {
         fireWeapon.setInUse(false);
         fireWeapon.gameObject.transform.parent = null;
 
         Rigidbody rb = fireWeapon.GetComponent<Rigidbody>();
         BoxCollider coll = fireWeapon.GetComponent<BoxCollider>();
- 
+
         //Make Rigidbody not kinematic and BoxCollider normal
         rb.isKinematic = false;
         coll.isTrigger = false;
@@ -95,5 +133,21 @@ public class EnemyController : Shooter
         //Disable script
         fireWeapon.enabled = false;
         fireWeapon = null;
+    }
+
+    public void CommunicateDeath()
+    {
+        dropWeapon();
+        _isDead = true;
+        _animator.SetTrigger("isDead");
+    }
+
+    // detach the weapon from player;
+    void clearRigWeaponReference()
+    {
+        rightHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
+        leftHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
+        rightHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
+        leftHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
     }
 }

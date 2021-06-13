@@ -10,4 +10,8 @@ public class M4A1 : FireWeapon {
         setAmmoValue(90);
         setClipValue(_initialAmmo);
     }
+
+    public override string getType() {
+        return "Rifle";
+    }
 }
