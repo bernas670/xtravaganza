@@ -86,3 +86,4 @@ Assets/Gizmos/*
 Assets/Gizmos.meta
 Assets/Plugins/*
 Assets/Plugins.meta
+*.json
