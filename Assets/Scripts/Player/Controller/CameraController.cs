@@ -1,10 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     public Camera cam;
+    public Transform rotationPivot;
     public float sensitivity = 5f;
 
     public float minHeadRotation = -90f;
@@ -33,18 +33,23 @@ public class CameraController : MonoBehaviour
 
         _headRotation += rotY;
         _headRotation = Mathf.Clamp(_headRotation, minHeadRotation, maxHeadRotation);
-        cam.transform.localEulerAngles = new Vector3(_headRotation, 0, _tilt);
+        cam.transform.localEulerAngles = new Vector3(_headRotation, 0, cam.transform.localEulerAngles.z);
+
+        float rotationAngle = _tilt - cam.transform.localEulerAngles.z;
+        cam.transform.RotateAround(rotationPivot.position, rotationPivot.forward, rotationAngle);
     }
 
-    public void Tilt(float max) {
+    public void Tilt(float max)
+    {
         _tilt = Mathf.Lerp(_tilt, max, _camTiltTime * Time.deltaTime);
     }
 
     public IEnumerator AsyncTilt(float target)
     {
         float _lastTilt = _tilt;
-        while(Mathf.Abs(_tilt - target) >= _tiltError) {
-            if(Mathf.Abs(_lastTilt) < Mathf.Abs(_tilt)) break;
+        while (Mathf.Abs(_tilt - target) >= _tiltError)
+        {
+            if (Mathf.Abs(_lastTilt) < Mathf.Abs(_tilt)) break;
 
             _tilt = Mathf.Lerp(_tilt, target, _camTiltTime * Time.deltaTime);
             _lastTilt = _tilt;

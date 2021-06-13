@@ -19,12 +19,14 @@ public class EnemyController : Shooter
 
     private bool _isEvil;
     private bool _isDead = false;
+    private bool _isChasing = false;
 
-    private GameObject _rightHand;
-    private GameObject _leftHand;
+    public GameObject rightHand;
+    public GameObject leftHand;
 
 
-    void Awake(){
+    void Awake()
+    {
         _isEvil = Random.Range(0, 2) == 0;
         setPoV(this.transform);
 
@@ -36,16 +38,20 @@ public class EnemyController : Shooter
         _player = GameObject.Find("Player"); // Make this a singleton + game manager
         _target = _player.transform; /* Make this a singleton + game manager*/
         _agent = GetComponent<NavMeshAgent>();
-        _rightHand = GameObject.Find("RightHandIK");
-        _leftHand = GameObject.Find("LeftHandIK");
     }
 
     void Update()
     {
         UpdateState();
 
-        float velX = Vector3.Dot(_agent.velocity, transform.right);
-        float velZ = Vector3.Dot(_agent.velocity, transform.forward);
+        float velX = Vector3.Dot(_agent.velocity.normalized, transform.right);
+        float velZ = Vector3.Dot(_agent.velocity.normalized, transform.forward);
+
+        if (!_isChasing)
+        {
+            velX /= 1.5f;
+            velZ /= 1.5f;
+        }
 
         _animator.SetFloat("VelocityX", velX, 0.1f, Time.deltaTime);
         _animator.SetFloat("VelocityZ", velZ, 0.1f, Time.deltaTime);
@@ -56,7 +62,8 @@ public class EnemyController : Shooter
     {
         float distance = Vector3.Distance(_target.position, transform.position);
 
-        if (_isDead) {
+        if (_isDead)
+        {
             clearRigWeaponReference();
             DyingAction dying = new DyingAction();
             dying.Act(this);
@@ -65,12 +72,16 @@ public class EnemyController : Shooter
         {
             //patrol;   
             //Change the patrolling points created in Scene;
+            _isChasing = false;
             PatrolAction patrol = new PatrolAction();
             patrol.Act(this);
             //  ------------TODO----------------------------
             //Use raycast, if player is in sight, chase him.
 
-       } else { 
+        }
+        else
+        {
+            _isChasing = true;
             ChaseAction chase = new ChaseAction();
             chase.Act(this);
             // Choose the attack method
@@ -131,12 +142,12 @@ public class EnemyController : Shooter
         _animator.SetTrigger("isDead");
     }
 
-        // detach the weapon from player;
+    // detach the weapon from player;
     void clearRigWeaponReference()
     {
-        _rightHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
-        _leftHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
-        _rightHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
-        _leftHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
+        rightHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
+        leftHand.GetComponent<TwoBoneIKConstraint>().weight = 0;
+        rightHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
+        leftHand.GetComponent<TwoBoneIKConstraint>().data.target = null;
     }
 }

@@ -16,7 +16,7 @@ public class Door : MonoBehaviour
     void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        openDoor = transform.position + new Vector3(0, 12, 0);
+        openDoor = transform.position + new Vector3(0, 14, 0);
         closeDoor = transform.position;
         closing = true;
         opening = false;

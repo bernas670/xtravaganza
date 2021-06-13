@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class CerelacKiller : FireWeapon {
     public void Awake(){
         _damage = 10;
@@ -13,5 +9,9 @@ public class CerelacKiller : FireWeapon {
 
         setAmmoValue(90);
         setClipValue(_initialAmmo);
+    }
+
+    public override string getType() {
+        return "Rifle";
     }
 }
