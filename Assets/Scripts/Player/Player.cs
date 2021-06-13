@@ -43,11 +43,11 @@ public class Player : Character
     {
         // since it is called every frame instead of only when the event occurs
         healthBar.SetHealth(_healthStat.getHealth());
-        if (gotHitScreen.GetComponent<Image>().color.a > 0)
+        if (gotHitScreen.GetComponent<RawImage>().color.a > 0)
         {
-            var color = gotHitScreen.GetComponent<Image>().color;
+            var color = gotHitScreen.GetComponent<RawImage>().color;
             color.a -= 0.05f;
-            gotHitScreen.GetComponent<Image>().color = color;
+            gotHitScreen.GetComponent<RawImage>().color = color;
         }
         else
         {
@@ -88,6 +88,11 @@ public class Player : Character
 
     public override void TakeDamage(int damage)
     {
+        if (_healthStat.isDead())
+        {
+            return;
+        }
+
         if (!_isPlayerInvincible)
         {
             _healthStat.TakeDamage(damage);
@@ -103,10 +108,9 @@ public class Player : Character
     private void gotHitFeedback()
     {
         gotHitScreen.SetActive(true);
-        var color = gotHitScreen.GetComponent<Image>().color;
-        color.a = 0.3f;
-        gotHitScreen.GetComponent<Image>().color = color;
-
+        var color = gotHitScreen.GetComponent<RawImage>().color;
+        color.a = 0.65f;
+        gotHitScreen.GetComponent<RawImage>().color = color;
     }
 
     public void becomeEvil()

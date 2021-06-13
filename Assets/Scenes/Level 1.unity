@@ -327,6 +327,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &21553561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 21553561, guid: 43a71693571f69740844b10ca2191148,
+    type: 3}
+  m_PrefabInstance: {fileID: 308585575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &22007564
 GameObject:
   m_ObjectHideFlags: 0
@@ -4130,11 +4136,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1333735286211902902, guid: 43a71693571f69740844b10ca2191148,
-        type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2836782337619449841, guid: 43a71693571f69740844b10ca2191148,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -4989,6 +4990,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7071738613240622140, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
+        type: 3}
+      propertyPath: weaponUI
+      value: 
+      objectReference: {fileID: 1976170615}
     - target: {fileID: 7071738613541774464, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
         type: 3}
       propertyPath: verticalSpeedText
@@ -5073,7 +5079,7 @@ PrefabInstance:
         type: 3}
       propertyPath: gotHitScreen
       value: 
-      objectReference: {fileID: 1093001827}
+      objectReference: {fileID: 21553561}
     m_RemovedComponents:
     - {fileID: 7071738614871731617, guid: 97f93a50485ba5f4ea52c7bf577b75f2, type: 3}
     - {fileID: 7071738614874730523, guid: 97f93a50485ba5f4ea52c7bf577b75f2, type: 3}
@@ -6680,12 +6686,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498704692}
   m_Mesh: {fileID: -1061776670790573707, guid: 99f1e0cf0711ae74da48ee3ccdc57255, type: 3}
---- !u!224 &509016929 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2836782337901214194, guid: 43a71693571f69740844b10ca2191148,
-    type: 3}
-  m_PrefabInstance: {fileID: 308585575}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &535057556
 GameObject:
   m_ObjectHideFlags: 0
@@ -12907,80 +12907,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7107094577648561181, guid: 99f1e0cf0711ae74da48ee3ccdc57255, type: 3}
---- !u!1 &1093001827
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1093001828}
-  - component: {fileID: 1093001830}
-  - component: {fileID: 1093001829}
-  m_Layer: 5
-  m_Name: GotHitScreen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1093001828
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093001827}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 509016929}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1093001829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093001827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1093001830
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093001827}
-  m_CullTransparentMesh: 0
 --- !u!1 &1101965187
 GameObject:
   m_ObjectHideFlags: 0

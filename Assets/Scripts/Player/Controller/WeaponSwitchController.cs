@@ -4,7 +4,8 @@ using UnityEngine;
 public class WeaponSwitchController : MonoBehaviour
 {
     public static bool slotFull;
-
+    
+    public WeaponUI weaponUI;
     public int selectedWeapon = 0;
     public Player player;
     public List<GameObject> weapons = new List<GameObject>();
@@ -146,6 +147,8 @@ public class WeaponSwitchController : MonoBehaviour
         //Enable script
         coll.gameObject.GetComponent<FireWeapon>().enabled = true;
         PlayPickSound();
+        weaponUI.updateWeaponsList(weapons);
+
     }
 
     void DropWeapon()
@@ -199,5 +202,7 @@ public class WeaponSwitchController : MonoBehaviour
             currentWeapon = null;
             _rig.clearRigWeaponReference();
         }
+        
+        weaponUI.updateWeaponsList(weapons);
     }
 }
