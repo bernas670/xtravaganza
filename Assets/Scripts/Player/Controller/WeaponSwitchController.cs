@@ -28,6 +28,7 @@ public class WeaponSwitchController : MonoBehaviour
 
         weapons.Add(_shooter.getFireWeapon().gameObject);
         currentWeapon = _shooter.getFireWeapon().gameObject;
+        currentWeapon.GetComponent<BoxCollider>().enabled = false;
 
         _cameraTransform = _shooter.getPoV();
 
@@ -137,8 +138,9 @@ public class WeaponSwitchController : MonoBehaviour
         coll.transform.localPosition = Vector3.zero;
         coll.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-        //Make Rigidbody kinematic and BoxCollider a trigger
+        //Make Rigidbody kinematic, enable BoxCollider and make it a trigger
         coll.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        coll.enabled = false;
         coll.isTrigger = true;
 
         //Enable script
@@ -162,6 +164,7 @@ public class WeaponSwitchController : MonoBehaviour
         //Make Rigidbody not kinematic and BoxCollider normal
         rb.isKinematic = false;
         coll.isTrigger = false;
+        coll.enabled = true;
 
         //Gun carries momentum of player
         rb.velocity = player.gameObject.GetComponent<Rigidbody>().velocity;
