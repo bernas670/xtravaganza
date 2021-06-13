@@ -1814,6 +1814,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8b20ea8d76ecf4d9c835e9ab3c80eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rigBuilder: {fileID: 7071738614071055298}
+  rightHand: {fileID: 7071738613813221328}
+  leftHand: {fileID: 7071738613369550829}
+  _aimRig: {fileID: 7071738614223893203}
 --- !u!114 &7071738614071055298
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -105,7 +105,7 @@ public class WeaponSwitchController : MonoBehaviour
                 currentWeapon = weapon;
                 _animator.SetBool("has" + fWeapon.getType(), true);
 
-                _rig.updateRigWeaponReference(currentWeapon.gameObject.transform.Find("ref_right_hand"), currentWeapon.gameObject.transform.Find("ref_left_hand"));
+                _rig.updateRigWeaponReference(currentWeapon.transform.Find("ref_right_hand"), currentWeapon.transform.Find("ref_left_hand"));
             }
             i++;
         }
@@ -119,7 +119,7 @@ public class WeaponSwitchController : MonoBehaviour
             _shooter.setFireWeapon(fireWeapon);
             _animator.SetBool("has" + fireWeapon.getType(), true);
             currentWeapon = coll.gameObject;
-            _rig.updateRigWeaponReference(currentWeapon.gameObject.transform.Find("ref_right_hand"), currentWeapon.gameObject.transform.Find("ref_left_hand"));
+            _rig.updateRigWeaponReference(currentWeapon.transform.Find("ref_right_hand"), currentWeapon.transform.Find("ref_left_hand"));
         }
 
         // hides the weapon because it's now in our 'inventory'
@@ -189,7 +189,7 @@ public class WeaponSwitchController : MonoBehaviour
             _animator.SetBool("has" + newFireWeapon.getType(), true);
             currentWeapon = weapons[0];
             currentWeapon.SetActive(true);
-            _rig.updateRigWeaponReference(currentWeapon.gameObject.transform.Find("ref_right_hand"), currentWeapon.gameObject.transform.Find("ref_left_hand"));
+            _rig.updateRigWeaponReference(currentWeapon.transform.Find("ref_right_hand"), currentWeapon.transform.Find("ref_left_hand"));
         }
         else
         {

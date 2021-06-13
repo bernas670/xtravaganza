@@ -12,7 +12,7 @@ public class MovementController : MonoBehaviour
     private CameraController _camController;
     private float WALL_DIST = 3.2f;
     private float MAX_GROUND_DIST = 2.2f;
-    private float MIN_WALL_RUN_HEIGHT = 1.5f;
+    private float MIN_WALL_RUN_HEIGHT = 2.5f;
     private Vector3 _wishDir = Vector3.zero;
 
     private float _hVel = 0f;

@@ -5,48 +5,42 @@ using UnityEngine.Animations.Rigging;
 
 public class RigController : MonoBehaviour
 {
-    private RigBuilder _rigBuilder;
-    private TwoBoneIKConstraint _rightHand;
-    private TwoBoneIKConstraint _leftHand;
-    private Rig _aimRig;
-
-    void Start()
-    {
-        Transform rigLayer = transform.Find("RigLayer");
-        _rigBuilder = GetComponent<RigBuilder>();
-        _rightHand = rigLayer.Find("RightHandIK").GetComponent<TwoBoneIKConstraint>();
-        _leftHand = rigLayer.Find("LeftHandIK").GetComponent<TwoBoneIKConstraint>();
-        _aimRig = transform.Find("AimRig").GetComponent<Rig>();
-    }
+    public RigBuilder _rigBuilder;
+    public TwoBoneIKConstraint rightHand;
+    public TwoBoneIKConstraint leftHand;
+    public Rig _aimRig;
 
     //Update weapon references
     public void updateRigWeaponReference(Transform righHandRef, Transform leftHandRef)
     {
-        _rightHand.data.target = righHandRef;
-        _leftHand.data.target = leftHandRef;
-        _rightHand.weight = 1;
-        _leftHand.weight = 1;
+        Debug.Log(rightHand);
+        Debug.Log(leftHand);
+
+        rightHand.data.target = righHandRef;
+        leftHand.data.target = leftHandRef;
+        rightHand.weight = 1;
+        leftHand.weight = 1;
         _rigBuilder.Build();
     }
 
     // detach the weapon from player;
     public void clearRigWeaponReference()
     {
-        _rightHand.weight = 0;
-        _leftHand.weight = 0;
-        _rightHand.data.target = null;
-        _leftHand.data.target = null;
+        rightHand.weight = 0;
+        leftHand.weight = 0;
+        rightHand.data.target = null;
+        leftHand.data.target = null;
     }
 
     public void setRigWeight(string rig, float weight)
     {
-        if (rig == "righHand" && _rightHand.data.target != null)
+        if (rig == "righHand" && rightHand.data.target != null)
         {
-            _rightHand.weight = weight;
+            rightHand.weight = weight;
         }
-        else if (rig == "leftHand" && _leftHand.data.target != null)
+        else if (rig == "leftHand" && leftHand.data.target != null)
         {
-            _leftHand.weight = weight;
+            leftHand.weight = weight;
         }
         else if (rig == "aimRig")
         {
