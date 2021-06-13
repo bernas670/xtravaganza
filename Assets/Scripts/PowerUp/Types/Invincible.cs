@@ -8,12 +8,14 @@ public class Invincible : PowerUp
     Player playerScript;
 
     private IEnumerator coroutine;
+    public GameObject isInvencibleCanvas;
     void Start(){
         playerScript = player.GetComponent<Player>();
     }
 
     // Initialize the powerup
     protected override void powerupPayload(){
+        isInvencibleCanvas.SetActive(true);
         hidePowerup();
         playerScript.setPlayerInvincible(true);
         coroutine = PowerUpTimer(_powerUpDuration);
@@ -22,6 +24,7 @@ public class Invincible : PowerUp
 
     // Remove the powerup  payload
     protected override void powerupExpire(){
+        isInvencibleCanvas.SetActive(false);
         playerScript.setPlayerInvincible(false);
         destroyPowerup();
     }
