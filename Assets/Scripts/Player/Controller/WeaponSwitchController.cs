@@ -34,6 +34,7 @@ public class WeaponSwitchController : MonoBehaviour
         _cameraTransform = _shooter.getPoV();
 
         SelectWeapon();
+        weaponUI.updateWeaponsList(weapons);
     }
 
     void Update()
@@ -202,7 +203,7 @@ public class WeaponSwitchController : MonoBehaviour
             currentWeapon = null;
             _rig.clearRigWeaponReference();
         }
-        
+
         weaponUI.updateWeaponsList(weapons);
     }
 }
