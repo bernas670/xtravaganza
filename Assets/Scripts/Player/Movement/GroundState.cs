@@ -3,7 +3,7 @@
 public class GroundState : MovementState
 {
     private Rigidbody _rb;
-    private const float GROUND_MAX_SPEED = 30f;
+    private const float GROUND_MAX_SPEED = 25f;
     private const float GROUND_ACCEL = 10f * GROUND_MAX_SPEED;
     private const float GROUND_FRICTION = 5f * GROUND_MAX_SPEED;
     private const float JUMP_HEIGHT = 4f;
