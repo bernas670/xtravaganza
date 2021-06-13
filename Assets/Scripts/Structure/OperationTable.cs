@@ -1,42 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class OperationTable : MonoBehaviour
 {
-    private GameObject _door;
-    public GameObject text;
+    public Door _door;
+    public TextMeshProUGUI text;
 
-    void Awake()
+    private void OnCollisionEnter(Collision col)
     {
-        _door = GameObject.FindGameObjectWithTag("LockedDoor");
-    }
-
-    private void OnCollisionEnter(Collision col){
-        if(col.transform.tag == "Player"){
-            text.SetActive(true);
+        if (col.transform.tag == "Player")
+        {
+            if (_door.isLocked)
+            {
+                text.text = "Press E to unlock a door...";
+            }
+            else
+            {
+                text.text = "Door is already unlocked...";
+            }
+            text.gameObject.SetActive(true);
         }
     }
 
-    private void OnCollisionExit(Collision col){
-        if(col.transform.tag == "Player"){
-            text.SetActive(false);
+    private void OnCollisionExit(Collision col)
+    {
+        if (col.transform.tag == "Player")
+        {
+            text.gameObject.SetActive(false);
         }
     }
 
     private void OnCollisionStay()
     {
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.E) && _door.isLocked)
         {
-            if (_door)
-            {
-                Renderer r = gameObject.GetComponent<MeshRenderer>();
-                r.materials[2].color = Color.green;
-                _door.GetComponent<Door>().unlockDoor();
-                TMPro.TextMeshProUGUI mText = text.GetComponent<TMPro.TextMeshProUGUI>();
-                mText.text = "The door is already unlocked...";
-            }
+            Renderer r = gameObject.GetComponent<MeshRenderer>();
+            r.materials[2].color = Color.green;
+            _door.unlockDoor();
+            text.text = "Door unlocked!";
         }
     }
 }

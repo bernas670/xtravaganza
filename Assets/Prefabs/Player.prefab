@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4257623947735800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7455969596330353373}
+  - component: {fileID: 1661960940894147475}
+  m_Layer: 12
+  m_Name: Melee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7455969596330353373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4257623947735800}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7071738613541774465}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1661960940894147475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4257623947735800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6cf4fdded87aee458383e4d4468e7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireRate: 0
 --- !u!1 &7071738612935912654
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,6 +1012,7 @@ Transform:
   - {fileID: 7071738614071055299}
   - {fileID: 7071738613544973664}
   - {fileID: 7071738614943819194}
+  - {fileID: 7455969596330353373}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1047,7 +1092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireWeapon: {fileID: 1554527584270395450}
-  meleeWeapon: {fileID: 0}
+  meleeWeapon: {fileID: 1661960940894147475}
   cam: {fileID: 7071738614871731620}
   weaponUI: {fileID: 0}
   animator: {fileID: 7071738614071055297}
@@ -1068,7 +1113,7 @@ MonoBehaviour:
   Event: event:/Johannes/Alien Footsteps
   PlayEvent: 7
   StopEvent: 0
-  AllowFadeout: 1
+  AllowFadeout: 0
   TriggerOnce: 0
   Preload: 0
   Params: []
@@ -3034,7 +3079,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7071738614943819194}
   - component: {fileID: 7071738614943819175}
-  - component: {fileID: 7071738614943819192}
   - component: {fileID: 7071738614943819193}
   m_Layer: 12
   m_Name: DeathCamera
@@ -3100,14 +3144,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &7071738614943819192
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7071738614943819195}
-  m_Enabled: 1
 --- !u!114 &7071738614943819193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3545,9 +3581,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8db53459e0764364094e558d9eb16e4c, type: 3}
---- !u!4 &1554527584270395431 stripped
+--- !u!4 &8779420757007178945 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+  m_CorrespondingSourceObject: {fileID: 2014543228248803000, guid: 8db53459e0764364094e558d9eb16e4c,
     type: 3}
   m_PrefabInstance: {fileID: 7071738614059293305}
   m_PrefabAsset: {fileID: 0}
@@ -3569,9 +3605,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fcc6d796dc8b246af42498d7ba67d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &8779420757007178945 stripped
+--- !u!4 &1554527584270395431 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2014543228248803000, guid: 8db53459e0764364094e558d9eb16e4c,
+  m_CorrespondingSourceObject: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
     type: 3}
   m_PrefabInstance: {fileID: 7071738614059293305}
   m_PrefabAsset: {fileID: 0}

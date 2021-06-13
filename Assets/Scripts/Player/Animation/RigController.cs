@@ -13,9 +13,6 @@ public class RigController : MonoBehaviour
     //Update weapon references
     public void updateRigWeaponReference(Transform righHandRef, Transform leftHandRef)
     {
-        Debug.Log(rightHand);
-        Debug.Log(leftHand);
-
         rightHand.data.target = righHandRef;
         leftHand.data.target = leftHandRef;
         rightHand.weight = 1;
