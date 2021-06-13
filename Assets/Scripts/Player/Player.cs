@@ -43,9 +43,9 @@ public class Player : Character
     {
         // since it is called every frame instead of only when the event occurs
         healthBar.SetHealth(_healthStat.getHealth());
-        if (gotHitScreen.GetComponent<RawImage>().color.a > 0)
+        Color color = gotHitScreen.GetComponent<RawImage>().color;
+        if (color.a > 0)
         {
-            var color = gotHitScreen.GetComponent<RawImage>().color;
             color.a -= 0.05f;
             gotHitScreen.GetComponent<RawImage>().color = color;
         }
