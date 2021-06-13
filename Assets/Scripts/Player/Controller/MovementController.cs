@@ -4,23 +4,22 @@ using TMPro;
 public class MovementController : MonoBehaviour
 {
     public Animator animator;
-    private CameraController _camController;
     [HideInInspector]
     public Rigidbody rb;
-
     // temporary for debug purposes
     public TextMeshProUGUI horizontalSpeedText, verticalSpeedText;
 
-    private float WALL_DIST = 1.6f;
-    private float MAX_GROUND_DIST = 1.1f;
-    private float MIN_WALL_RUN_HEIGHT = 1.5f;
+    private CameraController _camController;
+    private float WALL_DIST = 3.2f;
+    private float MAX_GROUND_DIST = 2.5f;
+    private float MIN_WALL_RUN_HEIGHT = 2.5f;
     private Vector3 _wishDir = Vector3.zero;
 
     private float _hVel = 0f;
     private float _vVel = 0f;
 
     private StateMachine _movementSM;
-    private FMODUnity.StudioEventEmitter _eventEmitter;    
+    private FMODUnity.StudioEventEmitter _eventEmitter;
 
     void Start()
     {
@@ -41,21 +40,15 @@ public class MovementController : MonoBehaviour
         _wishDir = transform.TransformDirection(_wishDir);
         _wishDir.Normalize();
 
-        //Debug.Log("Wish dir X = " + zCoef);
-        //Debug.Log("Wish dir Z = " + xCoef);
-        //Debug.Log((_hVel * xCoef) * 100 / 15);
-
-        // Animations
         Vector3 velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         float zVelocity = Vector3.Dot(velocity.normalized, transform.forward);
         float xVelocity = Vector3.Dot(velocity.normalized, transform.right);
 
-        animator.SetFloat("zVelocity", zVelocity);
-        animator.SetFloat("xVelocity", xVelocity);       
+        animator.SetFloat("zVelocity", zVelocity, 0.1f, Time.deltaTime);
+        animator.SetFloat("xVelocity", xVelocity, 0.1f, Time.deltaTime);
 
         _movementSM.HandleInput();
 
-        // FIXME: REMOVE, temporary for debug purposes
         horizontalSpeedText.text = string.Format("hspeed: {0}", _hVel.ToString("#.00"));
         verticalSpeedText.text = string.Format("vspeed: {0}", _vVel.ToString("#.00"));
     }
@@ -153,7 +146,13 @@ public class MovementController : MonoBehaviour
         _camController.Tilt(target);
     }
 
-    public void Step() {
+    public void Step()
+    {
         _eventEmitter.Play();
+    }
+    
+    public bool IsWallRunning()
+    {
+        return _movementSM.GetState() is WallRunningState;
     }
 }

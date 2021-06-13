@@ -7,9 +7,23 @@ public abstract class FireWeapon : Weapon
 
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
+    public FMODUnity.StudioEventEmitter dropEmitter;
 
     public bool inUse;
     public bool isEquipped;
+    public float dropSoundInterval = 0.5f;
+
+    private float lastPlayTime = 0;
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!dropEmitter.IsPlaying() || Time.time - lastPlayTime >= dropSoundInterval)
+        {
+            lastPlayTime = Time.time;
+            dropEmitter.Play();
+        }
+    }
+
     public void reload()
     {
         // Verify if has bullets to reload and wepon is not full
@@ -54,16 +68,13 @@ public abstract class FireWeapon : Weapon
         return _ammo.getReloadValue();
     }
 
+
+// TODO: refactor
     public override void shoot(Shooter controller)
     {
         if (Time.time >= _timeToFire)
         {
-            //if (controller.name == "Player")
-            //{
-                muzzleFlash.Play();
-            //}
-
-            //  This should be outside the if statement. But since we only have 1 weapon enemy is decreasing the ammo aswell;
+            muzzleFlash.Play();
             decreaseAmmo();
             setTimeToFire(Time.time + 1f / _fireRate);
 
@@ -86,6 +97,14 @@ public abstract class FireWeapon : Weapon
                     temObj.transform.parent = enemy.transform;
                     Destroy(temObj, 2f);
                 }
+                else if (hit.transform.tag == "Scientist"){
+
+                    Scientist scientist = hit.transform.gameObject.GetComponent<Scientist>();
+                    scientist.TakeDamage(_damage);
+                    GameObject temObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    temObj.transform.parent = scientist.transform;
+                    Destroy(temObj, 2f);
+                }
                 else
                 {
                     GameObject temObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
@@ -95,15 +114,20 @@ public abstract class FireWeapon : Weapon
         }
     }
 
-    public bool isInUse(){
+    public bool isInUse()
+    {
         return inUse;
     }
+
     public void setInUse(bool value)
     {
         inUse = value;
     }
 
-    public void SetIsEquipped(bool value){
+    public void SetIsEquipped(bool value)
+    {
         isEquipped = value;
     }
+
+    public abstract string getType();    
 }

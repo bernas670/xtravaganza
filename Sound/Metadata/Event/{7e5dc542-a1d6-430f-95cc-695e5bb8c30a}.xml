@@ -61,7 +61,7 @@
 			<destination>{18557768-1970-426b-a6f6-26351773041a}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{1109117d-d553-4e3b-ae28-12d58058cd67}</destination>
+			<destination>{d589780a-8599-40eb-a4df-256036d462bb}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{1f34f402-531b-4b60-8905-a8cad3bf8d52}" />
@@ -174,7 +174,6 @@
 		<property name="color">
 			<value>Purple Light 2</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{7aa8bbb8-1772-474b-8c04-697ab51da204}</destination>
 			<destination>{d2e1c2d9-e356-4e81-a045-1d0d6118aa57}</destination>
@@ -230,7 +229,6 @@
 		<property name="maximumTimeDelay">
 			<value>40</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{4b13f28a-827a-4d04-9386-c86e05fb16ba}</destination>
 			<destination>{c3a3be17-0543-4ebf-aac5-0a4daa1bb043}</destination>
@@ -244,7 +242,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{eb87caa7-e7bc-4b27-8486-d91f7c75ac62}">
 		<property name="volume">
-			<value>-5</value>
+			<value>-9</value>
 		</property>
 		<property name="name">
 			<value>Concrete Footsteps 2</value>
@@ -266,7 +264,6 @@
 		<property name="start">
 			<value>1</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{245eeceb-70e5-4843-8077-f93dc043dd07}</destination>
 			<destination>{09a4052b-96ea-42e2-ba67-9bee1e833639}</destination>
@@ -311,7 +308,6 @@
 		<property name="maximumTimeDelay">
 			<value>40</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{0a4444e6-c153-45d2-9d73-40fb9d358b43}</destination>
 			<destination>{78a13643-62bd-4438-a7dc-029fac43aebc}</destination>
@@ -350,7 +346,6 @@
 		<property name="maximumTimeDelay">
 			<value>100</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{94dede0e-ed75-4f74-bcd7-81291d51e8e4}</destination>
 			<destination>{4f075d56-1339-4027-bd8e-5036fde4e39f}</destination>
@@ -375,7 +370,6 @@
 		<property name="maximumTimeDelay">
 			<value>100</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{ead0acb7-76ef-4551-97f3-e45698d58c57}</destination>
 			<destination>{ce567814-82af-460b-a57d-b7c71440d217}</destination>
@@ -414,7 +408,6 @@
 		<property name="maximumTimeDelay">
 			<value>100</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{47ec876c-a211-40e3-b524-456debafbcab}</destination>
 			<destination>{af898450-c939-4696-b92c-54773d88f4b9}</destination>
@@ -439,7 +432,6 @@
 		<property name="maximumTimeDelay">
 			<value>100</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{24ed7bba-7d4a-4d2b-9236-e97df317b792}</destination>
 			<destination>{fb05f69e-0c91-4729-b67a-881be5ca5c73}</destination>
@@ -453,7 +445,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{511565dd-38c2-4bc2-b622-e664619c450c}">
 		<property name="volume">
-			<value>-25.5</value>
+			<value>-26.5</value>
 		</property>
 		<property name="name">
 			<value>BodySound 2</value>
