@@ -21,6 +21,7 @@ public class AirState : MovementState
 
         if (_controller.IsGrounded()) {
             // Debug.Log("Air -> Ground");
+            _controller.Step();
             _sm.ChangeState(new GroundState(_controller, _sm));
             return;
         }
