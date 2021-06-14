@@ -15355,13 +15355,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341424389}
-  m_LocalRotation: {x: 0.00000011941842, y: -0.0000001194184, z: -0.7071067, w: 0.7071068}
+  m_LocalRotation: {x: 0.00054603844, y: 0.0005457996, z: -0.70710653, w: 0.70710665}
   m_LocalPosition: {x: 60.500893, y: 24.856, z: -39.715027}
   m_LocalScale: {x: 1218.575, y: 2662.5579, z: 4179.3}
   m_Children: []
   m_Father: {fileID: 1481068719}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.08800001, y: 0, z: -90.00001}
 --- !u!23 &1341424391
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24715,6 +24715,8 @@ GameObject:
   - component: {fileID: 4851727461942110389}
   - component: {fileID: 408881780534456612}
   - component: {fileID: 1640073940996707110}
+  - component: {fileID: 1640073940996707112}
+  - component: {fileID: 1640073940996707111}
   m_Layer: 8
   m_Name: Cube.001
   m_TagString: Untagged
@@ -24735,6 +24737,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.079399996, y: 12.548396, z: 0.020000923}
   m_Center: {x: -0.029699948, y: 3.1500363, z: -0.00000012157992}
+--- !u!114 &1640073940996707111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640073940996707109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0e04e2572f9a940a47465f6f3c2f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  parameter: Surface
+  TriggerEvent: 8
+  value: 0.5
+--- !u!114 &1640073940996707112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640073940996707109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0e04e2572f9a940a47465f6f3c2f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  parameter: Surface
+  TriggerEvent: 7
+  value: 1.5
 --- !u!23 &1765954577085920504
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24941,6 +24975,8 @@ GameObject:
   - component: {fileID: 5175354165639838949}
   - component: {fileID: 1765954577085920504}
   - component: {fileID: 1934401341296104145}
+  - component: {fileID: 1934401341296104147}
+  - component: {fileID: 1934401341296104146}
   m_Layer: 8
   m_Name: Cube.002
   m_TagString: Untagged
@@ -24961,6 +24997,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25759995, y: 12.548393, z: 0.019999996}
   m_Center: {x: -0.11879998, y: 3.150036, z: 0.000011444092}
+--- !u!114 &1934401341296104146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934401341296104144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0e04e2572f9a940a47465f6f3c2f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  parameter: Surface
+  TriggerEvent: 8
+  value: 0.5
+--- !u!114 &1934401341296104147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934401341296104144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0e04e2572f9a940a47465f6f3c2f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  parameter: Surface
+  TriggerEvent: 7
+  value: 1.5
 --- !u!33 &1991642169305789470
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -25215,6 +25283,8 @@ GameObject:
   - component: {fileID: 8151559611316951362}
   - component: {fileID: 2580509269282513034}
   - component: {fileID: 5553806014472782982}
+  - component: {fileID: 5553806014472782983}
+  - component: {fileID: 5553806014472782984}
   m_Layer: 8
   m_Name: Cube.087
   m_TagString: Untagged
@@ -25235,6 +25305,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.118999995, y: 12.548393, z: 0.020000998}
   m_Center: {x: -0.0495, y: 3.1500342, z: -0.0000034610794}
+--- !u!114 &5553806014472782983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553806014472782981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0e04e2572f9a940a47465f6f3c2f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Player
+  parameter: Surface
+  TriggerEvent: 7
+  value: 1.5
+--- !u!114 &5553806014472782984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553806014472782981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0e04e2572f9a940a47465f6f3c2f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  parameter: Surface
+  TriggerEvent: 8
+  value: 0.5
 --- !u!1 &6010816714954470140
 GameObject:
   m_ObjectHideFlags: 0
