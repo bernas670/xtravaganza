@@ -112,8 +112,6 @@ public class WeaponSwitchController : MonoBehaviour
             i++;
         }
 
-        Debug.Log(weaponUI);
-
         weaponUI.updateWeaponsList(weapons, selectedWeapon);
     }
 
