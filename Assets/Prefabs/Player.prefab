@@ -1046,6 +1046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
   _animator: {fileID: 7071738614071055297}
+  crosshair: {fileID: 0}
 --- !u!114 &7071738613541774464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1847,6 +1848,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606134e006ce4a74dab463d63b539371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathMenu: {fileID: 0}
+  pauseController: {fileID: 0}
 --- !u!114 &7071738614071055310
 MonoBehaviour:
   m_ObjectHideFlags: 0

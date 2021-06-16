@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.35872743, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4237,6 +4237,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43a71693571f69740844b10ca2191148, type: 3}
+--- !u!114 &308585576 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5433978584517253602, guid: 43a71693571f69740844b10ca2191148,
+    type: 3}
+  m_PrefabInstance: {fileID: 308585575}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7621f427d9470fb188b9788eab86baf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &308585577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2836782339111169872, guid: 43a71693571f69740844b10ca2191148,
+    type: 3}
+  m_PrefabInstance: {fileID: 308585575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &308585578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7033312900012990814, guid: 43a71693571f69740844b10ca2191148,
+    type: 3}
+  m_PrefabInstance: {fileID: 308585575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &311140422
 GameObject:
   m_ObjectHideFlags: 0
@@ -4972,9 +4996,24 @@ PrefabInstance:
       objectReference: {fileID: 1976170615}
     - target: {fileID: 7071738613541774478, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
         type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 308585577}
+    - target: {fileID: 7071738613541774478, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
+        type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 93599047}
+    - target: {fileID: 7071738614071055311, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
+        type: 3}
+      propertyPath: deathMenu
+      value: 
+      objectReference: {fileID: 308585578}
+    - target: {fileID: 7071738614071055311, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
+        type: 3}
+      propertyPath: pauseController
+      value: 
+      objectReference: {fileID: 308585576}
     m_RemovedComponents:
     - {fileID: 7071738614871731617, guid: 97f93a50485ba5f4ea52c7bf577b75f2, type: 3}
     - {fileID: 7071738614874730523, guid: 97f93a50485ba5f4ea52c7bf577b75f2, type: 3}

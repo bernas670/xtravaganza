@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class DeathMenu : MonoBehaviour
 {
-
-    public void Resume()
+    public void Respawn()
     {
         PauseController pauseController = gameObject.GetComponentInParent<PauseController>();
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         pauseController.ResumeGame();
     }
 
     public void BackToMenu()
     {
         SceneManager.LoadScene(0);
-        Resume();
+        gameObject.GetComponentInParent<PauseController>().ResumeGame();
     }
 }
