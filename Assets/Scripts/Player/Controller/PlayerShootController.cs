@@ -33,7 +33,7 @@ public class PlayerShootController : Shooter
 
     void Update()
     {
-        UpdateText();        
+        UpdateText();
         _isMeleeing = animator.GetBool("isMeleeing");
 
         if (Input.GetButton("Fire2") && !_isMeleeing && !_movementController.IsWallRunning())
@@ -52,9 +52,14 @@ public class PlayerShootController : Shooter
         {
             fireWeapon.reload();
         }
+        else if (Input.GetButtonUp("Fire1"))
+        {
+            fireWeapon.StopShootSound();
+        }
     }
 
-    public void Kick() {
+    public void Kick()
+    {
         meleeWeapon.shoot(this);
     }
 

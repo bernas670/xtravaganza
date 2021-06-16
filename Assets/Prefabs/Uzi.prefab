@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 1532602676889507546}
   - component: {fileID: 798373221939579720}
   - component: {fileID: 840972776713415870}
-  m_Layer: 0
+  - component: {fileID: 6129448246198233289}
+  m_Layer: 11
   m_Name: Uzi
-  m_TagString: Untagged
+  m_TagString: FireWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2824039230446170400}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: -0.025039347, z: -0.016568968}
   m_LocalScale: {x: 3, y: 3, z: 2.5}
   m_Children:
@@ -136,8 +137,10 @@ MonoBehaviour:
   impactEffect: {fileID: 1000011190285628, guid: beb3acff7ab73944fb8f470f24d74ed3,
     type: 3}
   dropEmitter: {fileID: 840972776713415870}
+  shootEmitter: {fileID: 6129448246198233289}
   inUse: 0
   isEquipped: 0
+  dropSoundInterval: 0.5
 --- !u!114 &840972776713415870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +164,29 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &6129448246198233289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824039230446170400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: "event:/Andr\xE9/Gun_7.5f"
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &2824039230446170402
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +198,7 @@ GameObject:
   - component: {fileID: 2824039230446333186}
   - component: {fileID: 2824039230449200418}
   - component: {fileID: 2824039230448103394}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +277,7 @@ GameObject:
   - component: {fileID: 2824039230446333192}
   - component: {fileID: 2824039230449200424}
   - component: {fileID: 2824039230448103400}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Magazin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +356,7 @@ GameObject:
   - component: {fileID: 2824039230446333194}
   - component: {fileID: 2824039230449200426}
   - component: {fileID: 2824039230448103402}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +435,7 @@ GameObject:
   - component: {fileID: 2824039230446333196}
   - component: {fileID: 2824039230449200428}
   - component: {fileID: 2824039230448103404}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Stock_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +514,7 @@ GameObject:
   - component: {fileID: 2824039230446333198}
   - component: {fileID: 2824039230449200430}
   - component: {fileID: 2824039230448103406}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Stock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -624,6 +650,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2824039230446333184}
     m_Modifications:
+    - target: {fileID: 9022593464370175360, guid: 5dfb7b721c359584f915973c0c5ba8bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 9022593464370175363, guid: 5dfb7b721c359584f915973c0c5ba8bf,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
@@ -678,6 +709,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Particle System (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9022593465271377609, guid: 5dfb7b721c359584f915973c0c5ba8bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9022593465271377611, guid: 5dfb7b721c359584f915973c0c5ba8bf,
         type: 3}
