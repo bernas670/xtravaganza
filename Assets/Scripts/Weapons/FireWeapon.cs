@@ -83,13 +83,11 @@ public abstract class FireWeapon : Weapon
             {
                 if (hit.transform.name == "Player") /* controller = enemy */
                 {
-                    Debug.Log(controller.gameObject.name + " attacked player");
                     Player player = hit.transform.gameObject.GetComponent<Player>();
                     player.TakeDamage(_damage);
                 }
                 else if (hit.transform.name == "Enemy") /* controller = player || enemy */
                 {
-                    Debug.Log(controller.gameObject.name + " attacked enemy");
                     Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
                     enemy.TakeDamage(_damage);
 

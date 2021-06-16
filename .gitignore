@@ -87,3 +87,6 @@ Assets/Gizmos.meta
 Assets/Plugins/*
 Assets/Plugins.meta
 *.json
+
+Sound/.cache/*
+Sound/.unsaved/*

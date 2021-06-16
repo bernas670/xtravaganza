@@ -11,6 +11,10 @@ public class WallRunningState : MovementState
     private float _wallRunJumpForce = 6f;
     private float _wallRunCamTilt = 25;
 
+    private float _timeBetweenSounds = 0;
+    private float _interval = 0.3f;
+    private float _endInterval = 0.7f;
+
     public WallRunningState(MovementController controller, StateMachine stateMachine) : base(controller, stateMachine) { }
 
     public override void Enter()
@@ -28,6 +32,9 @@ public class WallRunningState : MovementState
     public override void HandleInput()
     {
         base.HandleInput();
+
+        Footsteps();
+
         if (Input.GetButtonDown("Jump"))
             _wishJump = true;
         if (Input.GetButtonUp("Jump"))
@@ -38,13 +45,15 @@ public class WallRunningState : MovementState
     {
         base.PhysicsUpdate();
 
-        if(!_controller.CanWallRun()) {
-            if(_controller.IsGrounded()) {
+        if (!_controller.CanWallRun())
+        {
+            if (_controller.IsGrounded())
+            {
                 // Debug.Log("WallRun -> Ground");
                 _sm.ChangeState(new GroundState(_controller, _sm));
                 return;
             }
-            
+
             // Debug.Log("WallRun -> Air");
             _sm.ChangeState(new AirState(_controller, _sm));
             return;
@@ -66,7 +75,8 @@ public class WallRunningState : MovementState
         _rb.AddForce(direction * force, ForceMode.Force);
     }
 
-    float CalcJumpForce() {
+    float CalcJumpForce()
+    {
         float hVel = Mathf.Sqrt(Mathf.Pow(_rb.velocity.x, 2) + Mathf.Pow(_rb.velocity.z, 2));
         return _wallRunJumpForce * Mathf.Clamp(hVel * 5, 50, 150);
     }
@@ -78,5 +88,19 @@ public class WallRunningState : MovementState
         _controller.Tilt(0, true);
         _controller.animator.SetBool("isWallRunning", false);
         _rig.setRigWeight("leftHand", 1f);
+    }
+
+    private void Footsteps()
+    {
+        if (_controller.rb.velocity.y < 0) {
+            _interval = Mathf.Lerp(_interval, _endInterval, Time.deltaTime);
+        }
+
+        _timeBetweenSounds += Time.deltaTime;
+        if (_timeBetweenSounds >= _interval)
+        {
+            _controller.Step();
+            _timeBetweenSounds = 0;
+        }
     }
 }

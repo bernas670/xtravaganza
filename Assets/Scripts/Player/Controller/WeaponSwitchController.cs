@@ -34,7 +34,6 @@ public class WeaponSwitchController : MonoBehaviour
         _cameraTransform = _shooter.getPoV();
 
         SelectWeapon();
-        weaponUI.updateWeaponsList(weapons, selectedWeapon);
     }
 
     void Update()
