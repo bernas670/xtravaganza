@@ -159,6 +159,7 @@ public class WeaponSwitchController : MonoBehaviour
     {
         FireWeapon fireWeapon = currentWeapon.GetComponent<FireWeapon>();
         fireWeapon.setInUse(false);
+        fireWeapon.StopShootSound();
 
         slotFull = false;
 

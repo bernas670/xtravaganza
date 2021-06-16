@@ -356,7 +356,7 @@ MonoBehaviour:
   impactEffect: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980,
     type: 3}
   dropEmitter: {fileID: 3749711158785976468}
-  shootEmitter: {fileID: 3749711158785976468}
+  shootEmitter: {fileID: 5494206762701917576}
   inUse: 0
   isEquipped: 0
   dropSoundInterval: 0.5
