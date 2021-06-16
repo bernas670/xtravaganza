@@ -63,7 +63,6 @@ public class OptionsMenu : MonoBehaviour
     }
 
     void OnDisable() {
-        Debug.Log("disabled");
         PlayerPrefs.SetFloat("music_volume", _musicVol);
         PlayerPrefs.SetFloat("sfx_volume", _sfxVol);
         PlayerPrefs.SetFloat("mouse_sensitivity", _mouseSens);

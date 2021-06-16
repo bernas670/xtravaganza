@@ -21,11 +21,15 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        sensitivity = PlayerPrefs.GetFloat("mouse_sensitivity", 5);
+        sensitivity = PlayerPrefs.GetFloat("mouse_sensitivity", 5f);
     }
 
     void Update()
     {
+        if (PauseController.isPaused) {
+            return;
+        }
+
         float rotX = Input.GetAxis("Mouse X") * sensitivity;
         float rotY = Input.GetAxis("Mouse Y") * sensitivity * -1f;
 

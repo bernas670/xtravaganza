@@ -32,6 +32,10 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
+        if (PauseController.isPaused) {
+            return;
+        }
+
         _wishDir = Vector3.zero;
         _wishDir.x = Input.GetAxis("Horizontal");
         _wishDir.z = Input.GetAxis("Vertical");
