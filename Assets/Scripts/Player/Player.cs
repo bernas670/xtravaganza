@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-using System.Collections;
+using UnityEngine.UI;
 
 public class Player : Character
 {
+    public Material badAlien;
     public HealthBar healthBar;
     public Animator _animator;
+    public GameObject gotHitScreen;
     private int _lavaLayer;
     private bool _isPlayerInvincible = false;
     private int _totalScientists;
@@ -15,7 +17,6 @@ public class Player : Character
     private Camera _deathCam;
     private RigController _rig;
     private GameObject _gunContainer;
-
     void Awake()
     {
         _healthStat = new HealthStat(100);
@@ -38,6 +39,16 @@ public class Player : Character
     {
         // since it is called every frame instead of only when the event occurs
         healthBar.SetHealth(_healthStat.getHealth());
+        Color color = gotHitScreen.GetComponent<RawImage>().color;
+        if (color.a > 0)
+        {
+            color.a -= 0.05f;
+            gotHitScreen.GetComponent<RawImage>().color = color;
+        }
+        else
+        {
+            gotHitScreen.SetActive(false);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -73,9 +84,15 @@ public class Player : Character
 
     public override void TakeDamage(int damage)
     {
+        if (_healthStat.isDead())
+        {
+            return;
+        }
+
         if (!_isPlayerInvincible)
         {
             _healthStat.TakeDamage(damage);
+            gotHitFeedback();
         }
 
         if (_healthStat.isDead())
@@ -83,15 +100,26 @@ public class Player : Character
             this.Die();
         }
     }
+
+    private void gotHitFeedback()
+    {
+        gotHitScreen.SetActive(true);
+        var color = gotHitScreen.GetComponent<RawImage>().color;
+        color.a = 0.65f;
+        gotHitScreen.GetComponent<RawImage>().color = color;
+    }
+
     public void becomeEvil()
     {
         _pointsToEvil--;
-
         if (_pointsToEvil <= 0)
         {
-            //muda de cor
+            GameObject head = GameObject.Find("Cube.001");
+            GameObject body = GameObject.Find("Cube.010");
+
+            head.GetComponent<SkinnedMeshRenderer>().material = badAlien;
+            body.GetComponent<SkinnedMeshRenderer>().material = badAlien;
         }
-        Debug.Log("points to evil:" + _pointsToEvil);
     }
     private void OnTriggerStay(Collider col){
         if (col.gameObject.name == "ElevatorFloor")
