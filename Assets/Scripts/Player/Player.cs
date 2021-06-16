@@ -83,7 +83,6 @@ public class Player : Character
             this.Die();
         }
     }
-
     public void becomeEvil()
     {
         _pointsToEvil--;
@@ -94,17 +93,25 @@ public class Player : Character
         }
         Debug.Log("points to evil:" + _pointsToEvil);
     }
-
-    private void OnTriggerEnter(Collider col)
-    {
+    private void OnTriggerStay(Collider col){
         if (col.gameObject.name == "ElevatorFloor")
-        {   
-            /* TODO: StartCoroutine(PauseMovement()) */
+        {               
+            //put player in the right position
+            gameObject.transform.position = new Vector3(18, 12, 145);
 
+            //disable ability to move
+            MovementController mController = gameObject.GetComponent<MovementController>();
+            mController.enabled = false;
+
+            //stop player animation
+            _animator.SetFloat("zVelocity", 0.0f);
+            _animator.SetFloat("xVelocity", 0.0f);
+
+            //start cutscene
             GameObject timeline = GameObject.Find("Timeline");
             Timeline cutscene = timeline.GetComponent<Timeline>();
             cutscene.playCutScene();
-            
         }
     }
+
 }
