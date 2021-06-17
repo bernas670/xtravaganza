@@ -66,6 +66,7 @@ public class Door : MonoBehaviour
             closing = false;
         }
     }
+
     private void OnTriggerExit(Collider col)
     {
         if (isLocked)
@@ -76,6 +77,5 @@ public class Door : MonoBehaviour
             closing = true;
             opening = false;
         }
-
     }
 }

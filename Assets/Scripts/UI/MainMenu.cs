@@ -7,6 +7,12 @@ public class MainMenu : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        GameObject player = GameObject.Find("Player");
+        GameObject canvas = GameObject.Find("Canvas");
+
+        Destroy(player);
+        Destroy(canvas);
     }
 
     public void PlayGame()

@@ -3,26 +3,21 @@ using UnityEngine.UI;
 
 public class Player : Character
 {
+    public Material badAlien;
     public HealthBar healthBar;
     public Animator _animator;
     public GameObject crosshair;
     public GameObject gotHitScreen;
-
     private int _lavaLayer;
     private bool _isPlayerInvincible = false;
-
     private int _totalScientists;
     private int _pointsToEvil;
-
-
     private Camera _mainCam;
     private Camera _deathCam;
     private RigController _rig;
     private GameObject _gunContainer;
-
     void Awake()
     {
-        _healthStat = new HealthStat(100);
         _lavaLayer = LayerMask.NameToLayer("Lava");
         _totalScientists = GameObject.FindGameObjectsWithTag("Scientist").Length;
         _pointsToEvil = _totalScientists / 2; // 50%
@@ -31,6 +26,21 @@ public class Player : Character
         _deathCam = transform.Find("DeathCamera").GetComponent<Camera>();
         _rig = GetComponentsInChildren<RigController>()[0];
         _gunContainer = transform.Find("Main Camera").Find("GunContainer").gameObject;
+
+        _healthStat = new HealthStat(100);
+
+        GameObject mementoManager = GameObject.Find("MementoManager");
+        if (!mementoManager)
+        {
+            return;
+        }
+
+        SnapshotPlayer sPlayer = mementoManager.GetComponent<MementoManager>().GetSnapshot();
+        if (sPlayer != null)
+        {
+            _healthStat = new HealthStat(sPlayer.health);
+        }
+
     }
 
     private void Start()
@@ -116,11 +126,44 @@ public class Player : Character
     public void becomeEvil()
     {
         _pointsToEvil--;
-
         if (_pointsToEvil <= 0)
         {
-            //muda de cor
+            GameObject head = GameObject.Find("Cube.001");
+            GameObject body = GameObject.Find("Cube.010");
+
+            head.GetComponent<SkinnedMeshRenderer>().material = badAlien;
+            body.GetComponent<SkinnedMeshRenderer>().material = badAlien;
         }
-        Debug.Log("points to evil:" + _pointsToEvil);
     }
+    private void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.name == "ElevatorFloor")
+        {
+            //put player in the right position
+            gameObject.transform.position = new Vector3(18, 12, 145);
+
+            //disable ability to move
+            MovementController mController = gameObject.GetComponent<MovementController>();
+            mController.rb.velocity = new Vector3(mController.rb.velocity.x, 0, mController.rb.velocity.z);
+            mController.enabled = false;
+
+            //stop player animation
+            _animator.SetFloat("zVelocity", 0.0f);
+            _animator.SetFloat("xVelocity", 0.0f);
+
+            //start cutscene
+            GameObject timeline = GameObject.Find("Timeline");
+            Timeline cutscene = timeline.GetComponent<Timeline>();
+            cutscene.playCutScene();
+        }
+    }
+
+    public GameObject getGunContainer(){
+        return _gunContainer;
+    }
+
+    public RigController GetRigController(){
+        return _rig;
+    }
+
 }
