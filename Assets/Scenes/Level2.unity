@@ -1163,6 +1163,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1347846076713622904, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
+        type: 3}
+      propertyPath: Event
+      value: "event:/Andr\xE9/Music"
+      objectReference: {fileID: 0}
     - target: {fileID: 7071738613240622140, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
         type: 3}
       propertyPath: weaponUI
