@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
-
 public class WeaponUI : MonoBehaviour
 {
-
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI weaponNameText;
-
     public TextMeshProUGUI weaponsList;
 
     public void SetAmmo(int clip, int ammo)

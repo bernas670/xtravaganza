@@ -16,7 +16,6 @@ public abstract class MeleeWeapon : Weapon
                 }
                 else if (hit.transform.name == "Enemy") /* controller = player || enemy */
                 {
-                    Debug.Log("MELEE: \t" + controller.gameObject.name + " attacked enemy");
                     Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
                     enemy.TakeDamage(_damage);
                 }
