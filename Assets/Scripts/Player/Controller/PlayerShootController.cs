@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerShootController : Shooter
 {
-    [SerializeField] protected Camera cam;
-
     public WeaponUI weaponUI;
     public Animator animator;
     public float pickUpRange = 5;
@@ -13,7 +11,7 @@ public class PlayerShootController : Shooter
 
     void Awake()
     {
-        setPoV(cam.transform);
+        setPoV((Camera.main).transform);
         _movementController = GetComponent<MovementController>();
     }
 
@@ -73,4 +71,6 @@ public class PlayerShootController : Shooter
         _isMeleeing = false;
         animator.SetBool("isMeleeing", false);
     }
+
+
 }
