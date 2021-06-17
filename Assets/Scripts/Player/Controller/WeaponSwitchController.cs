@@ -40,6 +40,7 @@ public class WeaponSwitchController : MonoBehaviour
             {
                 GameObject weapon = Instantiate(snapWeapon.prefab, transform, false);
                 weapon.name = weapon.name.Replace("(Clone)", "");
+                weapon.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
                 FireWeapon fireWeapon = weapon.GetComponent<FireWeapon>();
                 fireWeapon.setReloadValue(snapWeapon.maxAmmo);
                 fireWeapon.setClipValue(snapWeapon.currentAmmo);

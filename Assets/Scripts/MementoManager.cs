@@ -29,4 +29,9 @@ public class MementoManager : MonoBehaviour
     {
         return _snapshotPlayer;
     }
+
+    public void ClearSnapshot()
+    {
+        _snapshotPlayer = null;
+    }
 }

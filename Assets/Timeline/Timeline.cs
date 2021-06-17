@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Playables;
 
 public class Timeline : MonoBehaviour
@@ -11,7 +9,8 @@ public class Timeline : MonoBehaviour
         timeline = GetComponent<PlayableDirector>();
     }
 
-    public void playCutScene(){
+    public void playCutScene()
+    {
         timeline.Play();
     }
 }
