@@ -10,6 +10,11 @@ public class MainMenu : MonoBehaviour
 
         GameObject player = GameObject.Find("Player");
         GameObject canvas = GameObject.Find("Canvas");
+        GameObject memManager = GameObject.Find("MementoManager");
+
+        if(memManager) {
+            memManager.GetComponent<MementoManager>().ClearSnapshot();
+        }
 
         Destroy(player);
         Destroy(canvas);
