@@ -60,7 +60,9 @@ public class EnemyController : Shooter
     // State Machine
     public void UpdateState()
     {
-        float distance = Vector3.Distance(_target.position, transform.position);
+        float distance = Mathf.Infinity;
+        if(_target)
+            distance = Vector3.Distance(_target.position, transform.position);
 
         if (_isDead)
         {
@@ -68,7 +70,7 @@ public class EnemyController : Shooter
             DyingAction dying = new DyingAction();
             dying.Act(this);
         }
-        else if (!fireWeapon || distance > fireWeapon.getRange())
+        else if (!fireWeapon || !_target || distance > fireWeapon.getRange())
         {
             //patrol;   
             //Change the patrolling points created in Scene;

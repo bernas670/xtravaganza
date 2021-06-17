@@ -21,25 +21,37 @@ public class WeaponSwitchController : MonoBehaviour
     private int maxWeapons = 4;
     private float lastPickSoundTime = 0;
 
-    void Start()
+    void Awake()
     {
         _shooter = player.gameObject.GetComponent<PlayerShootController>();
         _rig = player.gameObject.GetComponentsInChildren<RigController>()[0];
         _animator = player.gameObject.GetComponentsInChildren<Animator>()[0];
 
-        weapons.Add(_shooter.getFireWeapon().gameObject);
-        currentWeapon = _shooter.getFireWeapon().gameObject;
-        currentWeapon.GetComponent<BoxCollider>().enabled = false;
-
         _cameraTransform = _shooter.getPoV();
 
-        SelectWeapon();
+        GameObject mementoManager = GameObject.Find("MementoManager");
+
+        if (!mementoManager) return;
+
+        SnapshotPlayer sPlayer = mementoManager.GetComponent<MementoManager>().GetSnapshot();
+        if (sPlayer != null)
+        {
+            this.weapons = sPlayer.weapons;
+
+            if (this.weapons.Count > 0)
+            {
+                currentWeapon = this.weapons[selectedWeapon];
+                SelectWeapon();
+            }
+
+        }
     }
 
     void Update()
     {
 
-        if (PauseController.isPaused) {
+        if (PauseController.isPaused)
+        {
             return;
         }
 

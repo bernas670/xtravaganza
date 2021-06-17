@@ -18,7 +18,6 @@ public class Player : Character
     private GameObject _gunContainer;
     void Awake()
     {
-        _healthStat = new HealthStat(100);
         _lavaLayer = LayerMask.NameToLayer("Lava");
         _totalScientists = GameObject.FindGameObjectsWithTag("Scientist").Length;
         _pointsToEvil = _totalScientists / 2; // 50%
@@ -27,6 +26,21 @@ public class Player : Character
         _deathCam = transform.Find("DeathCamera").GetComponent<Camera>();
         _rig = GetComponentsInChildren<RigController>()[0];
         _gunContainer = transform.Find("Main Camera").Find("GunContainer").gameObject;
+
+        _healthStat = new HealthStat(100);
+
+        GameObject mementoManager = GameObject.Find("MementoManager");
+        if (!mementoManager)
+        {
+            return;
+        }
+
+        SnapshotPlayer sPlayer = mementoManager.GetComponent<MementoManager>().GetSnapshot();
+        if (sPlayer != null)
+        {
+            _healthStat = new HealthStat(sPlayer.health);
+        }
+
     }
 
     private void Start()
@@ -121,9 +135,10 @@ public class Player : Character
             body.GetComponent<SkinnedMeshRenderer>().material = badAlien;
         }
     }
-    private void OnTriggerStay(Collider col){
+    private void OnTriggerStay(Collider col)
+    {
         if (col.gameObject.name == "ElevatorFloor")
-        {               
+        {
             //put player in the right position
             gameObject.transform.position = new Vector3(18, 12, 145);
 
@@ -141,6 +156,14 @@ public class Player : Character
             Timeline cutscene = timeline.GetComponent<Timeline>();
             cutscene.playCutScene();
         }
+    }
+
+    public GameObject getGunContainer(){
+        return _gunContainer;
+    }
+
+    public RigController GetRigController(){
+        return _rig;
     }
 
 }
