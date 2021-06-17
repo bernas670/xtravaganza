@@ -17,31 +17,38 @@ public class EnemyController : Shooter
     [SerializeField] List<Transform> _wayPointList;
     [HideInInspector] public int nextWayPoint;
 
-    private bool _isEvil;
     private bool _isDead = false;
     private bool _isChasing = false;
-
     public GameObject rightHand;
     public GameObject leftHand;
+    public MeshCollider collider;
 
+    private float _detectionRange = 50f;
 
     void Awake()
     {
-        _isEvil = Random.Range(0, 2) == 0;
         setPoV(this.transform);
 
         _animator = GetComponent<Animator>();
+
+        _player = GameObject.Find("Player");
+        _target = _player.transform;
+        _agent = GetComponent<NavMeshAgent>();
     }
 
     void Start()
     {
-        _player = GameObject.Find("Player"); // Make this a singleton + game manager
-        _target = _player.transform; /* Make this a singleton + game manager*/
-        _agent = GetComponent<NavMeshAgent>();
+
     }
 
     void Update()
     {
+        if (!_player)
+        {
+            _player = GameObject.Find("Player");
+            _target = _player.transform;
+        }
+
         UpdateState();
 
         float velX = Vector3.Dot(_agent.velocity.normalized, transform.right);
@@ -60,20 +67,23 @@ public class EnemyController : Shooter
     // State Machine
     public void UpdateState()
     {
-        float distance = Vector3.Distance(_target.position, transform.position);
+        float distance = Mathf.Infinity;
+        if (_target)
+        {
+            distance = Vector3.Distance(_target.position, transform.position);
+        }
 
         if (_isDead)
-        {            
+        {
             clearRigWeaponReference();
             DyingAction dying = new DyingAction();
             dying.Act(this);
         }
-        else if (!fireWeapon || distance > fireWeapon.getRange())
+        else if (!fireWeapon || !_target || distance > _detectionRange)
         {
             //patrol;   
             //Change the patrolling points created in Scene;
             _isChasing = false;
-            fireWeapon.StopShootSound();
             PatrolAction patrol = new PatrolAction();
             patrol.Act(this);
             //  ------------TODO----------------------------
@@ -111,7 +121,6 @@ public class EnemyController : Shooter
 
     public void dropWeapon()
     {
-        fireWeapon.StopShootSound();
         fireWeapon.setInUse(false);
         fireWeapon.gameObject.transform.parent = null;
 
@@ -142,6 +151,7 @@ public class EnemyController : Shooter
         dropWeapon();
         _isDead = true;
         _animator.SetTrigger("isDead");
+        collider.enabled = false;
     }
 
     // detach the weapon from player;

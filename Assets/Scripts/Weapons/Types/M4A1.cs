@@ -1,17 +1,19 @@
-public class M4A1 : FireWeapon {
-    public void Awake(){
-        _damage = 15;
-        _range = 30f;
+public class M4A1 : FireWeapon
+{
+    public void Awake()
+    {
+        _damage = 30;
+        _range = 60f;
 
-        _fireRate = 5f;
-        _timeToFire= 1f;        
-        _initialAmmo = 30;
+        _fireRate = 3f;
+        _initialAmmo = 20;
 
-        setAmmoValue(90);
+        setAmmoValue(60);
         setClipValue(_initialAmmo);
     }
 
-    public override string getType() {
+    public override string getType()
+    {
         return "Rifle";
     }
 }

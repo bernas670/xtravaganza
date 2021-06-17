@@ -1,17 +1,19 @@
-public class Pistol : FireWeapon {
-    public void Awake(){
+public class Pistol : FireWeapon
+{
+    public void Awake()
+    {
         _damage = 20;
-        _range = 30f;
+        _range = 40f;
 
         _fireRate = 2.5f;
-        _timeToFire= 1f;        
         _initialAmmo = 15;
 
         setAmmoValue(30);
         setClipValue(_initialAmmo);
     }
 
-    public override string getType() {
+    public override string getType()
+    {
         return "Pistol";
     }
 }
