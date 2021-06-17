@@ -380,7 +380,7 @@ PrefabInstance:
     - target: {fileID: 1347846076713622904, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
         type: 3}
       propertyPath: Event
-      value: "event:/Andr\xE9/AmbientRoom2"
+      value: "event:/Andr\xE9/Music"
       objectReference: {fileID: 0}
     - target: {fileID: 7071738613240622140, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
         type: 3}
@@ -6667,7 +6667,6 @@ GameObject:
   - component: {fileID: 1080586525733649178}
   - component: {fileID: 452922012639402053}
   - component: {fileID: 5740328751517886555}
-  - component: {fileID: 5740328751517886556}
   m_Layer: 0
   m_Name: Object_200
   m_TagString: Untagged
@@ -6689,29 +6688,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6235013080682466971, guid: e5d6eb963e8c8fb41a5b798875a8db3d, type: 3}
---- !u!114 &5740328751517886556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5740328751517886554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/Johannes/Elevator Soundtrack
-  PlayEvent: 1
-  StopEvent: 2
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 1
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 50
 --- !u!4 &5767484094023774648
 Transform:
   m_ObjectHideFlags: 0
