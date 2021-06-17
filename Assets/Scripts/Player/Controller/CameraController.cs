@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
 {
     public Camera cam;
     public Transform rotationPivot;
-    public float sensitivity = 300f;
+    public float sensitivity = 5f;
 
     public float minHeadRotation = -90f;
     public float maxHeadRotation = 90f;
@@ -20,10 +20,16 @@ public class CameraController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        sensitivity = PlayerPrefs.GetFloat("mouse_sensitivity", 5f);
     }
 
     void Update()
     {
+        if (PauseController.isPaused) {
+            return;
+        }
+
         float rotX = Input.GetAxis("Mouse X") * sensitivity;
         float rotY = Input.GetAxis("Mouse Y") * sensitivity * -1f;
 
@@ -55,4 +61,9 @@ public class CameraController : MonoBehaviour
         }
 
     }
+
+    public void ChangeSensitivity(float newSens) {
+        sensitivity = newSens;
+    }
+
 }

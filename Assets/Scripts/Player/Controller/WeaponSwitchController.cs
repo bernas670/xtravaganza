@@ -38,6 +38,12 @@ public class WeaponSwitchController : MonoBehaviour
 
     void Update()
     {
+
+        if (PauseController.isPaused) {
+            return;
+        }
+
+
         int previousWeapon = selectedWeapon;
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f && weapons.Count > 1)
