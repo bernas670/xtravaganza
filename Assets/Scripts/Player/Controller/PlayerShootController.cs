@@ -57,11 +57,6 @@ public class PlayerShootController : Shooter
         {
             fireWeapon.reload();
         }
-        
-        if (Input.GetButtonUp("Fire1") || fireWeapon.getClipValue() <= 0)
-        {
-            fireWeapon.StopShootSound();
-        }
     }
 
     public void Kick()

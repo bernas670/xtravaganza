@@ -2852,6 +2852,11 @@ PrefabInstance:
       propertyPath: pauseController
       value: 
       objectReference: {fileID: 675452377}
+    - target: {fileID: 7071738614211044039, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
+        type: 3}
+      propertyPath: Event
+      value: "event:/Andr\xE9/Gun_5f"
+      objectReference: {fileID: 0}
     - target: {fileID: 7071738614871731620, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
         type: 3}
       propertyPath: m_ClearFlags

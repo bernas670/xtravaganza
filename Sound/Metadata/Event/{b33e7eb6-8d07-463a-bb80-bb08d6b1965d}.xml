@@ -120,6 +120,9 @@
 		<property name="length">
 			<value>0.40000000000000002</value>
 		</property>
+		<property name="looping">
+			<value>0</value>
+		</property>
 		<relationship name="timeline">
 			<destination>{650d4920-4e71-4112-8c5b-9de48d8ad394}</destination>
 		</relationship>

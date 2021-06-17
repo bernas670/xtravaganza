@@ -75,7 +75,6 @@ public class EnemyController : Shooter
             //patrol;   
             //Change the patrolling points created in Scene;
             _isChasing = false;
-            fireWeapon.StopShootSound();
             PatrolAction patrol = new PatrolAction();
             patrol.Act(this);
             //  ------------TODO----------------------------
@@ -113,7 +112,6 @@ public class EnemyController : Shooter
 
     public void dropWeapon()
     {
-        fireWeapon.StopShootSound();
         fireWeapon.setInUse(false);
         fireWeapon.gameObject.transform.parent = null;
 

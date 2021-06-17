@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: "event:/Andr\xE9/Gun_5f"
+  Event: "event:/Andr\xE9/Gun_8f"
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1

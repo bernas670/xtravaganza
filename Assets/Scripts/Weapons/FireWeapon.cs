@@ -71,21 +71,11 @@ public abstract class FireWeapon : Weapon
 
     void PlayShootSound()
     {
-        if(shootEmitter == null) return;
-        
-        if(!shootEmitter.IsPlaying()) {
-            shootEmitter.Play();
-        }
+        if (shootEmitter == null) return;
+
+        shootEmitter.Play();
     }
 
-    public void StopShootSound()
-    {
-        if(shootEmitter.IsPlaying()) {
-            shootEmitter.Stop();
-        }
-    }
-
-// TODO: refactor
     public override void shoot(Shooter controller)
     {
         if (Time.time >= _timeToFire)
@@ -112,7 +102,8 @@ public abstract class FireWeapon : Weapon
                     temObj.transform.parent = enemy.transform;
                     Destroy(temObj, 2f);
                 }
-                else if (hit.transform.tag == "Scientist"){
+                else if (hit.transform.tag == "Scientist")
+                {
 
                     Scientist scientist = hit.transform.gameObject.GetComponent<Scientist>();
                     scientist.TakeDamage(_damage);
@@ -126,6 +117,7 @@ public abstract class FireWeapon : Weapon
                     Destroy(temObj, 2f);
                 }
             }
+
         }
     }
 
@@ -144,5 +136,5 @@ public abstract class FireWeapon : Weapon
         isEquipped = value;
     }
 
-    public abstract string getType();    
+    public abstract string getType();
 }
