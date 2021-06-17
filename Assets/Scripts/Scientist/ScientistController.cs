@@ -25,6 +25,7 @@ public class ScientistController : MonoBehaviour
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _scientist = gameObject.GetComponent<Scientist>();
 
+        
     }
 
     void Update()
@@ -47,13 +48,10 @@ public class ScientistController : MonoBehaviour
             _animator.SetBool("isRunning", false);
             _animator.SetBool("isSafe", true);
 
-
             _agent.destination = _wayPointList[nextWayPoint].position;
             if (_agent.remainingDistance <= _agent.stoppingDistance && !_agent.pathPending && !_scientist.isDead()) 
             {
                 nextWayPoint = (nextWayPoint + 1) % _wayPointList.Count;
-
-                /* TODO: stop between points */
             }
         }
         else if(distanceToPlayer < 40f && distanceToPlayer > 20f) {
@@ -71,7 +69,6 @@ public class ScientistController : MonoBehaviour
             
             RunFromAlien();
         }
-        //resetVelocity(startVelocity, startAngVelocity);
         
     }
     
