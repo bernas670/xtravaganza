@@ -33,6 +33,10 @@ public class PlayerShootController : Shooter
 
     void Update()
     {
+        if (PauseController.isPaused) {
+            return;
+        }
+
         UpdateText();        
         _isMeleeing = animator.GetBool("isMeleeing");
 

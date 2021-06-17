@@ -1049,6 +1049,7 @@ MonoBehaviour:
   badAlien: {fileID: 0}
   healthBar: {fileID: 0}
   _animator: {fileID: 7071738614071055297}
+  crosshair: {fileID: 0}
   gotHitScreen: {fileID: 0}
 --- !u!114 &7071738613541774464
 MonoBehaviour:
@@ -1115,7 +1116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollisionTag: 
   Event: event:/Johannes/Alien Footsteps
-  PlayEvent: 7
+  PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 0
   TriggerOnce: 0
@@ -1863,6 +1864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606134e006ce4a74dab463d63b539371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathMenu: {fileID: 0}
+  pauseController: {fileID: 0}
 --- !u!114 &7071738614071055310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2797,8 +2800,8 @@ Camera:
   m_GameObject: {fileID: 7071738614871731622}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.18823531, g: 0.19215688, b: 0.18823531, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3061,8 +3064,8 @@ Camera:
   m_GameObject: {fileID: 7071738614943819195}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.1882353, g: 0.19215687, b: 0.1882353, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

@@ -34,11 +34,16 @@ public class WeaponSwitchController : MonoBehaviour
         _cameraTransform = _shooter.getPoV();
 
         SelectWeapon();
-        weaponUI.updateWeaponsList(weapons, selectedWeapon);
     }
 
     void Update()
     {
+
+        if (PauseController.isPaused) {
+            return;
+        }
+
+
         int previousWeapon = selectedWeapon;
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f && weapons.Count > 1)

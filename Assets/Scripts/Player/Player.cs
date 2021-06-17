@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 using UnityEngine.UI;
 
 public class Player : Character
@@ -8,6 +6,7 @@ public class Player : Character
     public Material badAlien;
     public HealthBar healthBar;
     public Animator _animator;
+    public GameObject crosshair;
     public GameObject gotHitScreen;
     private int _lavaLayer;
     private bool _isPlayerInvincible = false;
@@ -65,6 +64,7 @@ public class Player : Character
         _animator.SetBool("isDead", true);
         _mainCam.enabled = false;
         _deathCam.enabled = true;
+        crosshair.SetActive(false);
         _rig.clearRigWeaponReference();
         _rig.setRigWeight("aimRig", 0);
         GetComponent<MovementController>().enabled = false;
