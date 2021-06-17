@@ -88,6 +88,10 @@ public abstract class FireWeapon : Weapon
 // TODO: refactor
     public override void shoot(Shooter controller)
     {
+        int layerMask = LayerMask.GetMask("Door");
+
+        layerMask = ~layerMask;
+
         if (Time.time >= _timeToFire)
         {
             muzzleFlash.Play();
@@ -96,7 +100,7 @@ public abstract class FireWeapon : Weapon
             setTimeToFire(Time.time + 1f / _fireRate);
 
             RaycastHit hit;
-            if (Physics.Raycast(controller.getPoV().position, controller.getPoV().forward, out hit, _range))
+            if (Physics.Raycast(controller.getPoV().position, controller.getPoV().forward, out hit, _range, layerMask))
             {
                 if (hit.transform.name == "Player") /* controller = enemy */
                 {
