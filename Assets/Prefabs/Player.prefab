@@ -366,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f5ffcac6e2831488455028c38c8e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponUI: {fileID: 0}
   selectedWeapon: 0
   player: {fileID: 7071738613541774478}
   weapons: []
@@ -1046,7 +1047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
   _animator: {fileID: 7071738614071055297}
-  crosshair: {fileID: 0}
+  gotHitScreen: {fileID: 0}
 --- !u!114 &7071738613541774464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1112,7 +1113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollisionTag: 
   Event: event:/Johannes/Alien Footsteps
-  PlayEvent: 7
+  PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 0
   TriggerOnce: 0

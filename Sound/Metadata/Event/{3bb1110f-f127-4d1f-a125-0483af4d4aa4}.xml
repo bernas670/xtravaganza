@@ -60,7 +60,7 @@
 			<destination>{caca0392-0d93-4830-8453-73ef1a37e45b}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{1109117d-d553-4e3b-ae28-12d58058cd67}</destination>
+			<destination>{d589780a-8599-40eb-a4df-256036d462bb}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{28051d44-46b2-4d75-abeb-0bfc2d99be98}" />
@@ -129,7 +129,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{33f957b0-7f20-4c39-bb68-8f452dc9dd76}">
 		<property name="volume">
-			<value>-3</value>
+			<value>10</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{6960545d-1b6b-4358-84a9-eb12a0a4ce00}</destination>
@@ -223,7 +223,6 @@
 		<property name="maximumTimeDelay">
 			<value>40</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{fec58997-4203-4564-8631-de041d4d2114}</destination>
 			<destination>{0a2b62c8-b214-46bc-98c3-24712d0f7dc6}</destination>
@@ -339,7 +338,6 @@
 		<property name="maximumTimeDelay">
 			<value>100</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{a9eec5be-9386-4c2f-ab76-b257797858da}</destination>
 			<destination>{d8426e14-d8cd-432e-bf7d-232f47942c1f}</destination>
@@ -364,7 +362,6 @@
 		<property name="maximumTimeDelay">
 			<value>100</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{babeb9bf-0f71-4773-8f37-d247b8e32a63}</destination>
 			<destination>{0b3c36f6-d709-4276-9d21-2d8362c25e82}</destination>
