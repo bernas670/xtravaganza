@@ -21,7 +21,9 @@ public class EnemyController : Shooter
     private bool _isChasing = false;
     public GameObject rightHand;
     public GameObject leftHand;
+    public MeshCollider collider;
 
+    private float _detectionRange = 50f;
 
     void Awake()
     {
@@ -75,12 +77,11 @@ public class EnemyController : Shooter
             DyingAction dying = new DyingAction();
             dying.Act(this);
         }
-        else if (!fireWeapon || !_target || distance > fireWeapon.getRange())
+        else if (!fireWeapon || !_target || distance > _detectionRange)
         {
             //patrol;   
             //Change the patrolling points created in Scene;
             _isChasing = false;
-            fireWeapon.StopShootSound();
             PatrolAction patrol = new PatrolAction();
             patrol.Act(this);
             //  ------------TODO----------------------------
@@ -118,7 +119,6 @@ public class EnemyController : Shooter
 
     public void dropWeapon()
     {
-        fireWeapon.StopShootSound();
         fireWeapon.setInUse(false);
         fireWeapon.gameObject.transform.parent = null;
 
@@ -149,6 +149,7 @@ public class EnemyController : Shooter
         dropWeapon();
         _isDead = true;
         _animator.SetTrigger("isDead");
+        collider.enabled = false;
     }
 
     // detach the weapon from player;

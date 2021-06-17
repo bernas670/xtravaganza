@@ -488,6 +488,7 @@ MonoBehaviour:
   nextWayPoint: 0
   rightHand: {fileID: 760430933}
   leftHand: {fileID: 1667445516}
+  collider: {fileID: 5421735617947067149}
 --- !u!114 &8185722618453552043
 MonoBehaviour:
   m_ObjectHideFlags: 0

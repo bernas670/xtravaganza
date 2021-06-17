@@ -5,7 +5,7 @@ public abstract class Weapon : MonoBehaviour
     protected float _range;
 
     [SerializeField] protected float _fireRate;
-    protected float _timeToFire;
+    protected float _timeToFire = 1;
 
     public int getDamage()
     {
