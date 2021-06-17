@@ -36,7 +36,15 @@ public class WeaponSwitchController : MonoBehaviour
         SnapshotPlayer sPlayer = mementoManager.GetComponent<MementoManager>().GetSnapshot();
         if (sPlayer != null)
         {
-            this.weapons = sPlayer.weapons;
+            foreach (SnapshotWeapon snapWeapon in sPlayer.weapons)
+            {
+                GameObject weapon = Instantiate(snapWeapon.prefab, transform, false);
+                weapon.name = weapon.name.Replace("(Clone)", "");
+                FireWeapon fireWeapon = weapon.GetComponent<FireWeapon>();
+                fireWeapon.setReloadValue(snapWeapon.maxAmmo);
+                fireWeapon.setClipValue(snapWeapon.currentAmmo);
+                this.weapons.Add(weapon);
+            };
 
             if (this.weapons.Count > 0)
             {

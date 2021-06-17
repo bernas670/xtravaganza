@@ -8,7 +8,7 @@ public class Pistol : FireWeapon
         _fireRate = 2.5f;
         _initialAmmo = 15;
 
-        setAmmoValue(30);
+        setReloadValue(30);
         setClipValue(_initialAmmo);
     }
 

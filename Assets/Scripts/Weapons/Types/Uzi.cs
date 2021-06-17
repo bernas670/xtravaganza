@@ -8,7 +8,7 @@ public class Uzi : FireWeapon
         _fireRate = 7.5f;
         _initialAmmo = 45;
 
-        setAmmoValue(135);
+        setReloadValue(135);
         setClipValue(_initialAmmo);
     }
 

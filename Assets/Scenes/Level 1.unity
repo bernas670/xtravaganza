@@ -5211,6 +5211,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83461383e6c0203418bec33c5329f828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptNames:
+  - CerelacKiller
+  - M4A1
+  - Pistol
+  - Uzi
+  prefabs:
+  - {fileID: 8624699325493113412, guid: 8db53459e0764364094e558d9eb16e4c, type: 3}
+  - {fileID: 9191724860870608772, guid: 899d8b0cce06b1c409140ccd5af9e82a, type: 3}
+  - {fileID: 5406812856881865318, guid: 4dffcc8ad44b5c64092f3ca62f97a9ca, type: 3}
+  - {fileID: 2824039230446170400, guid: 56b3c3027e9253d48b46cb9c8a713778, type: 3}
 --- !u!114 &377085899
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ public abstract class FireWeapon : Weapon
         _ammo.setClipValue(_ammo.getClipValue() - 1);
     }
 
-    public void setAmmoValue(int value)
+    public void setReloadValue(int value)
     {
         _ammo.setReloadValue(value);
     }

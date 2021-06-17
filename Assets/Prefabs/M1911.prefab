@@ -358,6 +358,7 @@ MonoBehaviour:
     type: 3}
   dropEmitter: {fileID: 1577568351210669546}
   shootEmitter: {fileID: 5066192365754720302}
+  prefab: {fileID: 5406812856881865318}
   inUse: 0
   isEquipped: 0
   dropSoundInterval: 0.5
