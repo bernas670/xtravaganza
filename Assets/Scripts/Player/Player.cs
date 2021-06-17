@@ -156,6 +156,9 @@ public class Player : Character
             //start cutscene
             GameObject timeline = GameObject.Find("Timeline");
             Timeline cutscene = timeline.GetComponent<Timeline>();
+            _rig.clearRigWeaponReference();
+            _animator.SetBool("hasRifle", false);
+            _animator.SetBool("hasPistol", false);
             cutscene.playCutScene();
         }
     }

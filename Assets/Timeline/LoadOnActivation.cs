@@ -25,29 +25,15 @@ public class LoadOnActivation : MonoBehaviour
 
     IEnumerator LoadAsyncScene(List<GameObject> weapons)
     {
-        // Scene currentScene = SceneManager.GetActiveScene();
-        
         string pathToScene = SceneUtility.GetScenePathByBuildIndex(2);
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(pathToScene);
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);//, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
-
-        // foreach(GameObject weapon in weapons){
-        //     weapon.transform.parent = null;
-        //     SceneManager.MoveGameObjectToScene(weapon, SceneManager.GetSceneByName(sceneName));
-            
-        //     GameObject gContainer = GameObject.Find("GunContainer");
-        //     weapon.transform.parent = gContainer.transform;
-        //     weapon.transform.localPosition = Vector3.zero;
-        //     weapon.transform.localRotation = Quaternion.identity;
-        // }
-
-        // SceneManager.UnloadSceneAsync(currentScene);
     }
 }
