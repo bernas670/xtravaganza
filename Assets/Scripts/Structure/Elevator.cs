@@ -1,7 +1,4 @@
-
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 
 public class Elevator : MonoBehaviour
 {
@@ -15,18 +12,20 @@ public class Elevator : MonoBehaviour
     private bool opening;
     private bool closing;
 
+    private float _smoothFactor = 2.5f;
+
     void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        
+
         leftDoor = transform.Find("LeftDoor").gameObject;
         rightDoor = transform.Find("RightDoor").gameObject;
 
         initLeftDoorPosition = leftDoor.transform.position;
-        endLeftDoorPosition = leftDoor.transform.position + new Vector3(0,0,10);
+        endLeftDoorPosition = leftDoor.transform.position + new Vector3(0, 0, 10);
 
         initRightDoorPosition = rightDoor.transform.position;
-        endRightDoorPosition = rightDoor.transform.position + new Vector3(0,0,-10);
+        endRightDoorPosition = rightDoor.transform.position + new Vector3(0, 0, -10);
 
         closing = false;
         opening = false;
@@ -36,20 +35,20 @@ public class Elevator : MonoBehaviour
     {
         if (opening)
         {
-            leftDoor.transform.position = Vector3.Lerp(leftDoor.transform.position, endLeftDoorPosition, Time.deltaTime * 2.0f);
-            rightDoor.transform.position = Vector3.Lerp(rightDoor.transform.position, endRightDoorPosition, Time.deltaTime * 2.0f);
+            leftDoor.transform.position = Vector3.Lerp(leftDoor.transform.position, endLeftDoorPosition, Time.deltaTime * _smoothFactor);
+            rightDoor.transform.position = Vector3.Lerp(rightDoor.transform.position, endRightDoorPosition, Time.deltaTime * _smoothFactor);
         }
         else if (closing)
         {
-            leftDoor.transform.position = Vector3.Lerp(leftDoor.transform.position, initLeftDoorPosition, Time.deltaTime * 2.0f);
-            rightDoor.transform.position = Vector3.Lerp(rightDoor.transform.position, initRightDoorPosition, Time.deltaTime * 2.0f);
+            leftDoor.transform.position = Vector3.Lerp(leftDoor.transform.position, initLeftDoorPosition, Time.deltaTime * _smoothFactor);
+            rightDoor.transform.position = Vector3.Lerp(rightDoor.transform.position, initRightDoorPosition, Time.deltaTime * _smoothFactor);
         }
     }
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
-        {   
+        {
             opening = true;
             closing = false;
         }
