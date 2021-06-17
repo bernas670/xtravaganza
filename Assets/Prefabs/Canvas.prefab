@@ -4650,7 +4650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoText: {fileID: 2836782338176788030}
   weaponNameText: {fileID: 2836782339435778127}
-  weaponsList: {fileID: 0}
+  weaponsList: {fileID: 1430513900658296725}
 --- !u!1 &2836782339057605568
 GameObject:
   m_ObjectHideFlags: 0

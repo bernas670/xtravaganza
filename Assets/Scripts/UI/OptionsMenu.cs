@@ -36,16 +36,12 @@ public class OptionsMenu : MonoBehaviour
     public void SetMusicVolume(float newVol)
     {
         _music.setVolume(newVol);
-
-        Debug.LogFormat("Changed music volume from {0} to {1}", _musicVol, newVol);
         _musicVol = newVol;
     }
 
     public void SetSFXVolume(float newVol)
     {
         _sfx.setVolume(newVol);
-
-        Debug.LogFormat("Changed sound effects volume from {0} to {1}", _sfxVol, newVol);
         _sfxVol = newVol;
     }
 

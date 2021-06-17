@@ -890,6 +890,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e82581f1fed08e547b5f4d9b79f65b66, type: 3}
+--- !u!1 &492987479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5604087798013366053, guid: 7bb7d3b5d2880654c9380f5d021ef271,
+    type: 3}
+  m_PrefabInstance: {fileID: 675452376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &520939602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1346,7 +1352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cafac367ff531b14492c83d5bc3c0c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInvencibleCanvas: {fileID: 0}
+  isInvencibleCanvas: {fileID: 492987479}
 --- !u!4 &660869912 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9191724860870908836, guid: 899d8b0cce06b1c409140ccd5af9e82a,
@@ -2871,7 +2877,7 @@ PrefabInstance:
         type: 3}
       propertyPath: weaponUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 675452385}
     - target: {fileID: 7071738613541774464, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
         type: 3}
       propertyPath: verticalSpeedText
