@@ -9,6 +9,7 @@ TagManager:
   - Scientist
   - Timeline
   - MementoManager
+  - Enemy
   layers:
   - Default
   - TransparentFX
