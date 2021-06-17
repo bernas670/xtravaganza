@@ -23,7 +23,9 @@ public class EnemyController : Shooter
 
     public GameObject rightHand;
     public GameObject leftHand;
+    public MeshCollider collider;
 
+    private float detectionRange = 50f;
 
     void Awake()
     {
@@ -68,7 +70,7 @@ public class EnemyController : Shooter
             DyingAction dying = new DyingAction();
             dying.Act(this);
         }
-        else if (!fireWeapon || distance > fireWeapon.getRange())
+        else if (!fireWeapon || distance > detectionRange)
         {
             //patrol;   
             //Change the patrolling points created in Scene;
@@ -142,6 +144,7 @@ public class EnemyController : Shooter
         dropWeapon();
         _isDead = true;
         _animator.SetTrigger("isDead");
+        collider.enabled = false;
     }
 
     // detach the weapon from player;
