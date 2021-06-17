@@ -21,7 +21,7 @@ public class WeaponSwitchController : MonoBehaviour
     private int maxWeapons = 4;
     private float lastPickSoundTime = 0;
 
-    void Awake()
+    void Start()
     {
         _shooter = player.gameObject.GetComponent<PlayerShootController>();
         _rig = player.gameObject.GetComponentsInChildren<RigController>()[0];
@@ -43,7 +43,6 @@ public class WeaponSwitchController : MonoBehaviour
                 currentWeapon = this.weapons[selectedWeapon];
                 SelectWeapon();
             }
-
         }
     }
 
@@ -89,6 +88,7 @@ public class WeaponSwitchController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.E))
         {
             RaycastHit hit;
+
             Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
             if (Physics.Raycast(ray, out hit))
             {
