@@ -3092,6 +3092,7 @@ Transform:
   - {fileID: 327511272}
   - {fileID: 420916572}
   - {fileID: 1762594225}
+  - {fileID: 1455813009}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9431,6 +9432,11 @@ PrefabInstance:
     - target: {fileID: 7071738613541774465, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071738613541774466, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
+        type: 3}
+      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7071738613541774467, guid: 97f93a50485ba5f4ea52c7bf577b75f2,
@@ -17578,6 +17584,81 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442904197}
   m_Mesh: {fileID: -1451218337330505211, guid: 99f1e0cf0711ae74da48ee3ccdc57255, type: 3}
+--- !u!1001 &1455813008
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 225548315}
+    m_Modifications:
+    - target: {fileID: 8624699325493113412, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_Name
+      value: AK74
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 45.282013
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.358764
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20.269054
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8db53459e0764364094e558d9eb16e4c, type: 3}
+--- !u!4 &1455813009 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8624699325493113438, guid: 8db53459e0764364094e558d9eb16e4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1455813008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1462001148
 GameObject:
   m_ObjectHideFlags: 0
@@ -21874,7 +21955,7 @@ MeshCollider:
   m_GameObject: {fileID: 1805519010}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -21888,7 +21969,7 @@ BoxCollider:
   m_GameObject: {fileID: 1805519010}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.041640274, y: 0.08057048, z: 0.00013682253}
   m_Center: {x: 0.010820096, y: -0.0067738974, z: 0.0000684111}

@@ -79,7 +79,6 @@ public abstract class FireWeapon : Weapon
     public override void shoot(Shooter controller)
     {
         int layerMask = LayerMask.GetMask("Door");
-
         layerMask = ~layerMask;
 
         if (Time.time >= _timeToFire)
@@ -93,7 +92,7 @@ public abstract class FireWeapon : Weapon
             if (Physics.Raycast(controller.getPoV().position, controller.getPoV().forward, out hit, _range, layerMask))
             {
                 if (hit.transform.name == "Player") /* controller = enemy */
-                {
+                {   
                     Player player = hit.transform.gameObject.GetComponent<Player>();
                     player.TakeDamage(_damage);
                 }
@@ -116,7 +115,7 @@ public abstract class FireWeapon : Weapon
                     Destroy(temObj, 2f);
                 }
                 else
-                {
+                {   
                     GameObject temObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     Destroy(temObj, 2f);
                 }
