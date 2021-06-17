@@ -8,6 +8,7 @@ public abstract class FireWeapon : Weapon
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
     public FMODUnity.StudioEventEmitter dropEmitter;
+    public FMODUnity.StudioEventEmitter shootEmitter;
 
     public bool inUse;
     public bool isEquipped;
@@ -68,6 +69,21 @@ public abstract class FireWeapon : Weapon
         return _ammo.getReloadValue();
     }
 
+    void PlayShootSound()
+    {
+        if(shootEmitter == null) return;
+        
+        if(!shootEmitter.IsPlaying()) {
+            shootEmitter.Play();
+        }
+    }
+
+    public void StopShootSound()
+    {
+        if(shootEmitter.IsPlaying()) {
+            shootEmitter.Stop();
+        }
+    }
 
 // TODO: refactor
     public override void shoot(Shooter controller)
@@ -75,6 +91,7 @@ public abstract class FireWeapon : Weapon
         if (Time.time >= _timeToFire)
         {
             muzzleFlash.Play();
+            PlayShootSound();
             decreaseAmmo();
             setTimeToFire(Time.time + 1f / _fireRate);
 

@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro;
+
 public class PlayerShootController : Shooter
 {
     [SerializeField] protected Camera cam;
@@ -33,11 +33,12 @@ public class PlayerShootController : Shooter
 
     void Update()
     {
-        if (PauseController.isPaused) {
+        if (PauseController.isPaused)
+        {
             return;
         }
 
-        UpdateText();        
+        UpdateText();
         _isMeleeing = animator.GetBool("isMeleeing");
 
         if (Input.GetButton("Fire2") && !_isMeleeing && !_movementController.IsWallRunning())
@@ -56,9 +57,14 @@ public class PlayerShootController : Shooter
         {
             fireWeapon.reload();
         }
+        else if (Input.GetButtonUp("Fire1") || fireWeapon.getClipValue() <= 0)
+        {
+            fireWeapon.StopShootSound();
+        }
     }
 
-    public void Kick() {
+    public void Kick()
+    {
         meleeWeapon.shoot(this);
     }
 
