@@ -16,6 +16,7 @@ public class Player : Character
     private Camera _deathCam;
     private RigController _rig;
     private GameObject _gunContainer;
+    
     void Awake()
     {
         _lavaLayer = LayerMask.NameToLayer("Lava");

@@ -73,7 +73,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{2e1579bd-b6b1-482f-8475-3d9d8632f5b6}">
 		<property name="volume">
-			<value>6</value>
+			<value>10</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{1e52accd-1307-4641-9be6-205e20e75b46}</destination>
@@ -107,7 +107,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{194698fb-d06d-428b-a006-4977bc905ee8}">
 		<property name="volume">
-			<value>2</value>
+			<value>10</value>
 		</property>
 		<property name="name">
 			<value>PowerUp Laughter</value>

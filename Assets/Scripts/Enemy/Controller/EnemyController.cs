@@ -43,7 +43,7 @@ public class EnemyController : Shooter
             _player = GameObject.Find("Player");
             _target = _player.transform;
         }
-        
+
         UpdateState();
 
         float velX = Vector3.Dot(_agent.velocity.normalized, transform.right);
@@ -64,7 +64,9 @@ public class EnemyController : Shooter
     {
         float distance = Mathf.Infinity;
         if (_target)
+        {
             distance = Vector3.Distance(_target.position, transform.position);
+        }
 
         if (_isDead)
         {
