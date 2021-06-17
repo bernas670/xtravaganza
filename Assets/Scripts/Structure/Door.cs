@@ -1,7 +1,4 @@
-
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 
 public class Door : MonoBehaviour
 {
@@ -12,6 +9,8 @@ public class Door : MonoBehaviour
 
     private bool opening;
     private bool closing;
+
+    private float _smoothFactor = 2.5f;
 
     void Awake()
     {
@@ -29,11 +28,11 @@ public class Door : MonoBehaviour
     {
         if (opening)
         {
-            transform.position = Vector3.Lerp(transform.position, openDoor, Time.deltaTime * 2.0f);
+            transform.position = Vector3.Lerp(transform.position, openDoor, Time.deltaTime * _smoothFactor);
         }
         else if (closing)
         {
-            transform.position = Vector3.Lerp(transform.position, closeDoor, Time.deltaTime * 2.0f);
+            transform.position = Vector3.Lerp(transform.position, closeDoor, Time.deltaTime * _smoothFactor);
         }
     }
 
