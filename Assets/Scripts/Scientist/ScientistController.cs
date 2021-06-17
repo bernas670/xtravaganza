@@ -7,7 +7,6 @@ using UnityEngine.AI;
 public class ScientistController : MonoBehaviour
 {
     public GameObject _player;
-
     private NavMeshAgent _agent;
     private Rigidbody _rigidbody;
     private Animator _animator;
@@ -30,6 +29,11 @@ public class ScientistController : MonoBehaviour
 
     void Update()
     {       
+        if (!_player)
+        {
+            _player = GameObject.Find("Player");
+        }
+        
         if(_scientist.isDead()){
             _agent.Stop(); //stops scientist from running away
             return;
