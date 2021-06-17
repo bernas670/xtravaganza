@@ -36,11 +36,6 @@ public class EnemyController : Shooter
         _agent = GetComponent<NavMeshAgent>();
     }
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if (!_player)

@@ -8,7 +8,7 @@ public class M4A1 : FireWeapon
         _fireRate = 3f;
         _initialAmmo = 20;
 
-        setAmmoValue(60);
+        setReloadValue(60);
         setClipValue(_initialAmmo);
     }
 

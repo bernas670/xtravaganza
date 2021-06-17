@@ -49,7 +49,7 @@ public abstract class FireWeapon : Weapon
         _ammo.setClipValue(_ammo.getClipValue() - 1);
     }
 
-    public void setAmmoValue(int value)
+    public void setReloadValue(int value)
     {
         _ammo.setReloadValue(value);
     }
@@ -78,6 +78,9 @@ public abstract class FireWeapon : Weapon
 
     public override void shoot(Shooter controller)
     {
+        int layerMask = LayerMask.GetMask("Door");
+        layerMask = ~layerMask;
+
         if (Time.time >= _timeToFire)
         {
             muzzleFlash.Play();
@@ -86,10 +89,10 @@ public abstract class FireWeapon : Weapon
             setTimeToFire(Time.time + 1f / _fireRate);
 
             RaycastHit hit;
-            if (Physics.Raycast(controller.getPoV().position, controller.getPoV().forward, out hit, _range))
+            if (Physics.Raycast(controller.getPoV().position, controller.getPoV().forward, out hit, _range, layerMask))
             {
                 if (hit.transform.name == "Player") /* controller = enemy */
-                {
+                {   
                     Player player = hit.transform.gameObject.GetComponent<Player>();
                     player.TakeDamage(_damage);
                 }
@@ -112,7 +115,7 @@ public abstract class FireWeapon : Weapon
                     Destroy(temObj, 2f);
                 }
                 else
-                {
+                {   
                     GameObject temObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     Destroy(temObj, 2f);
                 }

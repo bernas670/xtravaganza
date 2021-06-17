@@ -8,7 +8,7 @@ public class CerelacKiller : FireWeapon
         _fireRate = 3.5f;
         _initialAmmo = 30;
 
-        setAmmoValue(90);
+        setReloadValue(90);
         setClipValue(_initialAmmo);
     }
 

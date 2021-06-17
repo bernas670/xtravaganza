@@ -254,7 +254,7 @@ Transform:
   m_GameObject: {fileID: 5406812856881865318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 2.5}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 5406812856881708610}
   - {fileID: 5406812856881708612}
@@ -358,6 +358,7 @@ MonoBehaviour:
     type: 3}
   dropEmitter: {fileID: 1577568351210669546}
   shootEmitter: {fileID: 5066192365754720302}
+  prefab: {fileID: 5406812856881865318}
   inUse: 0
   isEquipped: 0
   dropSoundInterval: 0.5

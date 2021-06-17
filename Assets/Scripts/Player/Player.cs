@@ -145,7 +145,8 @@ public class Player : Character
 
             //disable ability to move
             MovementController mController = gameObject.GetComponent<MovementController>();
-            mController.rb.velocity = new Vector3(mController.rb.velocity.x, 0, mController.rb.velocity.z);
+            mController.rb.velocity = new Vector3(0, 0, 0);
+            
             mController.enabled = false;
 
             //stop player animation
